@@ -5,79 +5,134 @@ import json
 import os
 from datetime import datetime
 
+# --- KONFIGURACE ---
 TICKERS = ["AAPL", "NVDA", "TSLA", "AMD", "MSFT", "GOOGL", "AMZN", "META", "PLTR", "SPY"]
 LOG_FILE = 'final_backtest_results.csv'
 SIGNAL_FILE = 'ibkr_signals.json'
+INITIAL_CAPITAL = 10000
 
-def run_agent():
-    print(f"--- START AGENTA: {datetime.now()} ---")
+def calculate_metrics(equity_curve, daily_pnl_pct):
+    if len(equity_curve) < 2: return 0, 0, 0
+    equity_ser = pd.Series(equity_curve)
+    daily_rets = pd.Series(daily_pnl_pct)
+    total_return = (equity_ser.iloc[-1] / equity_ser.iloc[0] - 1) * 100
+    std = daily_rets.std()
+    sharpe = (daily_rets.mean() / (std + 1e-9)) * np.sqrt(252) if std > 0 else 0
+    return total_return, sharpe
+
+def run_trading_agent():
+    print(f"🚀 Start agenta: {datetime.now()}")
     
-    signals = {"Strategy_A": [], "Strategy_B": [], "Strategy_V": []}
-    today_trades_log = []
+    # 1. STAŽENÍ DAT (Stahujeme 2 roky pro Grid Search + aktuální dny)
+    # yfinance vrací data včetně dneška, pokud trh běží
+    raw_data = yf.download(TICKERS, period="2y", interval="1d", group_by='ticker')
     
+    # Rozdělení na VALIDACI (Grid Search) a OOS (Dnešek)
+    # Abychom se vyhnuli Look-ahead biasu, "Dnešek" (poslední řádek) 
+    # nesmí být použit pro výpočet signálů, které se mají dnes exekuovat.
+    
+    processed_data = {}
     for t in TICKERS:
         try:
-            print(f"Stahuji data pro {t}...")
-            # Stahujeme 40 dní historie (pro indikátory) a dnešní 1m data (pro vyhodnocení)
-            d = yf.download(t, period="40d", interval="1d", progress=False)
-            
-            if d.empty or len(d) < 21:
-                print(f"   ⚠️ Málo dat pro {t}, přeskakuji.")
-                continue
+            d = raw_data[t].dropna()
+            # TVORBA INDIKÁTORŮ - Vše posunuto o 1 den (shift), aby ráno u Openu byla data známá
+            d['Prev_High20_Strict'] = d['High'].rolling(window=20).max().shift(1)
+            d['Prev_Low20_Strict'] = d['Low'].rolling(window=20).min().shift(1)
+            d['Prev_Close'] = d['Close'].shift(1)
+            d['Prev_Open'] = d['Open'].shift(1)
+            d['Prev_High'] = d['High'].shift(1)
+            d['Prev_Low'] = d['Low'].shift(1)
+            d['Prev_Range'] = (d['High'] - d['Low']).shift(1)
+            d['Prev_AvgRange'] = d['Prev_Range'].rolling(window=20).mean()
+            d['Prev_Volume'] = d['Volume'].shift(1)
+            d['Prev_V_Avg'] = d['Volume'].rolling(window=20).mean().shift(1)
+            processed_data[t] = d.dropna()
+        except: continue
 
-            # Extrakce hodnot (zajištění, že bereme skaláry)
-            # Poslední řádek je index -1 (dnešek/poslední close), předchozí je -2
-            prev_high20 = float(d['High'].rolling(window=20).max().iloc[-2])
-            prev_low20 = float(d['Low'].rolling(window=20).min().iloc[-2])
-            
-            curr_row = d.iloc[-1]
-            c_close = float(curr_row['Close'])
-            c_high = float(curr_row['High'])
-            c_low = float(curr_row['Low'])
-            c_open = float(curr_row['Open'])
-            c_vol = float(curr_row['Volume'])
-            
-            prev_row = d.iloc[-2]
-            p_range = float(prev_row['High'] - prev_row['Low'])
-            avg_range = float((d['High'] - d['Low']).rolling(window=20).mean().iloc[-2])
-            avg_vol = float(d['Volume'].rolling(window=20).mean().iloc[-2])
-
-            # --- LOGIKA SIGNÁLŮ ---
-            # Strat A (Setup)
-            dist_h = abs(c_close - prev_high20) / (avg_range + 1e-9)
-            if dist_h < 0.4:
-                signals["Strategy_A"].append({'ticker': t, 'action': 'BUY', 'score': 1/(dist_h+0.01), 'range': p_range, 'price': c_close})
-
-            # Strat V (Reactive)
-            if c_high > prev_high20:
-                signals["Strategy_V"].append({'ticker': t, 'action': 'BUY', 'score': p_range, 'range': p_range, 'price': c_close})
-
-            # --- OKAMŽITÉ VYHODNOCENÍ DNEŠKA ---
-            # Simulujeme obchod za dnešní Open -> Close
-            pnl = (int(10000/c_open) * (c_close - c_open)) - 1.0
-            today_trades_log.append([datetime.now().strftime('%Y-%m-%d'), "DailyAgent", t, "Long", round(c_open, 2), round(c_close, 2), "EOD", round(pnl, 2)])
-
-        except Exception as e:
-            print(f"   ❌ Chyba u {t}: {e}")
-
-    # Uložení signálů
-    final_json = {}
-    for m in signals:
-        top3 = sorted(signals[m], key=lambda x: x['score'], reverse=True)[:3]
-        final_json[m] = top3
+    # 2. GRID SEARCH (Probíhá na historii bez posledních 60 dnů)
+    print("🔎 Optimalizuji parametry...")
+    best_params = {m: {'sharpe': -np.inf, 'sl_f': 0.5, 'ex_h': 0} for m in ['A', 'B', 'V']}
     
-    with open(SIGNAL_FILE, 'w') as f:
-        json.dump(final_json, f, indent=4)
-    print(f"✅ Signály uloženy do {SIGNAL_FILE}")
+    # Definujeme testovací dny pro optimalizaci (vše kromě posledních 60 dní)
+    sample_ticker = TICKERS[0]
+    valid_days = processed_data[sample_ticker].index[:-60]
+    
+    for sl_f in [0.4, 0.6,0.75]:
+        for mode in ['A', 'B', 'V']:
+            cap, eq, rets = INITIAL_CAPITAL, [INITIAL_CAPITAL], []
+            for day in valid_days:
+                pnl_day = 0
+                candidates = []
+                for t in TICKERS:
+                    row = processed_data[t].loc[day]
+                    if mode == 'A':
+                        dist_h = abs(row['Prev_Close'] - row['Prev_High20_Strict']) / (row['Prev_AvgRange'] + 1e-9)
+                        if dist_h < 0.4: candidates.append({'t': t, 's': 'Long', 'scr': 1/dist_h, 'rng': row['Prev_Range']})
+                    elif mode == 'B':
+                        if row['Prev_Volume'] > row['Prev_V_Avg'] * 1.3:
+                            side = 'Long' if row['Prev_Close'] > row['Prev_Open'] else 'Short'
+                            candidates.append({'t': t, 's': side, 'scr': row['Prev_Volume'], 'rng': row['Prev_Range']})
+                    elif mode == 'V':
+                        if row['Prev_High'] > row['Prev_High20_Strict']:
+                            candidates.append({'t': t, 's': 'Long', 'scr': row['Prev_Range'], 'rng': row['Prev_Range']})
+                
+                selected = sorted(candidates, key=lambda x: x['scr'], reverse=True)[:3]
+                for trade in selected:
+                    # Simulace (Open -> Close dne)
+                    d_row = processed_data[trade['t']].loc[day]
+                    # Zde simulujeme EOD výstup pro jednoduchost grid searche
+                    res = (d_row['Close'] - d_row['Open']) if trade['s'] == 'Long' else (d_row['Open'] - d_row['Close'])
+                    pnl_day += (int(10000/d_row['Open']) * res)
+                
+                rets.append((pnl_day/cap)*100); cap += pnl_day; eq.append(cap)
+            
+            _, sh = calculate_metrics(eq, rets)
+            if sh > best_params[mode]['sharpe']:
+                best_params[mode] = {'sharpe': sh, 'sl_f': sl_f}
 
-    # Uložení výsledků do CSV
-    if today_trades_log:
-        df_new = pd.DataFrame(today_trades_log, columns=['Date', 'Strategy', 'Ticker', 'Side', 'Entry', 'Exit', 'Type', 'Profit'])
-        if not os.path.exists(LOG_FILE):
-            df_new.to_csv(LOG_FILE, index=False)
-        else:
-            df_new.to_csv(LOG_FILE, mode='a', header=False, index=False)
-        print(f"✅ Výsledky dopsány do {LOG_FILE}")
+    # 3. GENERACE SIGNÁLŮ PRO DNES (Poslední řádek dat)
+    # OŠETŘENÍ LOOK-AHEAD: Signály se generují z "včerejších" indikátorů pro "dnešní" Open
+    print("🎯 Generuji signály pro dnešní seanci...")
+    current_signals = {}
+    for mode in ['A', 'B', 'V']:
+        candidates = []
+        for t in TICKERS:
+            # Poslední řádek obsahuje indikátory vypočítané z uzavřených předchozích dní
+            row = processed_data[t].iloc[-1]
+            if mode == 'A':
+                dist_h = abs(row['Prev_Close'] - row['Prev_High20_Strict']) / (row['Prev_AvgRange'] + 1e-9)
+                if dist_h < 0.4: candidates.append({'ticker': t, 'action': 'BUY', 'score': 1/dist_h, 'sl_f': best_params[mode]['sl_f']})
+            elif mode == 'B':
+                if row['Prev_Volume'] > row['Prev_V_Avg'] * 1.3:
+                    candidates.append({'ticker': t, 'action': 'BUY' if row['Prev_Close'] > row['Prev_Open'] else 'SELL', 'score': row['Prev_Volume'], 'sl_f': best_params[mode]['sl_f']})
+        
+        current_signals[mode] = sorted(candidates, key=lambda x: x['score'], reverse=True)[:3]
+
+    with open(SIGNAL_FILE, 'w') as f:
+        json.dump(current_signals, f, indent=4)
+
+    # 4. EVALUACE (Zápis včerejších výsledků do CSV)
+    # Abychom viděli reálný profit, zapíšeme výsledek dne, který právě skončil (iloc[-1])
+    # To se provede jen pokud skript běží večer po Close
+    if datetime.now().hour >= 21:
+        eval_logs = []
+        for mode, trades in current_signals.items():
+            for s in trades:
+                d_row = processed_data[s['ticker']].iloc[-1]
+                # Reálný rozdíl mezi dnešním Open a Close
+                pnl = (int(10000/d_row['Open']) * (d_row['Close'] - d_row['Open'] if s['action'] == 'BUY' else d_row['Open'] - d_row['Close'])) - 1.0
+                eval_logs.append({
+                    'Date': processed_data[s['ticker']].index[-1].strftime('%Y-%m-%d'),
+                    'Strategy': mode,
+                    'Ticker': s['ticker'],
+                    'Side': 'Long' if s['action'] == 'BUY' else 'Short',
+                    'Profit': round(pnl, 2)
+                })
+        
+        if eval_logs:
+            df_new = pd.DataFrame(eval_logs)
+            df_new.to_csv(LOG_FILE, mode='a', header=not os.path.exists(LOG_FILE), index=False)
+            print("✅ Výsledky zapsány do CSV.")
 
 if __name__ == "__main__":
-    run_agent()
+    run_trading_agent()
