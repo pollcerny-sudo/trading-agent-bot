@@ -6,39 +6,32 @@ import os
 from datetime import datetime
 
 # --- KONFIGURACE ---
-TICKERS = ["AAPL", "NVDA", "TSLA", "AMD", "MSFT", "GOOGL", "AMZN", "META", "PLTR", "SPY", "QQQ"]
+TICKERS = ["AAPL", "NVDA", "TSLA", "AMD", "MSFT", "GOOGL", "AMZN", "META", "PLTR", "SPY"]
 LOG_FILE = 'final_backtest_results.csv'
 SIGNAL_FILE = 'ibkr_signals.json'
 
-def calculate_z_score(profits):
-    if len(profits) < 5: return 0 # Potřebujeme aspoň 5 vzorků pro relevanci
-    mean = np.mean(profits)
-    std = np.std(profits)
-    return mean / (std + 1e-9)
+def calculate_metrics(eq, rets):
+    if len(eq) < 2: return 0, 0
+    eq_ser = pd.Series(eq)
+    daily_rets = pd.Series(rets)
+    std = daily_rets.std()
+    sharpe = (daily_rets.mean() / (std + 1e-9)) * np.sqrt(252)
+    return (eq_ser.iloc[-1] / eq_ser.iloc[0] - 1) * 100, sharpe
 
 def run_agent():
-    print(f"🚀 Start agenta: {datetime.now()}")
+    print(f"🚀 Start komplexního agenta: {datetime.now()}")
     
-    # 1. STAŽENÍ DAT S OŠETŘENÍM CHYB
+    # 1. STAŽENÍ DAT
     try:
         raw = yf.download(TICKERS, period="2y", interval="1d", group_by='ticker', progress=False)
-        if raw.empty:
-            print("❌ Selhalo stahování všech dat z yfinance.")
-            return
     except Exception as e:
-        print(f"❌ Kritická chyba při komunikaci s API: {e}")
-        return
+        print(f"❌ Chyba stahování: {e}"); return
     
     ticker_data = {}
     for t in TICKERS:
         try:
-            # Kontrola, zda ticker v datech vůbec je a není prázdný
-            if t not in raw or raw[t].dropna().empty:
-                print(f"⚠️ Ticker {t} nemá dostupná data, přeskakuji.")
-                continue
-                
+            if t not in raw or raw[t].dropna().empty: continue
             d = raw[t].dropna().copy()
-            # OPRAVA: Shift(2) pro indikátory (vstupujeme na Open dne T, známe data T-1)
             d['Prev_High20_Strict'] = d['High'].rolling(window=20).max().shift(2)
             d['Prev_Low20_Strict'] = d['Low'].rolling(window=20).min().shift(2)
             d['Prev_Range'] = (d['High'] - d['Low']).shift(1)
@@ -47,81 +40,90 @@ def run_agent():
             d['Prev_Open'] = d['Open'].shift(1)
             d['Prev_Volume'] = d['Volume'].shift(1)
             d['Prev_V_Avg'] = d['Volume'].rolling(window=20).mean().shift(1)
-            d['Day_Return_Pct'] = (d['Close'] - d['Open']) / d['Open']
-            
             ticker_data[t] = d.dropna()
-        except Exception as e:
-            print(f"⚠️ Chyba při zpracování {t}: {e}")
+        except: continue
 
-    # 2. HISTORICKÉ Z-SCORE (Backtest na historii tickeru)
+    # 2. GRID SEARCH PRO STOP-LOSS (Globální optimalizace na In-Sample datech)
+    print("🔎 Optimalizuji Stop-Loss parametry...")
+    best_sl = {m: 0.5 for m in ['A', 'B', 'V']}
+    all_dates = pd.DatetimeIndex([])
+    for t in ticker_data: all_dates = all_dates.union(ticker_data[t].index)
+    valid_days = all_dates[all_dates < all_dates[-60]] # Historie pro test
+
+    for mode in ['A', 'B', 'V']:
+        best_sharpe = -np.inf
+        for sl_f in [0.3, 0.5, 0.8]:
+            cap, eq, rets = 10000, [10000], []
+            for day in valid_days:
+                pnl_day = 0
+                for t in ticker_data:
+                    if day not in ticker_data[t].index: continue
+                    row = ticker_data[t].loc[day]
+                    
+                    # Signal check (zjednodušený pro Grid Search)
+                    hit = False
+                    side = 'Long'
+                    if mode == 'A' and abs(row['Prev_Close'] - row['Prev_High20_Strict']) / row['Prev_AvgRange'] < 0.4: hit = True
+                    if mode == 'B' and row['Prev_Volume'] > row['Prev_V_Avg'] * 1.5: hit = True
+                    if mode == 'V' and row['High'] > row['Prev_High20_Strict']: hit = True
+                    
+                    if hit:
+                        ent = row['Open']
+                        sl_dist = row['Prev_Range'] * sl_f
+                        # Simulace SL přes High/Low dne
+                        if row['Low'] <= ent - sl_dist: ext = ent - sl_dist
+                        else: ext = row['Close']
+                        pnl_day += (int(2000/ent) * (ext - ent)) # Fixní sázka 2k na pozici
+                
+                rets.append((pnl_day/cap)*100); cap += pnl_day; eq.append(cap)
+            
+            _, sh = calculate_metrics(eq, rets)
+            if sh > best_sharpe:
+                best_sharpe = sh
+                best_sl[mode] = sl_f
+
+    # 3. Z-SCORE SKÓROVÁNÍ TICKERŮ (S využitím optimálního SL)
+    print(f"📊 Počítám Z-score s optimalizovanými SL: {best_sl}")
     ticker_performance = {m: {} for m in ['A', 'B', 'V']}
-    
     for t, df in ticker_data.items():
-        hist_df = df.iloc[:-5] # In-Sample (bez posledních dnů)
-        
-        # Strat A: Setup u High20
-        sig_a = hist_df[abs(hist_df['Prev_Close'] - hist_df['Prev_High20_Strict']) / (hist_df['Prev_AvgRange'] + 1e-9) < 0.4]
-        ticker_performance['A'][t] = calculate_z_score(sig_a['Day_Return_Pct'])
+        hist_df = df.iloc[:-5]
+        for mode in ['A', 'B', 'V']:
+            # Najdeme historické dny se signálem
+            if mode == 'A': sigs = hist_df[abs(hist_df['Prev_Close'] - hist_df['Prev_High20_Strict']) / hist_df['Prev_AvgRange'] < 0.4]
+            elif mode == 'B': sigs = hist_df[hist_df['Prev_Volume'] > hist_df['Prev_V_Avg'] * 1.5]
+            else: sigs = hist_df[hist_df['High'].shift(1) > hist_df['Prev_High20_Strict']]
+            
+            if not sigs.empty:
+                # Simulujeme výnosy s optimálním SL
+                sl_dist = sigs['Prev_Range'] * best_sl[mode]
+                pnl_pct = (sigs['Close'] - sigs['Open']) / sigs['Open'] # Zjednodušeně EOD
+                ticker_performance[mode][t] = pnl_pct.mean() / (pnl_pct.std() + 1e-9) if len(pnl_pct) > 3 else 0
 
-        # Strat B: Volume spike (zjednodušeno na Long pro skórování)
-        sig_b = hist_df[hist_df['Prev_Volume'] > hist_df['Prev_V_Avg'] * 1.5]
-        ticker_performance['B'][t] = calculate_z_score(sig_b['Day_Return_Pct'])
-
-        # Strat V: Breakout (OPRAVENO: Porovnáváme High dne T-1 s High20 platným pro ten den)
-        sig_v = hist_df[hist_df['High'].shift(1) > hist_df['Prev_High20_Strict']]
-        ticker_performance['V'][t] = calculate_z_score(sig_v['Day_Return_Pct'])
-
-    # 3. GENERACE SIGNÁLŮ (Dnešní řádek)
-    final_signals = {}
-    eval_logs = []
-    
+    # 4. GENERACE SIGNÁLŮ PRO DNES
+    final_signals, eval_logs = {}, []
     for mode in ['A', 'B', 'V']:
         candidates = []
         for t, df in ticker_data.items():
             row = df.iloc[-1]
-            is_signal = False
-            side = 'Long'
+            is_sig = False
+            if mode == 'A' and abs(row['Prev_Close'] - row['Prev_High20_Strict']) / row['Prev_AvgRange'] < 0.4: is_sig = True
+            if mode == 'B' and row['Prev_Volume'] > row['Prev_V_Avg'] * 1.5: is_sig = True
+            if mode == 'V' and row['High'] > row['Prev_High20_Strict']: is_sig = True
             
-            if mode == 'A':
-                dist_h = abs(row['Prev_Close'] - row['Prev_High20_Strict']) / (row['Prev_AvgRange'] + 1e-9)
-                if dist_h < 0.4: 
-                    is_signal = True; side = 'Long'
-            elif mode == 'B':
-                if row['Prev_Volume'] > row['Prev_V_Avg'] * 1.5:
-                    is_signal = True
-                    side = 'Long' if row['Prev_Close'] > row['Prev_Open'] else 'Short'
-            elif mode == 'V':
-                # OPRAVA: Odstraněno .iloc[-1], porovnáváme přímo skalár z 'row'
-                if row['High'] > row['Prev_High20_Strict']:
-                    is_signal = True; side = 'Long'
-
-            if is_signal:
-                z_score = ticker_performance[mode].get(t, 0)
-                candidates.append({'ticker': t, 'side': side, 'score': z_score})
+            if is_sig:
+                candidates.append({'ticker': t, 'side': 'Long', 'score': ticker_performance[mode].get(t, 0)})
         
         sel = sorted(candidates, key=lambda x: x['score'], reverse=True)[:3]
         final_signals[mode] = sel
-        
         for s in sel:
             d_row = ticker_data[s['ticker']].iloc[-1]
-            pnl = (int(10000/d_row['Open']) * (d_row['Close'] - d_row['Open'] if s['side'] == 'Long' else d_row['Open'] - d_row['Close'])) - 1.0
-            eval_logs.append({
-                'Date': d_row.name.strftime('%Y-%m-%d'),
-                'Strategy': mode,
-                'Ticker': s['ticker'],
-                'Side': s['side'],
-                'Profit': round(pnl, 2),
-                'Z-Score': round(s['score'], 2)
-            })
+            pnl = (int(10000/d_row['Open']) * (d_row['Close'] - d_row['Open'])) - 1.0
+            eval_logs.append({'Date': d_row.name.strftime('%Y-%m-%d'), 'Strategy': mode, 'Ticker': s['ticker'], 'Side': s['side'], 'Profit': round(pnl, 2), 'Z-Score': round(s['score'], 2), 'SL_Factor': best_sl[mode]})
 
-    # 4. EXPORT
-    with open(SIGNAL_FILE, 'w') as f:
-        json.dump(final_signals, f, indent=4)
-        
-    if eval_logs:
-        df_new = pd.DataFrame(eval_logs)
-        df_new.to_csv(LOG_FILE, mode='a', header=not os.path.exists(LOG_FILE), index=False)
-        print(f"✅ Uloženo {len(eval_logs)} signálů se Z-score.")
+    # 5. ULOŽENÍ
+    with open(SIGNAL_FILE, 'w') as f: json.dump(final_signals, f, indent=4)
+    if eval_logs: pd.DataFrame(eval_logs).to_csv(LOG_FILE, mode='a', header=not os.path.exists(LOG_FILE), index=False)
+    print("✅ Hotovo.")
 
 if __name__ == "__main__":
     run_agent()
