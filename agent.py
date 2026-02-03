@@ -81,47 +81,56 @@ def run_trading_agent():
             processed_data[t] = d.dropna()
         except: continue
 
-    # 2. GRID SEARCH (Probíhá na historii bez posledních 60 dnů)
+    # 2. GRID SEARCH
     print("🔎 Optimalizuji parametry...")
-    best_params = {m: {'sharpe': -np.inf, 'sl_f': 0.5, 'ex_h': 0} for m in ['A', 'B', 'V']}
+    best_params = {m: {'sharpe': -np.inf, 'sl_f': 0.5} for m in ['A', 'B', 'V']}
     
-    # Definujeme testovací dny pro optimalizaci (vše kromě posledních 60 dní)
-    sample_ticker = TICKERS[0]
-    valid_days = processed_data[sample_ticker].index[:-60]
+    # Získáme seznam všech unikátních obchodních dnů napříč všemi tickery
+    all_dates = pd.DatetimeIndex([])
+    for t in processed_data:
+        all_dates = all_dates.union(processed_data[t].index)
     
-    for sl_f in [0.4, 0.6,0.75]:
+    # Validace na historii (vše kromě posledních 60 dnů)
+    valid_days = all_dates[all_dates < all_dates[-60]]
+    
+    for sl_f in [0.4, 0.6]:
         for mode in ['A', 'B', 'V']:
             cap, eq, rets = INITIAL_CAPITAL, [INITIAL_CAPITAL], []
             for day in valid_days:
                 pnl_day = 0
                 candidates = []
                 for t in TICKERS:
-                    row = processed_data[t].loc[day]
-                    if mode == 'A':
-                        dist_h = abs(row['Prev_Close'] - row['Prev_High20_Strict']) / (row['Prev_AvgRange'] + 1e-9)
-                        if dist_h < 0.4: candidates.append({'t': t, 's': 'Long', 'scr': 1/dist_h, 'rng': row['Prev_Range']})
-                    elif mode == 'B':
-                        if row['Prev_Volume'] > row['Prev_V_Avg'] * 1.3:
-                            side = 'Long' if row['Prev_Close'] > row['Prev_Open'] else 'Short'
-                            candidates.append({'t': t, 's': side, 'scr': row['Prev_Volume'], 'rng': row['Prev_Range']})
-                    elif mode == 'V':
-                        if row['Prev_High'] > row['Prev_High20_Strict']:
-                            candidates.append({'t': t, 's': 'Long', 'scr': row['Prev_Range'], 'rng': row['Prev_Range']})
+                    # KLÍČOVÁ OPRAVA: Kontrola, zda ticker má data pro tento konkrétní den
+                    if t in processed_data and day in processed_data[t].index:
+                        row = processed_data[t].loc[day]
+                        
+                        if mode == 'A':
+                            dist_h = abs(row['Prev_Close'] - row['Prev_High20_Strict']) / (row['Prev_AvgRange'] + 1e-9)
+                            if dist_h < 0.4: 
+                                candidates.append({'t': t, 's': 'Long', 'scr': 1/(dist_h+0.01)})
+                        elif mode == 'B':
+                            if row['Prev_Volume'] > row['Prev_V_Avg'] * 1.3:
+                                side = 'Long' if row['Prev_Close'] > row['Prev_Open'] else 'Short'
+                                candidates.append({'t': t, 's': side, 'scr': row['Prev_Volume']})
+                        elif mode == 'V':
+                            if row['Prev_High'] > row['Prev_High20_Strict']:
+                                candidates.append({'t': t, 's': 'Long', 'scr': row['Prev_Range']})
                 
                 selected = sorted(candidates, key=lambda x: x['scr'], reverse=True)[:3]
                 for trade in selected:
-                    # Simulace (Open -> Close dne)
                     d_row = processed_data[trade['t']].loc[day]
-                    # Zde simulujeme EOD výstup pro jednoduchost grid searche
-                    res = (d_row['Close'] - d_row['Open']) if trade['s'] == 'Long' else (d_row['Open'] - d_row['Close'])
-                    pnl_day += (int(10000/d_row['Open']) * res)
+                    # Simulace profitu (Open -> Close)
+                    change = (d_row['Close'] - d_row['Open']) if trade['s'] == 'Long' else (d_row['Open'] - d_row['Close'])
+                    pnl_day += (int(10000/d_row['Open']) * change)
                 
-                rets.append((pnl_day/cap)*100); cap += pnl_day; eq.append(cap)
+                rets.append((pnl_day/cap)*100 if cap > 0 else 0)
+                cap += pnl_day
+                eq.append(cap)
             
             _, sh = calculate_metrics(eq, rets)
             if sh > best_params[mode]['sharpe']:
                 best_params[mode] = {'sharpe': sh, 'sl_f': sl_f}
-
+                
     # 3. GENERACE SIGNÁLŮ PRO DNES (Poslední řádek dat)
     # OŠETŘENÍ LOOK-AHEAD: Signály se generují z "včerejších" indikátorů pro "dnešní" Open
     print("🎯 Generuji signály pro dnešní seanci...")
