@@ -1,24 +1,26 @@
 {
-    "A": [],
-    "B": [
+    "A": [
         {
-            "ticker": "AAPL",
-            "action": "BUY",
-            "score": 92443400.0,
-            "sl_f": 0.4
-        },
-        {
-            "ticker": "MSFT",
-            "action": "SELL",
-            "score": 58566800.0,
-            "sl_f": 0.4
-        },
-        {
-            "ticker": "META",
-            "action": "SELL",
-            "score": 23744600.0,
-            "sl_f": 0.4
+            "ticker": "GOOGL",
+            "side": "Long",
+            "score": 0.014126836615717913,
+            "current_vol": 1.0257837025527528
         }
     ],
-    "V": []
+    "B": [
+        {
+            "ticker": "PLTR",
+            "side": "Short",
+            "score": 0.15346531964843946,
+            "current_vol": 1.7731839626204489
+        }
+    ],
+    "V": [
+        {
+            "ticker": "GOOGL",
+            "side": "Long",
+            "score": -0.10098262527868893,
+            "current_vol": 1.0257837025527528
+        }
+    ]
 }
