@@ -1,0 +1,35 @@
+name: Market Agent
+
+on:
+  schedule:
+    # 14:35 UTC (9:35 EST) - Těsně po openu pro zachycení entry
+    - cron: '35 14 * * 1-5'
+    # 21:05 UTC (16:05 EST) - Po close pro vyhodnocení
+    - cron: '05 21 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Trading Agent
+        run: python agent.py
+
+      - name: Sync Results
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git add final_backtest_results.csv ibkr_signals.json
+          git commit -m "Auto-update trades and signals [skip ci]" || echo "No changes"
+          git push
