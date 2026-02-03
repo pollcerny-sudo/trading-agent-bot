@@ -1,0 +1,49 @@
+{
+    "Strategy_A": [
+        {
+            "ticker": "UL",
+            "action": "BUY",
+            "allocation_usd": 10000,
+            "est_sl": 68.07,
+            "sl_factor": 0.5
+        },
+        {
+            "ticker": "PTCAY",
+            "action": "BUY",
+            "allocation_usd": 10000,
+            "est_sl": 56.0,
+            "sl_factor": 0.5
+        },
+        {
+            "ticker": "PDD",
+            "action": "SELL",
+            "allocation_usd": 10000,
+            "est_sl": 101.92,
+            "sl_factor": 0.5
+        }
+    ],
+    "Strategy_B": [
+        {
+            "ticker": "VZ",
+            "action": "BUY",
+            "allocation_usd": 10000,
+            "est_sl": 42.9,
+            "sl_factor": 0.5
+        },
+        {
+            "ticker": "AAPL",
+            "action": "BUY",
+            "allocation_usd": 10000,
+            "est_sl": 254.62,
+            "sl_factor": 0.5
+        },
+        {
+            "ticker": "GLD",
+            "action": "SELL",
+            "allocation_usd": 10000,
+            "est_sl": 464.58,
+            "sl_factor": 0.5
+        }
+    ],
+    "Strategy_V": []
+}
