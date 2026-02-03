@@ -1,21 +1,24 @@
 {
-    "Strategy_A": [
+    "A": [],
+    "B": [
         {
-            "ticker": "GOOGL",
+            "ticker": "AAPL",
             "action": "BUY",
-            "score": 5.494185889649875,
-            "range": 7.709991455078125,
-            "price": 343.69000244140625
+            "score": 92443400.0,
+            "sl_f": 0.4
+        },
+        {
+            "ticker": "MSFT",
+            "action": "SELL",
+            "score": 58566800.0,
+            "sl_f": 0.4
+        },
+        {
+            "ticker": "META",
+            "action": "SELL",
+            "score": 23744600.0,
+            "sl_f": 0.4
         }
     ],
-    "Strategy_B": [],
-    "Strategy_V": [
-        {
-            "ticker": "GOOGL",
-            "action": "BUY",
-            "score": 7.709991455078125,
-            "range": 7.709991455078125,
-            "price": 343.69000244140625
-        }
-    ]
+    "V": []
 }
