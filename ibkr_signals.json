@@ -75,6 +75,16 @@
             "ticker_group": "SMALL"
         },
         {
+            "ticker": "PFG",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.4,
+            "z_score": 0.04,
+            "prev_return_pct": null,
+            "vol_ratio": 0.84,
+            "ticker_group": "SMALL"
+        },
+        {
             "ticker": "TELNY",
             "action": "Long",
             "allocation_usd": 10000,
@@ -82,16 +92,6 @@
             "z_score": 0.04,
             "prev_return_pct": null,
             "vol_ratio": 0.4,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "BCE",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.8,
-            "z_score": 0.04,
-            "prev_return_pct": null,
-            "vol_ratio": 1.58,
             "ticker_group": "SMALL"
         }
     ],
