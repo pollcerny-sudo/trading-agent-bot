@@ -11,16 +11,6 @@
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "SAN",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": 0.18,
-            "prev_return_pct": null,
-            "vol_ratio": 0.82,
-            "ticker_group": "BIG + ETF"
-        },
-        {
             "ticker": "CCEP",
             "action": "Long",
             "allocation_usd": 10000,
@@ -28,6 +18,16 @@
             "z_score": 0.17,
             "prev_return_pct": null,
             "vol_ratio": 1.4,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "CM",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 3.2,
+            "z_score": 0.16,
+            "prev_return_pct": null,
+            "vol_ratio": 0.78,
             "ticker_group": "BIG + ETF"
         }
     ],
@@ -69,7 +69,7 @@
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 1.6,
-            "z_score": 0.16,
+            "z_score": 0.15,
             "prev_return_pct": null,
             "vol_ratio": 0.68,
             "ticker_group": "SMALL"
@@ -112,7 +112,7 @@
             "allocation_usd": 10000,
             "sl_factor": 3.2,
             "z_score": null,
-            "prev_return_pct": 12.0,
+            "prev_return_pct": 12.09,
             "vol_ratio": 1.65,
             "ticker_group": "SMALL"
         },
