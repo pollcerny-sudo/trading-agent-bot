@@ -1,53 +1,130 @@
 {
     "A": [
         {
-            "ticker": "BTI",
-            "side": "Long",
-            "score": 0.3569237982331802
+            "ticker": "HLN",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.6,
+            "z_score": 0.3,
+            "prev_return_pct": null,
+            "vol_ratio": 0.69,
+            "ticker_group": "BIG + ETF"
         },
         {
             "ticker": "GEV",
-            "side": "Long",
-            "score": 0.25432885409300554
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 3.2,
+            "z_score": 0.27,
+            "prev_return_pct": null,
+            "vol_ratio": 1.22,
+            "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "KO",
-            "side": "Long",
-            "score": 0.2413857209287956
+            "ticker": "BTI",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 1.6,
+            "z_score": 0.2,
+            "prev_return_pct": null,
+            "vol_ratio": 1.27,
+            "ticker_group": "BIG + ETF"
         }
     ],
     "B": [
         {
+            "ticker": "TGT",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.4,
+            "z_score": 0.16,
+            "prev_return_pct": null,
+            "vol_ratio": 1.63,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "MSCI",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 1.6,
+            "z_score": 0.16,
+            "prev_return_pct": null,
+            "vol_ratio": 1.59,
+            "ticker_group": "BIG + ETF"
+        },
+        {
             "ticker": "HOOD",
-            "side": "Long",
-            "score": 0.2475948831082103
-        },
-        {
-            "ticker": "VZ",
-            "side": "Long",
-            "score": 0.21641589863903293
-        },
-        {
-            "ticker": "MNST",
-            "side": "Long",
-            "score": 0.15704911150595105
+            "action": "Short",
+            "allocation_usd": 10000,
+            "sl_factor": 1.6,
+            "z_score": 0.14,
+            "prev_return_pct": null,
+            "vol_ratio": 2.58,
+            "ticker_group": "BIG + ETF"
         }
     ],
     "V": [
         {
-            "ticker": "BTI",
-            "side": "Long",
-            "score": 0.3323284796209039
+            "ticker": "BAP",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 1.6,
+            "z_score": 0.07,
+            "prev_return_pct": null,
+            "vol_ratio": 0.66,
+            "ticker_group": "SMALL"
         },
         {
-            "ticker": "TAK",
-            "side": "Long",
-            "score": 0.2606692617297042
+            "ticker": "TELNY",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 3.2,
+            "z_score": 0.04,
+            "prev_return_pct": null,
+            "vol_ratio": 0.4,
+            "ticker_group": "SMALL"
         },
         {
-            "ticker": "FDX",
-            "side": "Long",
-            "score": 0.1720098115931588
+            "ticker": "BCE",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.8,
+            "z_score": 0.04,
+            "prev_return_pct": null,
+            "vol_ratio": 1.58,
+            "ticker_group": "SMALL"
+        }
+    ],
+    "M": [
+        {
+            "ticker": "NJDCY",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.4,
+            "z_score": null,
+            "prev_return_pct": 21.78,
+            "vol_ratio": 0.28,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "TER",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.8,
+            "z_score": null,
+            "prev_return_pct": 9.61,
+            "vol_ratio": 2.16,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "WBS",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.6,
+            "z_score": null,
+            "prev_return_pct": 8.9,
+            "vol_ratio": 0.86,
+            "ticker_group": "SMALL"
         }
     ]
 }
