@@ -3,31 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Trading Agent Dashboard</title>
-
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 <style>
-body{
-  background:#111;
-  color:white;
-  font-family:Arial;
-  padding:20px;
-}
-.card{
-  background:#1a1a1a;
-  padding:15px;
-  margin:15px 0;
-  border-radius:8px;
-}
-table{
-  width:100%;
-  border-collapse:collapse;
-}
-td,th{
-  padding:8px;
-  border-bottom:1px solid #333;
-}
-h1,h2{margin-top:0}
+body{background:#111;color:white;font-family:Arial;padding:20px}
+.card{background:#1a1a1a;padding:15px;margin:15px 0;border-radius:8px}
+table{width:100%;border-collapse:collapse}
+td,th{padding:8px;border-bottom:1px solid #333}
 </style>
 </head>
 
@@ -55,31 +37,24 @@ h1,h2{margin-top:0}
 
 <script>
 
-const JSON_URL =
-"https://trading-agent-bot.pages.dev/public/dashboard_data.json?v=" + Date.now();
-
-fetch(JSON_URL)
+fetch("/dashboard_data.json?v="+Date.now())
 .then(r=>{
     if(!r.ok) throw new Error("HTTP "+r.status);
     return r.json();
 })
 .then(d=>{
 
-console.log("DATA LOADED:", d)
-
-// -------- updated time --------
 document.getElementById("updated").innerText =
-"Updated: " + d.timestamp;
+"Updated: "+d.timestamp;
 
 
-// -------- equity chart --------
-let traces = [];
-
-for(const key in d.equity){
+// EQUITY
+let traces=[];
+for(const k in d.equity){
     traces.push({
-        y: d.equity[key],
-        mode: 'lines',
-        name: d.strategies[key]?.name || key
+        y:d.equity[k],
+        mode:'lines',
+        name:d.strategies[k]?.name || k
     });
 }
 
@@ -90,53 +65,46 @@ Plotly.newPlot("equityChart", traces, {
 });
 
 
-// -------- metrics table --------
-let html = `
-<tr>
+// METRICS
+let html=`<tr>
 <th>Strategy</th>
-<th>Return %</th>
+<th>Return%</th>
 <th>Sharpe</th>
-<th>Win Rate</th>
-<th>Profit Factor</th>
+<th>WinRate</th>
+<th>PF</th>
 </tr>`;
 
-for(const key in d.strategies){
-    const s = d.strategies[key];
-    const m = s.metrics;
+for(const k in d.strategies){
+    let s=d.strategies[k];
+    let m=s.metrics;
 
-    html += `<tr>
+    html+=`<tr>
     <td>${s.name}</td>
-    <td>${(m.return_pct ?? 0).toFixed(2)}</td>
-    <td>${(m.sharpe ?? 0).toFixed(2)}</td>
-    <td>${((m.win_rate ?? 0)*100).toFixed(1)}%</td>
-    <td>${(m.profit_factor ?? 0).toFixed(2)}</td>
+    <td>${(m.total_return_pct??0).toFixed(2)}</td>
+    <td>${(m.sharpe_ratio??0).toFixed(2)}</td>
+    <td>${(m.win_rate??0).toFixed(1)}%</td>
+    <td>${(m.profit_factor??0).toFixed(2)}</td>
     </tr>`;
 }
 
-document.getElementById("metricsTable").innerHTML = html;
+document.getElementById("metricsTable").innerHTML=html;
 
 
-// -------- signals --------
-let sigHTML = "";
-
+// SIGNALS
+let sig="";
 for(const strat in d.signals){
-    sigHTML += "<b>"+strat+"</b><br>";
-
+    sig+="<b>"+strat+"</b><br>";
     d.signals[strat].forEach(x=>{
-        sigHTML +=
-        `${x.symbol} | ${x.side} | SL ${x.stop_loss}<br>`;
+        sig+=`${x.ticker||x.symbol} | ${x.action||x.side} <br>`;
     });
-
-    sigHTML += "<br>";
+    sig+="<br>";
 }
 
-document.getElementById("signals").innerHTML = sigHTML;
+document.getElementById("signals").innerHTML=sig;
 
 })
 .catch(e=>{
-    console.error(e);
-    document.getElementById("error").innerText =
-    "❌ ERROR: " + e;
+document.getElementById("error").innerText="❌ "+e;
 });
 
 </script>
