@@ -458,6 +458,7 @@ def run_agent():
             json.dump(optimization_results, f, indent=4, cls=PandasJSONEncoder)
         
         print(f"✅ Optimization výsledky uloženy ({os.path.getsize(OPTIMIZATION_FILE):,} bytes)\n")
+        print("Saving to:", os.path.abspath(OPTIMIZATION_FILE))
     except Exception as e:
         print(f"❌ Chyba při ukládání {OPTIMIZATION_FILE}: {e}")
         traceback.print_exc()
