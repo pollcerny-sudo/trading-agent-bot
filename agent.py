@@ -518,6 +518,14 @@ def run_agent():
             if best_metrics:
                 print(f"  {t:6s}: SL={best_sl:.1f} | Sharpe={best_metrics['sharpe']:.2f} | WR={best_metrics['win_rate']:.0f}%")
 
+    # Uložení optimization výsledků
+    try:
+        with open(OPTIMIZATION_FILE, 'w') as f:
+            json.dump(optimization_results, f, indent=4)
+        print(f"\n💾 Optimization výsledky uloženy do: {OPTIMIZATION_FILE}\n")
+    except Exception as e:
+        print(f"❌ Chyba při ukládání optimization: {e}\n")
+
     # 3. BACKTEST
     backtest_results = run_backtest_60d(ticker_data, optimized_sl, ticker_performance)
     
@@ -648,6 +656,7 @@ def run_agent():
             print(f"✅ {len(eval_logs)} obchodů zalogováno do: {LOG_FILE}\n")
         except Exception as e:
             print(f"❌ Chyba při ukládání logu: {e}\n")
+    
     
     # Shrnutí
     print(f"{'='*70}")
