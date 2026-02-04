@@ -4,19 +4,19 @@ import yfinance as yf
 import json
 import os
 from datetime import datetime, timedelta
-import json
-from datetime import datetime
-import pandas as pd
+import traceback
 
+# ────────────────────────────────────────────────
+# Custom JSON encoder – řeší problém s pd.Timestamp / datetime
+# ────────────────────────────────────────────────
 class PandasJSONEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, (pd.Timestamp, datetime)):
-            return obj.isoformat()          # nebo .strftime('%Y-%m-%d')
+            return obj.isoformat()
         if isinstance(obj, pd.Series):
             return obj.to_dict()
-        if hasattr(obj, 'to_dict'):
-            return obj.to_dict()
         return super().default(obj)
+
 
 # === MANUAL TICKER GROUPING ===
 # Split tickers into two groups based on typical market cap/volatility
@@ -35,16 +35,19 @@ STRATEGY_TICKER_GROUPS = {
     'M': SMALL_TICKERS                # Momentum: stronger in smaller caps
 }
 
+# Output files – relativní cesty → aktuální pracovní adresář
 LOG_FILE = 'final_backtest_results.csv'
 SIGNAL_FILE = 'ibkr_signals.json'
 OPTIMIZATION_FILE = 'sl_optimization_results.json'
 BACKTEST_FILE = 'backtest_60d_results.json'
+
 COMMISSION_PCT = 0.001
 
 # Grid search parametry
 SL_GRID = [0.3, 0.4, 0.5, 0.6, 0.7, 0.8]
 ALLOCATION_USD = 10000
 BACKTEST_DAYS = 60
+
 
 def calculate_z_score(profits):
     """Vypočítá Z-score pro sérii profitů"""
@@ -53,34 +56,34 @@ def calculate_z_score(profits):
     std = np.std(profits, ddof=1)
     return mean / (std + 1e-9)
 
+
 def simulate_trade_with_sl(row, side, sl_factor, commission_pct=0.001):
     """Simuluje obchod s stop lossem"""
     entry_price = row['Open']
     exit_price = row['Close']
     sl_distance = sl_factor * row['Prev_AvgRange']
-    shares = int(ALLOCATION_USD / entry_price)
+    shares = int(ALLOCATION_USD / entry_price) if entry_price > 0 else 1
+    
+    hit_sl = False
     
     if side == 'Long':
         sl_price = entry_price - sl_distance
         if row['Low'] <= sl_price:
             exit_price = sl_price
             hit_sl = True
-        else:
-            hit_sl = False
         gross_pnl = shares * (exit_price - entry_price)
     else:  # Short
         sl_price = entry_price + sl_distance
         if row['High'] >= sl_price:
             exit_price = sl_price
             hit_sl = True
-        else:
-            hit_sl = False
         gross_pnl = shares * (entry_price - exit_price)
     
     commission = ALLOCATION_USD * commission_pct * 2
     net_pnl = gross_pnl - commission
     
     return net_pnl, hit_sl
+
 
 def optimize_sl_for_ticker_strategy(df, strategy_mode, ticker):
     """Grid search pro optimální stop loss"""
@@ -109,11 +112,11 @@ def optimize_sl_for_ticker_strategy(df, strategy_mode, ticker):
         results.append({
             'sl_factor': sl_factor,
             'total_profit': sum(profits),
-            'win_rate': sum(1 for p in profits if p > 0) / len(profits) * 100,
-            'avg_profit': np.mean(profits),
+            'win_rate': sum(1 for p in profits if p > 0) / len(profits) * 100 if profits else 0,
+            'avg_profit': np.mean(profits) if profits else 0,
             'sharpe': calculate_z_score(profits),
             'num_trades': len(trades),
-            'sl_hit_rate': sum(1 for t in trades if t['hit_sl']) / len(trades) * 100
+            'sl_hit_rate': sum(1 for t in trades if t['hit_sl']) / len(trades) * 100 if trades else 0
         })
     
     if not results:
@@ -121,6 +124,25 @@ def optimize_sl_for_ticker_strategy(df, strategy_mode, ticker):
     
     best = max(results, key=lambda x: x['sharpe'])
     return best['sl_factor'], best
+
+
+def calculate_max_drawdown(equity_curve):
+    """Vypočítá maximální drawdown v procentech"""
+    if len(equity_curve) < 2:
+        return 0
+    
+    peak = equity_curve[0]
+    max_dd = 0
+    
+    for equity in equity_curve:
+        if equity > peak:
+            peak = equity
+        dd = (peak - equity) / peak * 100
+        if dd > max_dd:
+            max_dd = dd
+    
+    return max_dd
+
 
 def run_backtest_60d(ticker_data, optimized_sl, ticker_performance):
     """Spustí 60denní backtest s manuálně přiřazenými ticker skupinami"""
@@ -134,7 +156,6 @@ def run_backtest_60d(ticker_data, optimized_sl, ticker_performance):
         print(f"\n🎯 Strategie {mode}:")
         print("-" * 70)
         
-        # Použij přiřazenou skupinu tickerů
         allowed_tickers = STRATEGY_TICKER_GROUPS[mode]
         filtered_data = {t: ticker_data[t] for t in allowed_tickers if t in ticker_data}
         
@@ -286,27 +307,16 @@ def run_backtest_60d(ticker_data, optimized_sl, ticker_performance):
     print(f"\n{'='*70}\n")
     return backtest_results
 
-def calculate_max_drawdown(equity_curve):
-    """Vypočítá maximální drawdown v procentech"""
-    if len(equity_curve) < 2:
-        return 0
-    
-    peak = equity_curve[0]
-    max_dd = 0
-    
-    for equity in equity_curve:
-        if equity > peak:
-            peak = equity
-        dd = (peak - equity) / peak * 100
-        if dd > max_dd:
-            max_dd = dd
-    
-    return max_dd
 
 def run_agent():
     print(f"🚀 TRADING AGENT S MANUÁLNÍ TICKER SEGMENTACÍ")
     print(f"📅 Datum: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"{'='*70}\n")
+    
+    # Kontrola zapisovatelnosti
+    cwd = os.getcwd()
+    print(f"📁 Pracovní adresář: {cwd}")
+    print(f"   Zapisovatelný: {os.access(cwd, os.W_OK)}\n")
     
     print(f"📋 TICKER SKUPINY:")
     print(f"   BIG TICKERS (stable):   {', '.join(BIG_TICKERS)}")
@@ -318,6 +328,12 @@ def run_agent():
     print(f"   B (Volume Breakout):  → BIG + ETF")
     print(f"   V (Trend Breakout):   → SMALL")
     print(f"   M (Momentum):         → SMALL\n")
+    
+    print(f"📁 VÝSTUPNÍ SOUBORY:")
+    print(f"   {LOG_FILE}")
+    print(f"   {SIGNAL_FILE}")
+    print(f"   {OPTIMIZATION_FILE}")
+    print(f"   {BACKTEST_FILE}\n")
     
     # 1. Stažení dat
     print(f"📥 Stahuji data pro {len(ALL_TICKERS)} tickerů...")
@@ -434,19 +450,16 @@ def run_agent():
 
     # Uložení optimization výsledků
     try:
-        print(f"\n💾 Ukládám optimization výsledky...")
-        # Debug: check what we're saving
-        total_records = sum(len(optimization_results[mode]) for mode in ['A', 'B', 'V', 'M'])
-        print(f"   Celkem záznamů k uložení: {total_records}")
+        print(f"\n💾 Ukládám optimization výsledky do {OPTIMIZATION_FILE} ...")
+        total_records = sum(len(optimization_results[m]) for m in optimization_results)
+        print(f"   Celkem záznamů: {total_records}")
         
         with open(OPTIMIZATION_FILE, 'w', encoding='utf-8') as f:
-             json.dump(optimization_results, f, indent=4, cls=PandasJSONEncoder)
-
-
-        print(f"✅ Optimization výsledky uloženy do: {OPTIMIZATION_FILE}\n")
+            json.dump(optimization_results, f, indent=4, cls=PandasJSONEncoder)
+        
+        print(f"✅ Optimization výsledky uloženy ({os.path.getsize(OPTIMIZATION_FILE):,} bytes)\n")
     except Exception as e:
-        print(f"❌ Chyba při ukládání optimization: {e}")
-        import traceback
+        print(f"❌ Chyba při ukládání {OPTIMIZATION_FILE}: {e}")
         traceback.print_exc()
         print()
 
@@ -455,34 +468,26 @@ def run_agent():
     
     # Uložení backtest výsledků
     try:
-        print(f"💾 Ukládám backtest výsledky...")
-        results_to_save = {}
+        print(f"💾 Ukládám backtest výsledky do {BACKTEST_FILE} ...")
         
+        results_to_save = {}
         for mode, data in backtest_results.items():
             results_to_save[mode] = data.copy()
-            
-            # Convert datetime objects in trades
             if 'trades' in results_to_save[mode]:
-                print(f"   Konvertuji {len(results_to_save[mode]['trades'])} trades pro {mode}...")
                 for trade in results_to_save[mode]['trades']:
-                    if 'date' in trade:
-                        # Check if it's already a string
-                        if not isinstance(trade['date'], str):
-                            trade['date'] = trade['date'].strftime('%Y-%m-%d')
+                    if 'date' in trade and hasattr(trade['date'], 'strftime'):
+                        trade['date'] = trade['date'].strftime('%Y-%m-%d')
         
-        print(f"   Zapisuji do souboru: {BACKTEST_FILE}")
-        # a stejně pro backtest
-   with open(BACKTEST_FILE, 'w', encoding='utf-8') as f:
-        json.dump(results_to_save, f, indent=4, cls=PandasJSONEncoder)
+        with open(BACKTEST_FILE, 'w', encoding='utf-8') as f:
+            json.dump(results_to_save, f, indent=4, cls=PandasJSONEncoder)
         
-        print(f"✅ Backtest výsledky uloženy do: {BACKTEST_FILE}\n")
+        print(f"✅ Backtest výsledky uloženy ({os.path.getsize(BACKTEST_FILE):,} bytes)\n")
     except Exception as e:
-        print(f"❌ Chyba při ukládání backtestu: {e}")
-        import traceback
+        print(f"❌ Chyba při ukládání {BACKTEST_FILE}: {e}")
         traceback.print_exc()
         print()
 
-   # 4. GENERACE SIGNÁLŮ PRO DNES
+    # 4. GENERACE SIGNÁLŮ PRO DNES
     print(f"{'='*70}")
     print(f"🎯 GENERACE SIGNÁLŮ PRO DNES")
     print(f"{'='*70}\n")
@@ -579,10 +584,10 @@ def run_agent():
                 'Hit-SL': hit_sl
             })
 
-    # Uložení
+    # Uložení signálů
     try:
-        with open(SIGNAL_FILE, 'w') as f:
-            json.dump(final_signals, f, indent=4)
+        with open(SIGNAL_FILE, 'w', encoding='utf-8') as f:
+            json.dump(final_signals, f, indent=4, cls=PandasJSONEncoder)
         print(f"\n💾 Signály uloženy do: {SIGNAL_FILE}\n")
     except Exception as e:
         print(f"❌ Chyba při ukládání signálů: {e}\n")
@@ -611,6 +616,7 @@ def run_agent():
     print(f"\n{'='*70}")
     print("✅ AGENT DOKONČEN!")
     print(f"{'='*70}\n")
+
 
 if __name__ == "__main__":
     run_agent()
