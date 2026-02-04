@@ -20,8 +20,107 @@ class PandasJSONEncoder(json.JSONEncoder):
 
 # === MANUAL TICKER GROUPING ===
 # Split tickers into two groups based on typical market cap/volatility
-BIG_TICKERS = ["AAPL", "MSFT", "GOOGL", "AMZN", "META", "NVDA"]  # Large, stable companies
-SMALL_TICKERS = ["TSLA", "AMD", "PLTR", "NFLX", "AVGO", "SMCI"]  # Smaller, more volatile
+BIG_TICKERS = ["AAPL", "^GSPC", "GOOGL", "V", "WMT", "BRK-B", "PLTR", "NVDA", "SPY", "ABBV",
+    "BAC", "AMZN", "NFLX", "XOM", "GE", "JPM", "JNJ", "MA", "HD", "AVGO",
+    "TSLA", "PG", "CVX", "MSFT", "KO", "META", "ORCL", "ASML", "LLY", "BABA",
+    "SAP", "COST", "AMD", "TMUS", "CSCO", "PM", "MS", "QQQ", "AZN", "NVS",
+    "UNH", "TM", "IBM", "LIN", "SHEL", "GS", "RTX", "AXP", "CRM", "HSBC",
+    "SHOP", "MRK", "RY", "WFC", "PEP", "MCD", "HDB", "UBER", "ABT", "DIS",
+    "BX", "VZ", "T", "TMO", "NVO", "BLK", "CYATY", "CAT", "SCHW", "BKNG",
+    "INTU", "C", "GEV", "DTEGY", "FMX", "ANET", "BA", "NOW", "TXN", "MUFG",
+    "AMGN", "SONY", "SYK", "TJX", "SPGI", "ISRG", "GILD", "AMAT", "QCOM", "ACN",
+    "ARM", "APP", "BSX", "PDD", "ADBE", "UL", "SPOT", "DHR", "MU", "COF",
+    "HON", "HTHIY", "TTE", "RTNTF", "NEE", "KKR", "BHP", "SAN", "BTI", "DE",
+    "PGR", "ETN", "BUD", "PFE", "COP", "ADP", "LOW", "KLAC", "UBS", "TD",
+    "MELI", "UNP", "LRCX", "APH", "MDT", "SNY", "CMCSA", "SNPS", "IBN", "MO",
+    "ADI", "PANW", "DASH", "MSTR", "SMFG", "IBKR", "CB", "NKE", "BBVA", "CRWD",
+    "SO", "WELL", "CEG", "CME", "BAM", "ENB", "ICE", "BN", "RIO", "SE",
+    "HOOD", "CFRUY", "MMC", "SBUX", "VRTX", "TT", "DUK", "PH", "PLD", "LMT",
+    "INTC", "AMT", "BP", "CTAS", "RBLX", "DELL", "BMY", "ORLY", "CDNS", "MCO",
+    "RELX", "RCL", "WM", "HCA", "MGCLY", "SHW", "APO", "MMM", "GD", "TDG",
+    "NOC", "MCK", "NTES", "BMO", "CVS", "MFG", "MDLZ", "GLD", "RACE", "AON",
+    "MSI", "CI", "AJG", "PBR", "GSK", "COIN", "SCCO", "ECL", "TRI", "UPS",
+    "BK", "RSG", "PNC", "EQIX", "ABNB", "ITW", "CRH", "CRWV", "BAESY",
+    "NEM", "EMR", "NGG", "HWM", "JCI", "ITUB", "ING", "BCS", "MAR", "USB",
+    "BNS", "VST", "WMB", "CSX", "NET", "CL", "AZO", "ZTS", "CP", "DB",
+    "BMWKY", "EPD", "AEM", "CM", "INFY", "LYG", "MRVL", "SPG", "GBTC", "NSC",
+    "EQNR", "EOG", "HLT", "MNST", "DEO", "ARES", "ELV", "PYPL", "APD", "CNQ",
+    "IAU", "SNOW", "TEL", "AXON", "CNI", "FCX", "ADSK", "AEP", "FTNT", "NU",
+    "ATEYY", "URI", "TRV", "PWR", "ET", "NWG", "KMI", "WDAY", "IFNNY", "AMX",
+    "CMG", "REGN", "DLR", "ALNY", "NDAQ", "GLW", "AFL", "FAST", "CMI", "CARR",
+    "ROP", "BDX", "NXPI", "TFC", "SRE", "PCAR", "VRT", "TRP", "COR", "FDX",
+    "MFC", "O", "MET", "PTCAY", "D", "ALL", "IDXX", "E", "GM", "CPNG",
+    "FLUT", "MPLX", "PSA", "SLB", "KR", "PAYX", "LHX", "MPC", "LNG", "WCN",
+    "AMP", "ROST", "CTVA", "SU", "PSX", "XYZ", "DHI", "JD", "TGT", "TAK",
+    "GWW", "OKE", "CPRT", "CBRE", "FERG", "KDP", "FIG", "EBAY", "EW", "EA",
+    "OXY", "EXC", "CCI", "AIG", "VEEV", "DDOG", "F", "VALE", "CRCL", "HMC",
+    "GRMN", "PEG", "KMB", "BKR", "HLN", "IMO", "ARGX", "CCEP", "TTWO", "XEL",
+    "RDDT", "WPM", "B", "MSCI", "TEAM", "ALC", "RMD", "GALDY", "AME", "ETR",
+    "MPWR", "VLO", "FANG", "FER", "ZS", "KVUE", "CCL", "TCOM", "CVNA", "VMC",
+    "SYY", "FRFHF", "YUM", "TME", "BSBR", "DAL", "HEI", "RKT", "GWLIF", "ROK",
+    "ED", "PRU", "CSGP", "LYV", "FIS", "ONC", "MLM", "LVS", "VRSK", "TRGP",
+    "ABEV", "VICI", "WEC", "PCG", "CUK", "HIG", "RYAAY", "HSY", "CHT", "CHTR",
+    "MCHP", "XYL", "CAH", "CHLSY", "FNV", "DIA", "CTSH", "OTIS", "GEHC", "CCJ",
+    "WDS", "JBS", "PUK", "WTW", "ACGL", "RJF", "WAB", "STX", "WTKWY", "SLF",
+    "MDY", "HUM", "A", "EL", "NUE", "ODFL", "KHC", "EQT", "LEN", "OWL",
+    "IR", "TSCO", "TYHOY", "DXCM", "BRO", "ALAB", "FICO", "STT", "TEF", "UAL",
+    "VTR", "IQV", "STZ", "EXR", "BR", "DD", "BBD", "VG", "LPLA", "SYM",
+    "NRG", "KB", "FUJIY", "QSR", "UI", "EFX", "DTE", "BIDU", "MTB", "WBD",
+    "TW", "IX", "K", "WIT", "GFI", "AU", "AMRZ", "VOD", "SOFI", "HPE",
+    "EME", "AWK", "ROL", "ADM", "STLA", "KEYS", "DIDIY", "FITB", "PPL", "SMCI",
+    "VLTO", "AVB", "NTR", "AEE", "SYF", "GIS", "WRB", "ATO", "IRM", "CVE",
+    "KBGGY", "BNTX", "SDZNY", "MTD", "WDC", "CBOE", "MT", "VIK", "PHG", "ERIC",
+    "TTD", "IP"]  # Large, stable companies
+SMALL_TICKERS = ["IP", "DSFIY", "CQP", "WSM", "TDY", "FTS", "HPQ", "FE", "TOST",    "INSM", "FIX", "SHG", "EXPE", "DG", "CNP", "VRSN", "JBL", "EQR", "TYL",
+    "AFRM", "PPG", "TU", "YAHOY", "ES", "PTC", "CLS", "FCNCA", "LI", "PHM",
+    "STE", "PINS", "MKL", "DOV", "NTRS", "TPG", "DRI", "STM", "HBAN", "DLTR",
+    "FOXA", "CG", "CINF", "SBAC", "NJDCY", "RSHGY", "PUBGY", "TROW", "EXE", "LULU",
+    "ULTA", "LDOS", "SW", "BCE", "TPR", "TELNY", "HUBB", "FUTU", "KGC", "PHYS",
+    "CDW", "CHD", "RF", "LH", "CPAY", "HUBS", "EIX", "PMDIY", "NVR", "CMS",
+    "RBA", "AMCR", "NTAP", "GIB", "CKHGF", "NTRA", "PODD", "CYBR", "NOK", "SSNC",
+    "AS", "DKNG", "NMR", "ASX", "PBA", "BEKE", "ZM", "LII", "CRDO", "DVN",
+    "RPRX", "HKHHY", "RKLB", "TRMB", "AER", "TSN", "CFG", "ESLT", "ON", "DGX",
+    "GRAB", "VIV", "FLEX", "TPL", "BAP", "ZBH", "FSLR", "L", "CHKP", "NI",
+    "KEY", "GDDY", "GEN", "GPN", "TLK", "ZG", "TS", "ERIE", "CW", "CASY",
+    "EBR", "RCI", "PSTG", "TEVA", "BIIB", "STLD", "XPEV", "SMMT", "FFIV", "GPC",
+    "KSPI", "IOT", "GFL", "MKC", "EDPFY", "NTNX", "INVH", "RL", "DKS", "USFD",
+    "COHR", "KOF", "IHG", "OMVKY", "KEP", "CRBG", "PKG", "CTRA", "GFS", "WY",
+    "ESS", "EC", "NBIS", "BURL", "J", "HAL", "GWRE", "TER", "ASTS", "NWSA",
+    "RBRK", "PNR", "PFG", "TRU", "EVRG", "TLN", "IT", "PKX", "WST", "LNT",
+    "MAA", "WSO", "UMC", "ZBRA", "JHX", "WMG", "SNA", "MDB", "YUMC", "SGI",
+    "BG", "EQH", "NPXYY", "ARNNY", "SN", "WAT", "IFF", "FNF", "SUI", "BWXT",
+    "EXPD", "BEP", "BNT", "INCY", "CSL", "FTV", "TECK", "ZTO", "ONON", "ACM",
+    "LYB", "BSY", "LUV", "VDMCY", "SNN", "ARCC", "RYAN", "HRL", "DOW", "RPM",
+    "PFGC", "APTV", "CNH", "U", "HOLX", "SBS", "JOBY", "BLDR", "RS", "OKTA",
+    "BCH", "ILMN", "CLX", "NVT", "DPZ", "THC", "XPO", "TKO", "WWD", "CHWY",
+    "SOAGY", "APG", "BBY", "AMH", "DECK", "LOGI", "TWLO", "MAS", "FTI", "FTAI",
+    "EMA", "BALL", "BF-A", "RIVN", "COO", "WPC", "DUOL", "KIM", "HNGKY", "MTZ",
+    "OMC", "WES", "UDR", "ALLE", "GGG", "BIP", "SFM", "EWBC", "BJ", "DT",
+    "GMAB", "JBHT", "HLI", "FMS", "CHRW", "DOCU", "EG", "AVY", "CELH", "TXT",
+    "FDS", "CIEN", "CF", "UTHR", "ULS", "REG", "CART", "NLY", "WF", "LTM",
+    "BEN", "BAH", "LECO", "YPF", "QXO", "FNMA", "ITT", "JLL", "H", "RBC",
+    "MEDP", "CLH", "CNM", "GLPI", "SUZ", "CNA", "ICLR", "MP", "NBIX", "RTO",
+    "PNDRY", "IONQ", "CX", "PAC", "CRS", "MANH", "RKUNY", "SOLV", "JEF", "FN",
+    "CNC", "AVAV", "STN", "OC", "MGA", "PAA", "ARE", "BAX", "TOL", "SNX",
+    "SNAP", "ROKU", "OHI", "NDSN", "CIB", "ELS", "COOP", "IEX", "PAG", "EHC",
+    "UNM", "BLD", "RGA", "SJM", "YMM", "EVR", "PAYC", "LAMR", "ASND", "PPC",
+    "GTM", "CCK", "WYNN", "SQM", "DOC", "ALLY", "SLV", "AEG", "TXRH", "POOL",
+    "JKHY", "SF", "VTRS", "DOCS", "CR", "BSAC", "DLAKY", "AUR", "PAAS", "KTOS",
+    "GNRC", "RNR", "SCI", "RGLD", "ENTG", "OKLO", "BROS", "GL", "RDY", "MBLY",
+    "SOTGY", "CPT", "TEM", "FHN", "UHS", "BXP", "DRS", "PNW", "SWK", "CHYM",
+    "VNOM", "DSEEY", "HAS", "NCLH", "HST", "MORN", "HIMS", "FRHC", "LKNCY", "ERJ",
+    "AGI", "SAIL", "PR", "SEIC", "CRRFY", "ACI", "BMRN", "WMS", "PUGBY", "GLXY",
+    "UUGRY", "UWMC", "QGEN", "AFG", "SWKS", "RDEIY", "WTRG", "DTM", "AIZ", "WBA",
+    "ATI", "HII", "NCLTY", "CACI", "AIT", "BZLFY", "EXEL", "ARMK", "WLK", "OVV",
+    "RVTY", "WCC", "MLI", "KNSL", "ALGN", "LINE", "HTHT", "AKAM", "AOS", "TAP",
+    "GME", "UHAL", "AGNC", "BPYPP", "HMY", "BZ", "NIO", "APPF", "TIMB", "KT",
+    "COKE", "CSXXY", "AYI", "ASR", "MOS", "SFD", "AR", "WBS", "DOX", "MRNA",
+    "MGM", "SARO", "KAIKY", "CAVA", "TTEK", "PEN", "BE", "CPB", "W", "SSB",
+    "SKX", "BILI", "PCOR", "NYT", "IVZ", "ORI", "PCTY", "RRX", "WING", "ENSG",
+    "CAI", "XP", "MTSI", "BBIO", "MYTHY", "STRL", "PSO", "CAE", "FYBR", "DVA",
+    "ATR", "SPXC", "IPG", "ALB", "PRMB", "OGE", "CAG", "NICE", "WTS", "WAL",
+    "MMYT", "AES", "KVYO", "REXR", "BIRK", "VIRT", "CUBE", "PLNT", "VRNA", "GTLS",
+    "MNDY"]  # Smaller, more volatile
 ETF_TICKERS = ["SPY", "QQQ"]  # ETFs can be in either group
 
 # Combine for download
@@ -41,10 +140,10 @@ SIGNAL_FILE = 'ibkr_signals.json'
 OPTIMIZATION_FILE = 'sl_optimization_results.json'
 BACKTEST_FILE = 'backtest_60d_results.json'
 
-COMMISSION_PCT = 0.001
+COMMISSION_PCT = 0.0001
 
 # Grid search parametry
-SL_GRID = [0.3, 0.4, 0.5, 0.6, 0.7, 0.8]
+SL_GRID = [0.4, 0.6, 0.8, 1.6,3.2]
 ALLOCATION_USD = 10000
 BACKTEST_DAYS = 60
 
@@ -338,7 +437,7 @@ def run_agent():
     # 1. Stažení dat
     print(f"📥 Stahuji data pro {len(ALL_TICKERS)} tickerů...")
     try:
-        raw = yf.download(ALL_TICKERS, period="2y", interval="1d", group_by='ticker', progress=False)
+        raw = yf.download(ALL_TICKERS, period="8y", interval="1d", group_by='ticker', progress=False)
     except Exception as e:
         print(f"❌ Chyba při stahování dat: {e}")
         return
