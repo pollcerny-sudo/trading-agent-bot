@@ -2,30 +2,109 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Trading Dashboard</title>
+<title>Trading Agent Dashboard V2</title>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+<style>
+body{
+  background:#111;
+  color:white;
+  font-family:Arial;
+  padding:20px;
+}
+.card{
+  background:#1a1a1a;
+  padding:15px;
+  margin:15px 0;
+  border-radius:8px;
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+td,th{
+  padding:8px;
+  border-bottom:1px solid #333;
+}
+h2{margin-top:0}
+</style>
 </head>
 
-<body style="background:#111;color:white;font-family:Arial">
+<body>
 
-<h1>Trading Agent Dashboard</h1>
+<h1>🚀 Trading Agent Dashboard</h1>
 <div id="updated"></div>
-<div id="chart"></div>
+
+<div class="card">
+<h2>📈 Equity Curves</h2>
+<div id="equityChart"></div>
+</div>
+
+<div class="card">
+<h2>📊 Strategy Metrics</h2>
+<table id="metricsTable"></table>
+</div>
+
+<div class="card">
+<h2>🎯 Today's Signals</h2>
+<div id="signals"></div>
+</div>
 
 <script>
 
-fetch("dashboard_data.json")
+fetch("dashboard_data.json?v=2")
 .then(r=>r.json())
 .then(d=>{
 
+// ---------- updated ----------
 document.getElementById("updated").innerText =
 "Updated: "+d.timestamp
 
+// ---------- equity ----------
 let traces=[]
 for(const [k,e] of Object.entries(d.equity)){
-traces.push({y:e,mode:'lines',name:k})
+    traces.push({
+        y:e,
+        mode:'lines',
+        name:d.strategies[k].name
+    })
 }
-Plotly.newPlot("chart",traces)
+
+Plotly.newPlot("equityChart",traces,{
+    paper_bgcolor:"#111",
+    plot_bgcolor:"#111",
+    font:{color:"white"}
+})
+
+// ---------- metrics table ----------
+let html="<tr><th>Strategy</th><th>Return</th><th>Sharpe</th><th>WinRate</th><th>PF</th></tr>"
+
+for(const [k,s] of Object.entries(d.strategies)){
+    let m=s.metrics
+    html+=`
+    <tr>
+      <td>${s.name}</td>
+      <td>${m.return_pct.toFixed(2)}%</td>
+      <td>${m.sharpe.toFixed(2)}</td>
+      <td>${(m.win_rate*100).toFixed(1)}%</td>
+      <td>${m.profit_factor.toFixed(2)}</td>
+    </tr>`
+}
+
+document.getElementById("metricsTable").innerHTML=html
+
+// ---------- signals ----------
+let sigHTML=""
+
+for(const [strat,list] of Object.entries(d.signals)){
+    sigHTML+=`<b>${strat}</b><br>`
+    list.forEach(x=>{
+        sigHTML+=`${x.symbol} | ${x.side} | SL ${x.stop_loss}<br>`
+    })
+    sigHTML+="<br>"
+}
+
+document.getElementById("signals").innerHTML=sigHTML
 
 })
 
