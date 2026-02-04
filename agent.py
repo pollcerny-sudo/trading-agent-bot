@@ -125,10 +125,10 @@ LOG_FILE = 'final_backtest_results.csv'
 SIGNAL_FILE = 'ibkr_signals.json'
 OPTIMIZATION_FILE = 'sl_optimization_results.json'
 BACKTEST_FILE = 'backtest_60d_results.json'
-COMMISSION_PCT = 0.0001
+COMMISSION_PCT = 0.001
 
 # Grid search parametry
-SL_GRID = [ 0.4, 0.6, 0.8, 1.6, 3.2]
+SL_GRID = [0.3, 0.4, 0.5, 0.6, 0.7, 0.8]
 ALLOCATION_USD = 10000
 BACKTEST_DAYS = 60
 
@@ -167,6 +167,7 @@ def simulate_trade_with_sl(row, side, sl_factor, commission_pct=0.001):
     net_pnl = gross_pnl - commission
     
     return net_pnl, hit_sl
+
 
 def optimize_sl_for_ticker_strategy(df, strategy_mode, ticker):
     """Grid search pro optimální stop loss"""
