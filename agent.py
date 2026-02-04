@@ -421,31 +421,52 @@ def run_agent():
 
     # Uložení optimization výsledků
     try:
+        print(f"\n💾 Ukládám optimization výsledky...")
+        # Debug: check what we're saving
+        total_records = sum(len(optimization_results[mode]) for mode in ['A', 'B', 'V', 'M'])
+        print(f"   Celkem záznamů k uložení: {total_records}")
+        
         with open(OPTIMIZATION_FILE, 'w') as f:
             json.dump(optimization_results, f, indent=4)
-        print(f"\n💾 Optimization výsledky uloženy do: {OPTIMIZATION_FILE}\n")
+        print(f"✅ Optimization výsledky uloženy do: {OPTIMIZATION_FILE}\n")
     except Exception as e:
-        print(f"❌ Chyba při ukládání optimization: {e}\n")
+        print(f"❌ Chyba při ukládání optimization: {e}")
+        import traceback
+        traceback.print_exc()
+        print()
 
     # 3. BACKTEST
     backtest_results = run_backtest_60d(ticker_data, optimized_sl, ticker_performance)
     
-    # Uložení
+    # Uložení backtest výsledků
     try:
-        with open(BACKTEST_FILE, 'w') as f:
-            results_to_save = {}
-            for mode, data in backtest_results.items():
-                results_to_save[mode] = data.copy()
-                if 'trades' in results_to_save[mode]:
-                    for trade in results_to_save[mode]['trades']:
-                        if 'date' in trade:
+        print(f"💾 Ukládám backtest výsledky...")
+        results_to_save = {}
+        
+        for mode, data in backtest_results.items():
+            results_to_save[mode] = data.copy()
+            
+            # Convert datetime objects in trades
+            if 'trades' in results_to_save[mode]:
+                print(f"   Konvertuji {len(results_to_save[mode]['trades'])} trades pro {mode}...")
+                for trade in results_to_save[mode]['trades']:
+                    if 'date' in trade:
+                        # Check if it's already a string
+                        if not isinstance(trade['date'], str):
                             trade['date'] = trade['date'].strftime('%Y-%m-%d')
+        
+        print(f"   Zapisuji do souboru: {BACKTEST_FILE}")
+        with open(BACKTEST_FILE, 'w') as f:
             json.dump(results_to_save, f, indent=4)
-        print(f"💾 Backtest výsledky uloženy do: {BACKTEST_FILE}\n")
+        
+        print(f"✅ Backtest výsledky uloženy do: {BACKTEST_FILE}\n")
     except Exception as e:
-        print(f"❌ Chyba při ukládání backtestu: {e}\n")
+        print(f"❌ Chyba při ukládání backtestu: {e}")
+        import traceback
+        traceback.print_exc()
+        print()
 
-    # 4. GENERACE SIGNÁLŮ PRO DNES
+   # 4. GENERACE SIGNÁLŮ PRO DNES
     print(f"{'='*70}")
     print(f"🎯 GENERACE SIGNÁLŮ PRO DNES")
     print(f"{'='*70}\n")
@@ -577,3 +598,4 @@ def run_agent():
 
 if __name__ == "__main__":
     run_agent()
+            
