@@ -4,6 +4,19 @@ import yfinance as yf
 import json
 import os
 from datetime import datetime, timedelta
+import json
+from datetime import datetime
+import pandas as pd
+
+class PandasJSONEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, (pd.Timestamp, datetime)):
+            return obj.isoformat()          # nebo .strftime('%Y-%m-%d')
+        if isinstance(obj, pd.Series):
+            return obj.to_dict()
+        if hasattr(obj, 'to_dict'):
+            return obj.to_dict()
+        return super().default(obj)
 
 # === MANUAL TICKER GROUPING ===
 # Split tickers into two groups based on typical market cap/volatility
@@ -22,14 +35,10 @@ STRATEGY_TICKER_GROUPS = {
     'M': SMALL_TICKERS                # Momentum: stronger in smaller caps
 }
 
-# Output directory - use current working directory
-OUTPUT_DIR = os.getcwd()
-
-# All files in the same directory
-LOG_FILE = os.path.join(OUTPUT_DIR, 'final_backtest_results.csv')
-SIGNAL_FILE = os.path.join(OUTPUT_DIR, 'ibkr_signals.json')
-OPTIMIZATION_FILE = os.path.join(OUTPUT_DIR, 'sl_optimization_results.json')
-BACKTEST_FILE = os.path.join(OUTPUT_DIR, 'backtest_60d_results.json')
+LOG_FILE = 'final_backtest_results.csv'
+SIGNAL_FILE = 'ibkr_signals.json'
+OPTIMIZATION_FILE = 'sl_optimization_results.json'
+BACKTEST_FILE = 'backtest_60d_results.json'
 COMMISSION_PCT = 0.001
 
 # Grid search parametry
@@ -299,30 +308,6 @@ def run_agent():
     print(f"📅 Datum: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"{'='*70}\n")
     
-    # Check output directory permissions
-    print(f"📁 Output directory: {OUTPUT_DIR}")
-    print(f"   Current user: {os.getenv('USER', 'unknown')}")
-    print(f"   Writable: {os.access(OUTPUT_DIR, os.W_OK)}")
-    
-    # Test file write
-    try:
-        test_file = os.path.join(OUTPUT_DIR, '.test_write')
-        with open(test_file, 'w') as f:
-            f.write('test')
-        os.remove(test_file)
-        print(f"   ✅ Write test successful\n")
-    except Exception as e:
-        print(f"   ❌ Write test failed: {e}")
-        print(f"   Trying alternative directory...\n")
-        # Fallback to /tmp or current script directory
-        global OUTPUT_DIR, LOG_FILE, SIGNAL_FILE, OPTIMIZATION_FILE, BACKTEST_FILE
-        OUTPUT_DIR = '/tmp' if os.access('/tmp', os.W_OK) else os.path.dirname(os.path.abspath(__file__))
-        LOG_FILE = os.path.join(OUTPUT_DIR, 'final_backtest_results.csv')
-        SIGNAL_FILE = os.path.join(OUTPUT_DIR, 'ibkr_signals.json')
-        OPTIMIZATION_FILE = os.path.join(OUTPUT_DIR, 'sl_optimization_results.json')
-        BACKTEST_FILE = os.path.join(OUTPUT_DIR, 'backtest_60d_results.json')
-        print(f"   Using fallback directory: {OUTPUT_DIR}\n")
-    
     print(f"📋 TICKER SKUPINY:")
     print(f"   BIG TICKERS (stable):   {', '.join(BIG_TICKERS)}")
     print(f"   SMALL TICKERS (volatile): {', '.join(SMALL_TICKERS)}")
@@ -333,12 +318,6 @@ def run_agent():
     print(f"   B (Volume Breakout):  → BIG + ETF")
     print(f"   V (Trend Breakout):   → SMALL")
     print(f"   M (Momentum):         → SMALL\n")
-    
-    print(f"📁 OUTPUT FILES:")
-    print(f"   {LOG_FILE}")
-    print(f"   {SIGNAL_FILE}")
-    print(f"   {OPTIMIZATION_FILE}")
-    print(f"   {BACKTEST_FILE}\n")
     
     # 1. Stažení dat
     print(f"📥 Stahuji data pro {len(ALL_TICKERS)} tickerů...")
@@ -459,19 +438,12 @@ def run_agent():
         # Debug: check what we're saving
         total_records = sum(len(optimization_results[mode]) for mode in ['A', 'B', 'V', 'M'])
         print(f"   Celkem záznamů k uložení: {total_records}")
-        print(f"   Cesta: {os.path.abspath(OPTIMIZATION_FILE)}")
         
-        with open(OPTIMIZATION_FILE, 'w') as f:
-            json.dump(optimization_results, f, indent=4)
-        
-        # Verify file was created
-        if os.path.exists(OPTIMIZATION_FILE):
-            file_size = os.path.getsize(OPTIMIZATION_FILE)
-            print(f"✅ Optimization výsledky uloženy ({file_size} bytes)")
-            print(f"   Soubor: {os.path.abspath(OPTIMIZATION_FILE)}\n")
-        else:
-            print(f"❌ Soubor nebyl vytvořen!\n")
-            
+        with open(OPTIMIZATION_FILE, 'w', encoding='utf-8') as f:
+             json.dump(optimization_results, f, indent=4, cls=PandasJSONEncoder)
+
+
+        print(f"✅ Optimization výsledky uloženy do: {OPTIMIZATION_FILE}\n")
     except Exception as e:
         print(f"❌ Chyba při ukládání optimization: {e}")
         import traceback
@@ -484,7 +456,6 @@ def run_agent():
     # Uložení backtest výsledků
     try:
         print(f"💾 Ukládám backtest výsledky...")
-        print(f"   Cesta: {os.path.abspath(BACKTEST_FILE)}")
         results_to_save = {}
         
         for mode, data in backtest_results.items():
@@ -499,25 +470,19 @@ def run_agent():
                         if not isinstance(trade['date'], str):
                             trade['date'] = trade['date'].strftime('%Y-%m-%d')
         
-        print(f"   Zapisuji do souboru...")
-        with open(BACKTEST_FILE, 'w') as f:
-            json.dump(results_to_save, f, indent=4)
+        print(f"   Zapisuji do souboru: {BACKTEST_FILE}")
+        # a stejně pro backtest
+   with open(BACKTEST_FILE, 'w', encoding='utf-8') as f:
+        json.dump(results_to_save, f, indent=4, cls=PandasJSONEncoder)
         
-        # Verify file was created
-        if os.path.exists(BACKTEST_FILE):
-            file_size = os.path.getsize(BACKTEST_FILE)
-            print(f"✅ Backtest výsledky uloženy ({file_size} bytes)")
-            print(f"   Soubor: {os.path.abspath(BACKTEST_FILE)}\n")
-        else:
-            print(f"❌ Soubor nebyl vytvořen!\n")
-            
+        print(f"✅ Backtest výsledky uloženy do: {BACKTEST_FILE}\n")
     except Exception as e:
         print(f"❌ Chyba při ukládání backtestu: {e}")
         import traceback
         traceback.print_exc()
         print()
 
-    # 4. GENERACE SIGNÁLŮ PRO DNES
+   # 4. GENERACE SIGNÁLŮ PRO DNES
     print(f"{'='*70}")
     print(f"🎯 GENERACE SIGNÁLŮ PRO DNES")
     print(f"{'='*70}\n")
