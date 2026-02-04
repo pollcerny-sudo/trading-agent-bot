@@ -30,6 +30,6 @@ jobs:
         run: |
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
-          git add final_backtest_results.csv ibkr_signals.json
+          git add final_backtest_results.csv ibkr_signals.json sl_optimization_results.json backtest_60d_results.json
           git commit -m "Auto-update trades and signals [skip ci]" || echo "No changes"
           git push
