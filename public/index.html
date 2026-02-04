@@ -52,9 +52,16 @@ h2{margin-top:0}
 
 <script>
 
-fetch("dashboard_data.json?v=2")
-.then(r=>r.json())
+fetch("public/dashboard_data.json?v=3")
+.then(r=>{
+    if(!r.ok){
+        throw new Error("JSON load failed "+r.status)
+    }
+    return r.json()
+})
 .then(d=>{
+
+console.log("DATA:", d)
 
 // ---------- updated ----------
 document.getElementById("updated").innerText =
@@ -70,42 +77,25 @@ for(const [k,e] of Object.entries(d.equity)){
     })
 }
 
-Plotly.newPlot("equityChart",traces,{
-    paper_bgcolor:"#111",
-    plot_bgcolor:"#111",
-    font:{color:"white"}
-})
+Plotly.newPlot("equityChart",traces)
 
-// ---------- metrics table ----------
-let html="<tr><th>Strategy</th><th>Return</th><th>Sharpe</th><th>WinRate</th><th>PF</th></tr>"
+// ---------- metrics ----------
+let html="<tr><th>Strategy</th><th>Return</th><th>Sharpe</th></tr>"
 
 for(const [k,s] of Object.entries(d.strategies)){
-    let m=s.metrics
-    html+=`
-    <tr>
-      <td>${s.name}</td>
-      <td>${m.return_pct.toFixed(2)}%</td>
-      <td>${m.sharpe.toFixed(2)}</td>
-      <td>${(m.win_rate*100).toFixed(1)}%</td>
-      <td>${m.profit_factor.toFixed(2)}</td>
+    html+=`<tr>
+    <td>${s.name}</td>
+    <td>${s.metrics.return_pct}</td>
+    <td>${s.metrics.sharpe}</td>
     </tr>`
 }
 
 document.getElementById("metricsTable").innerHTML=html
 
-// ---------- signals ----------
-let sigHTML=""
-
-for(const [strat,list] of Object.entries(d.signals)){
-    sigHTML+=`<b>${strat}</b><br>`
-    list.forEach(x=>{
-        sigHTML+=`${x.symbol} | ${x.side} | SL ${x.stop_loss}<br>`
-    })
-    sigHTML+="<br>"
-}
-
-document.getElementById("signals").innerHTML=sigHTML
-
+})
+.catch(e=>{
+    document.body.innerHTML += "<br><br>❌ ERROR: "+e
+    console.error(e)
 })
 
 </script>
