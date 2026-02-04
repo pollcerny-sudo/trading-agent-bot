@@ -426,6 +426,300 @@ def run_agent():
             d = raw[t].dropna().copy()
             
             if len(d) < 100:
+def calculate_z_score(profits):
+    """Vypočítá Z-score pro sérii profitů"""
+    if len(profits) < 3: return 0
+    mean = np.mean(profits)
+    std = np.std(profits, ddof=1)
+    return mean / (std + 1e-9)
+
+def simulate_trade_with_sl(row, side, sl_factor, commission_pct=0.001):
+    """Simuluje obchod s stop lossem"""
+    entry_price = row['Open']
+    exit_price = row['Close']
+    sl_distance = sl_factor * row['Prev_AvgRange']
+    shares = int(ALLOCATION_USD / entry_price)
+    
+    if side == 'Long':
+        sl_price = entry_price - sl_distance
+        if row['Low'] <= sl_price:
+            exit_price = sl_price
+            hit_sl = True
+        else:
+            hit_sl = False
+        gross_pnl = shares * (exit_price - entry_price)
+    else:  # Short
+        sl_price = entry_price + sl_distance
+        if row['High'] >= sl_price:
+            exit_price = sl_price
+            hit_sl = True
+        else:
+            hit_sl = False
+        gross_pnl = shares * (entry_price - exit_price)
+    
+    commission = ALLOCATION_USD * commission_pct * 2
+    net_pnl = gross_pnl - commission
+    
+    return net_pnl, hit_sl
+
+def optimize_sl_for_ticker_strategy(df, strategy_mode, ticker):
+    """Grid search pro optimální stop loss"""
+    results = []
+    
+    for sl_factor in SL_GRID:
+        trades = []
+        
+        for idx, row in df.iterrows():
+            if strategy_mode == 'A':
+                side = 'Long'
+            elif strategy_mode == 'B':
+                side = 'Long' if row['Prev_Close'] > row['Prev_Open'] else 'Short'
+            elif strategy_mode == 'V':
+                side = 'Long'
+            elif strategy_mode == 'M':
+                side = 'Long'
+            
+            profit, hit_sl = simulate_trade_with_sl(row, side, sl_factor, COMMISSION_PCT)
+            trades.append({'profit': profit, 'hit_sl': hit_sl})
+        
+        if not trades:
+            continue
+        
+        profits = [t['profit'] for t in trades]
+        results.append({
+            'sl_factor': sl_factor,
+            'total_profit': sum(profits),
+            'win_rate': sum(1 for p in profits if p > 0) / len(profits) * 100,
+            'avg_profit': np.mean(profits),
+            'sharpe': calculate_z_score(profits),
+            'num_trades': len(trades),
+            'sl_hit_rate': sum(1 for t in trades if t['hit_sl']) / len(trades) * 100
+        })
+    
+    if not results:
+        return 0.5, None
+    
+    best = max(results, key=lambda x: x['sharpe'])
+    return best['sl_factor'], best
+
+def run_backtest_60d(ticker_data, optimized_sl, ticker_performance):
+    """Spustí 60denní backtest s manuálně přiřazenými ticker skupinami"""
+    print(f"\n{'='*70}")
+    print(f"📊 BACKTEST POSLEDNÍCH {BACKTEST_DAYS} DNÍ - TICKER GROUP ASSIGNMENT")
+    print(f"{'='*70}\n")
+    
+    backtest_results = {}
+    
+    for mode in ['A', 'B', 'V', 'M']:
+        print(f"\n🎯 Strategie {mode}:")
+        print("-" * 70)
+        
+        # Použij přiřazenou skupinu tickerů
+        allowed_tickers = STRATEGY_TICKER_GROUPS[mode]
+        filtered_data = {t: ticker_data[t] for t in allowed_tickers if t in ticker_data}
+        
+        if not filtered_data:
+            print(f"  ⚠️  Žádné tickery k dispozici")
+            backtest_results[mode] = {'total_profit': 0, 'num_trades': 0, 'message': 'Žádné tickery'}
+            continue
+        
+        print(f"  📋 Použité tickery ({len(filtered_data)}): {', '.join(filtered_data.keys())}")
+        
+        daily_trades = []
+        equity_curve = [10000]
+        
+        for day_offset in range(BACKTEST_DAYS, 0, -1):
+            candidates = []
+            
+            for t in filtered_data:
+                df = ticker_data[t]
+                
+                if len(df) < day_offset + 1:
+                    continue
+                
+                row = df.iloc[-(day_offset + 1)]
+                current_row = df.iloc[-day_offset]
+                
+                is_signal = False
+                side = 'Long'
+                score = 0
+                
+                if mode == 'A':
+                    dist_h = abs(row['Prev_Close'] - row['Prev_High20_Strict']) / (row['Prev_AvgRange'] + 1e-9)
+                    if dist_h < 0.4:
+                        is_signal = True
+                        side = 'Long'
+                        score = ticker_performance[mode].get(t, 0)
+                elif mode == 'B':
+                    if row['Prev_Volume'] > row['Prev_V_Avg'] * 1.5:
+                        is_signal = True
+                        side = 'Long' if row['Prev_Close'] > row['Prev_Open'] else 'Short'
+                        score = ticker_performance[mode].get(t, 0)
+                elif mode == 'V':
+                    if row['Prev_High'] > row['Prev_High20_Strict']:
+                        is_signal = True
+                        side = 'Long'
+                        score = ticker_performance[mode].get(t, 0)
+                elif mode == 'M':
+                    is_signal = True
+                    side = 'Long'
+                    score = row['Day_Return_Pct']
+                
+                if is_signal:
+                    sl_factor = optimized_sl[mode].get(t, 0.5)
+                    candidates.append({
+                        'ticker': t,
+                        'side': side,
+                        'score': score,
+                        'sl_factor': sl_factor,
+                        'row': current_row
+                    })
+            
+            top3 = sorted(candidates, key=lambda x: x['score'], reverse=True)[:3]
+            
+            day_pnl = 0
+            for trade in top3:
+                profit, hit_sl = simulate_trade_with_sl(
+                    trade['row'], 
+                    trade['side'], 
+                    trade['sl_factor'], 
+                    COMMISSION_PCT
+                )
+                day_pnl += profit
+                
+                daily_trades.append({
+                    'date': trade['row'].name,
+                    'ticker': trade['ticker'],
+                    'side': trade['side'],
+                    'profit': profit,
+                    'hit_sl': hit_sl,
+                    'score': trade['score'],
+                    'sl_factor': trade['sl_factor']
+                })
+            
+            if top3:
+                equity_curve.append(equity_curve[-1] + day_pnl)
+        
+        # Výpočet statistik
+        if daily_trades:
+            profits = [t['profit'] for t in daily_trades]
+            total_profit = sum(profits)
+            total_return_pct = (equity_curve[-1] / equity_curve[0] - 1) * 100
+            num_trades = len(daily_trades)
+            win_rate = sum(1 for p in profits if p > 0) / num_trades * 100
+            avg_win = np.mean([p for p in profits if p > 0]) if any(p > 0 for p in profits) else 0
+            avg_loss = np.mean([p for p in profits if p < 0]) if any(p < 0 for p in profits) else 0
+            sharpe = calculate_z_score(profits)
+            max_dd = calculate_max_drawdown(equity_curve)
+            sl_hit_rate = sum(1 for t in daily_trades if t['hit_sl']) / num_trades * 100
+            
+            daily_pnls = {}
+            for t in daily_trades:
+                date_str = t['date'].strftime('%Y-%m-%d')
+                if date_str not in daily_pnls:
+                    daily_pnls[date_str] = 0
+                daily_pnls[date_str] += t['profit']
+            
+            winning_days = sum(1 for pnl in daily_pnls.values() if pnl > 0)
+            total_days = len(daily_pnls)
+            daily_win_rate = winning_days / total_days * 100 if total_days > 0 else 0
+            
+            backtest_results[mode] = {
+                'total_profit': round(total_profit, 2),
+                'total_return_pct': round(total_return_pct, 2),
+                'final_equity': round(equity_curve[-1], 2),
+                'num_trades': num_trades,
+                'num_days': total_days,
+                'win_rate': round(win_rate, 2),
+                'daily_win_rate': round(daily_win_rate, 2),
+                'avg_win': round(avg_win, 2),
+                'avg_loss': round(avg_loss, 2),
+                'sharpe_ratio': round(sharpe, 2),
+                'max_drawdown_pct': round(max_dd, 2),
+                'sl_hit_rate': round(sl_hit_rate, 2),
+                'equity_curve': [round(e, 2) for e in equity_curve],
+                'trades': daily_trades[-10:],
+                'tickers_used': list(filtered_data.keys()),
+                'ticker_group': 'BIG' if mode in ['A', 'B'] else 'SMALL'
+            }
+            
+            print(f"  💰 Celkový Profit:        ${total_profit:,.2f} ({total_return_pct:+.2f}%)")
+            print(f"  📈 Finální Equity:        ${equity_curve[-1]:,.2f}")
+            print(f"  📊 Počet Obchodů:         {num_trades} ({total_days} dnů)")
+            print(f"  ✅ Win Rate (obchody):    {win_rate:.1f}%")
+            print(f"  📅 Win Rate (dny):        {daily_win_rate:.1f}%")
+            print(f"  💚 Průměrný Win:          ${avg_win:.2f}")
+            print(f"  💔 Průměrný Loss:         ${avg_loss:.2f}")
+            print(f"  📉 Max Drawdown:          {max_dd:.2f}%")
+            print(f"  🎲 Sharpe Ratio:          {sharpe:.2f}")
+            print(f"  🛑 Stop Loss Hit Rate:    {sl_hit_rate:.1f}%")
+        else:
+            print(f"  ⚠️  Žádné obchody v backtestu")
+            backtest_results[mode] = {
+                'total_profit': 0,
+                'num_trades': 0,
+                'message': 'Žádné signály',
+                'tickers_used': list(filtered_data.keys()),
+                'ticker_group': 'BIG' if mode in ['A', 'B'] else 'SMALL'
+            }
+    
+    print(f"\n{'='*70}\n")
+    return backtest_results
+
+def calculate_max_drawdown(equity_curve):
+    """Vypočítá maximální drawdown v procentech"""
+    if len(equity_curve) < 2:
+        return 0
+    
+    peak = equity_curve[0]
+    max_dd = 0
+    
+    for equity in equity_curve:
+        if equity > peak:
+            peak = equity
+        dd = (peak - equity) / peak * 100
+        if dd > max_dd:
+            max_dd = dd
+    
+    return max_dd
+
+def run_agent():
+    print(f"🚀 TRADING AGENT S MANUÁLNÍ TICKER SEGMENTACÍ")
+    print(f"📅 Datum: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"{'='*70}\n")
+    
+    print(f"📋 TICKER SKUPINY:")
+    print(f"   BIG TICKERS (stable):   {', '.join(BIG_TICKERS)}")
+    print(f"   SMALL TICKERS (volatile): {', '.join(SMALL_TICKERS)}")
+    print(f"   ETF TICKERS:            {', '.join(ETF_TICKERS)}\n")
+    
+    print(f"📋 STRATEGY → TICKER GROUP ASSIGNMENT:")
+    print(f"   A (Mean Reversion):   → BIG + ETF")
+    print(f"   B (Volume Breakout):  → BIG + ETF")
+    print(f"   V (Trend Breakout):   → SMALL")
+    print(f"   M (Momentum):         → SMALL\n")
+    
+    # 1. Stažení dat
+    print(f"📥 Stahuji data pro {len(ALL_TICKERS)} tickerů...")
+    try:
+        raw = yf.download(ALL_TICKERS, period="2y", interval="1d", group_by='ticker', progress=False)
+    except Exception as e:
+        print(f"❌ Chyba při stahování dat: {e}")
+        return
+    
+    ticker_data = {}
+    failed_tickers = []
+    
+    for t in ALL_TICKERS:
+        try:
+            if t not in raw.columns.get_level_values(0):
+                failed_tickers.append(t)
+                print(f"⚠️  Ticker {t}: Žádná data nenalezena")
+                continue
+                
+            d = raw[t].dropna().copy()
+            
+            if len(d) < 100:
                 failed_tickers.append(t)
                 print(f"⚠️  Ticker {t}: Nedostatek dat ({len(d)} dní)")
                 continue
@@ -656,7 +950,6 @@ def run_agent():
             print(f"✅ {len(eval_logs)} obchodů zalogováno do: {LOG_FILE}\n")
         except Exception as e:
             print(f"❌ Chyba při ukládání logu: {e}\n")
-    
     
     # Shrnutí
     print(f"{'='*70}")
