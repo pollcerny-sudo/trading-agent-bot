@@ -1,129 +1,47 @@
 {
     "A": [
         {
-            "ticker": "HLN",
+            "ticker": "GOOGL",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.6,
-            "z_score": 0.3,
-            "prev_return_pct": null,
-            "vol_ratio": 0.69,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "GEV",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": 0.27,
-            "prev_return_pct": null,
-            "vol_ratio": 1.22,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "BTI",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 1.6,
-            "z_score": 0.2,
-            "prev_return_pct": null,
-            "vol_ratio": 1.27,
-            "ticker_group": "BIG + ETF"
-        }
-    ],
-    "B": [
-        {
-            "ticker": "TGT",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.16,
-            "prev_return_pct": null,
-            "vol_ratio": 1.63,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "MSCI",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 1.6,
-            "z_score": 0.16,
-            "prev_return_pct": null,
-            "vol_ratio": 1.59,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "HOOD",
-            "action": "Short",
-            "allocation_usd": 10000,
-            "sl_factor": 1.6,
-            "z_score": 0.14,
-            "prev_return_pct": null,
-            "vol_ratio": 2.58,
-            "ticker_group": "BIG + ETF"
-        }
-    ],
-    "V": [
-        {
-            "ticker": "BAP",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 1.6,
+            "sl_factor": 0.8,
             "z_score": 0.07,
             "prev_return_pct": null,
-            "vol_ratio": 0.66,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "TELNY",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": 0.04,
-            "prev_return_pct": null,
-            "vol_ratio": 0.4,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "BCE",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.8,
-            "z_score": 0.04,
-            "prev_return_pct": null,
-            "vol_ratio": 1.58,
-            "ticker_group": "SMALL"
+            "vol_ratio": 1.03,
+            "ticker_group": "BIG + ETF"
         }
     ],
+    "B": [],
+    "V": [],
     "M": [
         {
-            "ticker": "NJDCY",
+            "ticker": "TSLA",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.4,
             "z_score": null,
-            "prev_return_pct": 21.78,
-            "vol_ratio": 0.28,
+            "prev_return_pct": -0.54,
+            "vol_ratio": 0.94,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "TER",
+            "ticker": "SMCI",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.8,
+            "sl_factor": 0.3,
             "z_score": null,
-            "prev_return_pct": 9.61,
-            "vol_ratio": 2.16,
+            "prev_return_pct": -1.1,
+            "vol_ratio": 0.84,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "WBS",
+            "ticker": "NFLX",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.6,
+            "sl_factor": 0.5,
             "z_score": null,
-            "prev_return_pct": 8.9,
-            "vol_ratio": 0.86,
+            "prev_return_pct": -2.78,
+            "vol_ratio": 0.79,
             "ticker_group": "SMALL"
         }
     ]
