@@ -39,47 +39,39 @@ canvas { background:#020617; padding:10px; border-radius:12px }
 <div id="metrics" class="grid"></div>
 
 <div class="card">
-<h2>📈 Live Equity Curves</h2>
-<canvas id="liveChart"></canvas>
+  <h2>📈 Live Equity (Skutečné obchody)</h2>
+  <canvas id="liveChart"></canvas>
 </div>
 
 <div class="card">
-<h2>📉 Backtest Equity (60d)</h2>
-<canvas id="btChart"></canvas>
+  <h2>📉 Backtest Equity (60 dní)</h2>
+  <canvas id="btChart"></canvas>
 </div>
 
 <div class="card">
-<h2>🎯 Today Signals</h2>
-<div id="signals"></div>
+  <h2>🎯 Today Signals</h2>
+  <div id="signals"></div>
 </div>
 
 <script>
-const DATA_URL = "dashboard_data.json";
-const BACKTEST_URL = "backtest_60d_results.json";
+const DATA_URL = "dashboard_data.json";        // Live equity a signály
+const BACKTEST_URL = "backtest_60d_results.json";  // Backtest 60d
 
-const COLORS = {
- A:"#38bdf8",
- B:"#f472b6",
- V:"#fb923c",
- M:"#34d399"
-};
+const COLORS = { A:"#38bdf8", B:"#f472b6", V:"#fb923c", M:"#34d399" };
 
-// Load JSON file with cache-busting
+// --- Funkce pro načtení JSON ---
 async function loadJSON(url){
   const r = await fetch(url + "?t=" + Date.now());
   if(!r.ok) throw new Error(url+" not found");
   return await r.json();
 }
 
-// Render metrics
+// --- Render metrik strategií ---
 function renderMetrics(strategies){
   const root = document.getElementById("metrics");
   root.innerHTML = "";
-
   Object.entries(strategies).forEach(([k,s])=>{
-    if(!s.metrics) return;
     const m = s.metrics;
-
     root.innerHTML += `
       <div class="card">
         <div class="value">${s.name}</div>
@@ -94,16 +86,13 @@ function renderMetrics(strategies){
   });
 }
 
-// Render today's signals
+// --- Render dnešních signálů ---
 function renderSignals(signals){
   let html="";
-
   Object.entries(signals).forEach(([mode,list])=>{
-    if(!list || !list.length) return;
-
+    if(!list.length) return;
     html += `<h3>${mode}</h3><table>`;
     html += "<tr><th>Ticker</th><th>Side</th><th>SL</th><th>Score</th></tr>";
-
     list.forEach(s=>{
       html += `<tr>
         <td>${s.ticker}</td>
@@ -112,89 +101,65 @@ function renderSignals(signals){
         <td>${s.z_score ?? s.prev_return_pct ?? ""}</td>
       </tr>`;
     });
-
     html += "</table>";
   });
-
   document.getElementById("signals").innerHTML = html;
 }
 
-// Render live equity curves
+// --- Render live equity (skutečné obchody) ---
 function renderLiveEquity(equity){
-  const datasets = [];
-
+  const datasets=[];
   Object.entries(equity).forEach(([k,arr])=>{
-    if(!arr || !arr.length) return;
-
-    const data = arr.map((p,i)=>({
-      x:i,
-      y:(typeof p === "object") ? p.equity : p
-    }));
-
-    datasets.push({
-      label:"Live "+k,
-      data,
-      borderColor: COLORS[k],
-      tension: 0.2
-    });
+    const data = arr.map((p,i)=>({x:i, y:(typeof p==="object") ? p.equity : p}));
+    datasets.push({ label:"Live "+k, data, borderColor:COLORS[k], tension:0.2 });
   });
-
-  const ctx = document.getElementById("liveChart").getContext("2d");
-  new Chart(ctx,{
+  new Chart(document.getElementById("liveChart"),{
     type:"line",
     data:{datasets},
-    options:{parsing:false, scales:{x:{display:false}, y:{beginAtZero:false}}}
+    options:{ parsing:false, scales:{x:{display:true}, y:{display:true}} }
   });
 }
 
-// Render backtest 60d
+// --- Render backtest 60 dní ---
 function renderBacktest(bt){
   const datasets=[];
-
   Object.entries(bt).forEach(([k,s])=>{
-    if(!s || !s.equity_curve) return;
-
-    const data = s.equity_curve.map((v,i)=>({x:i,y:v}));
-
+    const data = s.equity_curve.map((v,i)=>({x:i, y:v}));
     datasets.push({
       label:"Backtest "+k,
       data,
+      borderColor:COLORS[k],
       borderDash:[6,6],
-      borderColor: COLORS[k],
-      tension: 0.2
+      tension:0.2
     });
   });
-
-  const ctx = document.getElementById("btChart").getContext("2d");
-  new Chart(ctx,{
+  new Chart(document.getElementById("btChart"),{
     type:"line",
     data:{datasets},
-    options:{parsing:false, scales:{x:{display:false}, y:{beginAtZero:false}}}
+    options:{ parsing:false, scales:{x:{display:true}, y:{display:true}} }
   });
 }
 
-// Main function
+// --- Main funkce ---
 async function main(){
-  try{
+  try {
     const data = await loadJSON(DATA_URL);
     const bt   = await loadJSON(BACKTEST_URL);
-
-    console.log("Dashboard data:", data);
-    console.log("Backtest data:", bt);
 
     renderMetrics(data.strategies);
     renderSignals(data.signals);
     renderLiveEquity(data.equity);
     renderBacktest(bt);
 
-    console.log("Dashboard loaded");
-  }catch(e){
-    document.body.innerHTML += "<h2>ERROR: "+e.message+"</h2>";
+    console.log("Dashboard loaded successfully");
+  } catch(e){
+    document.body.innerHTML += "<h2 style='color:red;'>ERROR: "+e.message+"</h2>";
     console.error(e);
   }
 }
 
 main();
 </script>
+
 </body>
 </html>
