@@ -65,21 +65,19 @@ const COLORS = {
  M:"#34d399"
 };
 
+// --- načtení JSON ---
 async function loadJSON(url){
   const r = await fetch(url + "?t=" + Date.now());
   if(!r.ok) throw new Error(url+" not found");
   return await r.json();
 }
 
+// --- metrics ---
 function renderMetrics(strategies){
-
   const root = document.getElementById("metrics");
   root.innerHTML = "";
-
   Object.entries(strategies).forEach(([k,s]) => {
-
     const m = s.metrics;
-
     root.innerHTML += `
       <div class="card">
         <div class="value">${s.name}</div>
@@ -89,22 +87,17 @@ function renderMetrics(strategies){
         <div class="metric">WinRate: ${m.win_rate.toFixed(1)}%</div>
         <div class="metric">Trades: ${m.num_trades}</div>
         <div class="metric">MaxDD: ${m.max_drawdown_pct.toFixed(2)}%</div>
-      </div>
-    `;
+      </div>`;
   });
 }
 
+// --- signals ---
 function renderSignals(signals){
-
   let html="";
-
   Object.entries(signals).forEach(([mode,list]) => {
-
     if(!list.length) return;
-
     html += `<h3>${mode}</h3><table>`;
     html += "<tr><th>Ticker</th><th>Side</th><th>SL</th><th>Score</th></tr>";
-
     list.forEach(s=>{
       html += `<tr>
         <td>${s.ticker}</td>
@@ -113,24 +106,16 @@ function renderSignals(signals){
         <td>${s.z_score ?? s.prev_return_pct ?? ""}</td>
       </tr>`;
     });
-
     html += "</table>";
   });
-
   document.getElementById("signals").innerHTML = html;
 }
 
+// --- live equity ---
 function renderLiveEquity(equity){
-
   const datasets = [];
-
   Object.entries(equity).forEach(([k,arr]) => {
-
-    const data = arr.map((p,i)=>({
-      x:i,
-      y:(typeof p === "object") ? p.equity : p
-    }));
-
+    const data = arr.map((p,i)=>({x:i+1, y:(typeof p === "object") ? p.equity : p}));
     datasets.push({
       label:"Live "+k,
       data,
@@ -138,25 +123,26 @@ function renderLiveEquity(equity){
       tension:.2
     });
   });
-
-  new Chart(liveChart,{
+  new Chart(document.getElementById("liveChart"),{
     type:"line",
     data:{datasets},
     options:{
       parsing:false,
-      scales:{x:{display:false}}
+      responsive:true,
+      plugins:{legend:{labels:{color:'#e5e7eb'}}},
+      scales:{
+        x:{title:{display:true,text:'Day',color:'#e5e7eb'}, ticks:{color:'#e5e7eb'}},
+        y:{title:{display:true,text:'Equity ($)',color:'#e5e7eb'}, ticks:{color:'#e5e7eb'}}
+      }
     }
   });
 }
 
+// --- backtest equity ---
 function renderBacktest(bt){
-
   const datasets=[];
-
   Object.entries(bt).forEach(([k,s]) => {
-
-    const data = s.equity_curve.map((v,i)=>({x:i,y:v}));
-
+    const data = s.equity_curve.map((v,i)=>({x:i+1,y:v}));
     datasets.push({
       label:"Backtest "+k,
       data,
@@ -165,33 +151,34 @@ function renderBacktest(bt){
       tension:.2
     });
   });
-
-  new Chart(btChart,{
+  new Chart(document.getElementById("btChart"),{
     type:"line",
     data:{datasets},
     options:{
       parsing:false,
-      scales:{x:{display:false}}
+      responsive:true,
+      plugins:{legend:{labels:{color:'#e5e7eb'}}},
+      scales:{
+        x:{title:{display:true,text:'Day',color:'#e5e7eb'}, ticks:{color:'#e5e7eb'}},
+        y:{title:{display:true,text:'Equity ($)',color:'#e5e7eb'}, ticks:{color:'#e5e7eb'}}
+      }
     }
   });
 }
 
+// --- main ---
 async function main(){
-
   try {
-
     const data = await loadJSON(DATA_URL);
     const bt   = await loadJSON(BACKTEST_URL);
-
     renderMetrics(data.strategies);
     renderSignals(data.signals);
     renderLiveEquity(data.equity);
     renderBacktest(bt);
-
     console.log("Dashboard loaded");
-
   } catch(e){
     document.body.innerHTML += "<h2>ERROR: "+e.message+"</h2>";
+    console.error(e);
   }
 }
 
