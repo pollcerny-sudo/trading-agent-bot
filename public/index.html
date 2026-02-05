@@ -5,6 +5,8 @@
 <title>Trading Agent Dashboard V4</title>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/luxon@3.3.0/build/global/luxon.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.1.0"></script>
 
 <style>
 body {
@@ -39,38 +41,37 @@ canvas { background:#020617; padding:10px; border-radius:12px }
 <div id="metrics" class="grid"></div>
 
 <div class="card">
-  <h2>📈 Live Equity (Skutečné obchody)</h2>
-  <canvas id="liveChart"></canvas>
+<h2>📈 Live Equity Curves</h2>
+<canvas id="liveChart"></canvas>
 </div>
 
 <div class="card">
-  <h2>📉 Backtest Equity (60 dní)</h2>
-  <canvas id="btChart"></canvas>
+<h2>📉 Backtest Equity (60d)</h2>
+<canvas id="btChart"></canvas>
 </div>
 
 <div class="card">
-  <h2>🎯 Today Signals</h2>
-  <div id="signals"></div>
+<h2>🎯 Today Signals</h2>
+<div id="signals"></div>
 </div>
 
 <script>
-const DATA_URL = "dashboard_data.json";        // Live equity a signály
-const BACKTEST_URL = "backtest_60d_results.json";  // Backtest 60d
+const DATA_URL = "dashboard_data.json";
+const BACKTEST_URL = "backtest_60d_results.json";
 
 const COLORS = { A:"#38bdf8", B:"#f472b6", V:"#fb923c", M:"#34d399" };
 
-// --- Funkce pro načtení JSON ---
 async function loadJSON(url){
   const r = await fetch(url + "?t=" + Date.now());
   if(!r.ok) throw new Error(url+" not found");
   return await r.json();
 }
 
-// --- Render metrik strategií ---
+// --- Metrics ---
 function renderMetrics(strategies){
   const root = document.getElementById("metrics");
   root.innerHTML = "";
-  Object.entries(strategies).forEach(([k,s])=>{
+  Object.entries(strategies).forEach(([k,s]) => {
     const m = s.metrics;
     root.innerHTML += `
       <div class="card">
@@ -81,12 +82,11 @@ function renderMetrics(strategies){
         <div class="metric">WinRate: ${m.win_rate.toFixed(1)}%</div>
         <div class="metric">Trades: ${m.num_trades}</div>
         <div class="metric">MaxDD: ${m.max_drawdown_pct.toFixed(2)}%</div>
-      </div>
-    `;
+      </div>`;
   });
 }
 
-// --- Render dnešních signálů ---
+// --- Signals ---
 function renderSignals(signals){
   let html="";
   Object.entries(signals).forEach(([mode,list])=>{
@@ -106,60 +106,63 @@ function renderSignals(signals){
   document.getElementById("signals").innerHTML = html;
 }
 
-// --- Render live equity (skutečné obchody) ---
+// --- Live Equity ---
 function renderLiveEquity(equity){
   const datasets=[];
   Object.entries(equity).forEach(([k,arr])=>{
-    const data = arr.map((p,i)=>({x:i, y:(typeof p==="object") ? p.equity : p}));
+    const data = arr.map(p=>({ x: p.date, y: p.equity }));
     datasets.push({ label:"Live "+k, data, borderColor:COLORS[k], tension:0.2 });
   });
   new Chart(document.getElementById("liveChart"),{
     type:"line",
     data:{datasets},
-    options:{ parsing:false, scales:{x:{display:true}, y:{display:true}} }
+    options:{
+      parsing:false,
+      scales:{
+        x:{ type:"time", time:{ unit:"day" }, title:{ display:true, text:"Datum" } },
+        y:{ title:{ display:true, text:"Equity ($)" } }
+      }
+    }
   });
 }
 
-// --- Render backtest 60 dní ---
+// --- Backtest 60 dní ---
 function renderBacktest(bt){
   const datasets=[];
   Object.entries(bt).forEach(([k,s])=>{
-    const data = s.equity_curve.map((v,i)=>({x:i, y:v}));
-    datasets.push({
-      label:"Backtest "+k,
-      data,
-      borderColor:COLORS[k],
-      borderDash:[6,6],
-      tension:0.2
-    });
+    if(!s.equity_curve || !s.dates) return;
+    const data = s.equity_curve.map((v,i)=>({ x: s.dates[i], y:v }));
+    datasets.push({ label:"Backtest "+k, data, borderColor:COLORS[k], borderDash:[6,6], tension:0.2 });
   });
   new Chart(document.getElementById("btChart"),{
     type:"line",
     data:{datasets},
-    options:{ parsing:false, scales:{x:{display:true}, y:{display:true}} }
+    options:{
+      parsing:false,
+      scales:{
+        x:{ type:"time", time:{ unit:"day" }, title:{ display:true, text:"Datum" } },
+        y:{ title:{ display:true, text:"Equity ($)" } }
+      }
+    }
   });
 }
 
-// --- Main funkce ---
+// --- Main ---
 async function main(){
   try {
     const data = await loadJSON(DATA_URL);
     const bt   = await loadJSON(BACKTEST_URL);
-
     renderMetrics(data.strategies);
     renderSignals(data.signals);
     renderLiveEquity(data.equity);
     renderBacktest(bt);
-
-    console.log("Dashboard loaded successfully");
+    console.log("Dashboard loaded");
   } catch(e){
-    document.body.innerHTML += "<h2 style='color:red;'>ERROR: "+e.message+"</h2>";
-    console.error(e);
+    document.body.innerHTML += "<h2>ERROR: "+e.message+"</h2>";
   }
 }
 
 main();
 </script>
-
 </body>
 </html>
