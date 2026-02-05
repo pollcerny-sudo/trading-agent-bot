@@ -545,6 +545,7 @@ def show_recent_performance(data):
 
 def export_dashboard_json(data):
     if data['history'].empty:
+        print("⚠️ history empty — JSON not exported")
         return
 
     df = data['history'].copy()
@@ -553,32 +554,44 @@ def export_dashboard_json(data):
     strategies = {}
 
     for s in ['A','B','V','M']:
-        strat_df = df[df['Strategy']==s]
+        strat_df = df[df['Strategy'] == s]
         if strat_df.empty:
             continue
+
         m = calculate_metrics(strat_df)
+
         strategies[s] = {
             "name": STRATEGY_NAMES[s],
             "metrics": m
         }
 
+    # ===== DAILY PROFIT =====
     df_daily = df.groupby(['Date','Strategy'])['Profit'].sum().reset_index()
 
+    # ===== EQUITY BUILD =====
     equity = {}
 
-for s in ['A','B','V','M']:
-    d = df_daily[df_daily['Strategy']==s].sort_values('Date')
-    if d.empty:
-        equity[s] = []
-        continue
+    for s in ['A','B','V','M']:
+        d = df_daily[df_daily['Strategy'] == s].sort_values('Date')
 
-    d['Equity'] = 10000 + d['Profit'].cumsum()
+        if d.empty:
+            equity[s] = []
+            continue
 
-    equity[s] = [
-        {"date": str(r['Date'])[:10], "equity": round(r['Equity'],2)}
-        for _, r in d.iterrows()
-    ]
+        d['Equity'] = 10000 + d['Profit'].cumsum()
+
+        equity[s] = [
+            {
+                "date": str(r['Date'])[:10],
+                "equity": round(r['Equity'], 2)
+            }
+            for _, r in d.iterrows()
+        ]
+
+    # ===== JSON EXPORT =====
     import os, json
+    from datetime import datetime
+
     os.makedirs("public", exist_ok=True)
 
     out = {
@@ -588,8 +601,10 @@ for s in ['A','B','V','M']:
         "equity": equity
     }
 
-    with open("public/dashboard_data.json","w") as f:
-        json.dump(out,f,indent=2)
+    with open("public/dashboard_data.json", "w") as f:
+        json.dump(out, f, indent=2)
+
+    print("✅ dashboard_data.json exported")
 
 
 def main():
