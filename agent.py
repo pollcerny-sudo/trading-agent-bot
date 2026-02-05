@@ -661,13 +661,16 @@ def run_agent():
     
     # Backtest (minimal)
     backtest_results = run_backtest_60d(ticker_data, optimized_sl, ticker_performance)
-    
-    try:
-        with open(BACKTEST_FILE, 'w') as f:
-            json.dump(backtest_results, f, indent=4)
-        print(f"✅ Backtest uloženy\n")
-    except Exception as e:
-        print(f"❌ Chyba: {e}\n")
+
+    # ===== Export do public =====
+    import os
+    BACKTEST_FILE = os.path.join("public", "backtest_60d_results.json")
+    os.makedirs("public", exist_ok=True)  # zajistí existenci složky
+
+    with open(BACKTEST_FILE, "w") as f:
+      json.dump(backtest_results, f, indent=2)
+
+    print("✅ backtest_60d_results.json exported")
     
     # Generuj signály pro zítřek
     final_signals = generate_signals_for_tomorrow(ticker_data, optimized_sl, ticker_performance)
