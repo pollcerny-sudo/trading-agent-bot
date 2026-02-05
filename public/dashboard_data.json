@@ -1,60 +1,60 @@
 {
-  "timestamp": "2026-02-05T10:50:56.616168",
+  "timestamp": "2026-02-05T14:13:27.993163",
   "strategies": {
     "A": {
       "name": "Mean Reversion",
       "metrics": {
-        "total_profit": 559.52,
-        "total_return_pct": 5.595199999999999,
-        "num_trades": 6,
+        "total_profit": 895.3500000000001,
+        "total_return_pct": 8.953500000000002,
+        "num_trades": 9,
         "win_rate": 66.66666666666666,
-        "avg_win": 154.265,
+        "avg_win": 163.60999999999999,
         "avg_loss": -28.77,
-        "sharpe_ratio": 16.033836898309897,
+        "sharpe_ratio": 16.34869693979438,
         "max_drawdown_pct": 0.2806155790902732,
-        "profit_factor": 5.362009037191519
+        "profit_factor": 5.686826555439693
       }
     },
     "B": {
       "name": "Volume Breakout",
       "metrics": {
-        "total_profit": -458.02,
-        "total_return_pct": -4.5802,
-        "num_trades": 6,
-        "win_rate": 16.666666666666664,
+        "total_profit": -770.99,
+        "total_return_pct": -7.7099,
+        "num_trades": 9,
+        "win_rate": 11.11111111111111,
         "avg_win": 74.16,
-        "avg_loss": -106.43599999999999,
-        "sharpe_ratio": -17.89493182363648,
-        "max_drawdown_pct": 4.2964389414614415,
-        "profit_factor": 0.6967567364425571
+        "avg_loss": -105.64375000000001,
+        "sharpe_ratio": -23.82760671436037,
+        "max_drawdown_pct": 7.4354460976796215,
+        "profit_factor": 0.7019818967047269
       }
     },
     "V": {
       "name": "Trend Breakout",
       "metrics": {
-        "total_profit": -401.68,
-        "total_return_pct": -4.0168,
-        "num_trades": 6,
+        "total_profit": -602.52,
+        "total_return_pct": -6.0252,
+        "num_trades": 9,
         "win_rate": 0.0,
         "avg_win": 0,
-        "avg_loss": -66.94666666666667,
-        "sharpe_ratio": -23.09736501179042,
-        "max_drawdown_pct": 3.997599519903984,
+        "avg_loss": -66.94666666666666,
+        "sharpe_ratio": -23.097365011790412,
+        "max_drawdown_pct": 6.006401280256055,
         "profit_factor": 0.0
       }
     },
     "M": {
       "name": "Momentum",
       "metrics": {
-        "total_profit": 2900.0000000000005,
-        "total_return_pct": 29.000000000000004,
-        "num_trades": 4,
-        "win_rate": 75.0,
-        "avg_win": 1017.8600000000001,
+        "total_profit": 4775.370000000001,
+        "total_return_pct": 47.75370000000001,
+        "num_trades": 7,
+        "win_rate": 71.42857142857143,
+        "avg_win": 1016.5060000000001,
         "avg_loss": -153.58,
-        "sharpe_ratio": 22.68608624539885,
+        "sharpe_ratio": 20.484933793717435,
         "max_drawdown_pct": 1.176535479155909,
-        "profit_factor": 6.627555671311369
+        "profit_factor": 6.618739419195208
       }
     }
   },
@@ -192,25 +192,25 @@
     "A": [
       {
         "date": "2026-02-04",
-        "equity": 10559.52
+        "equity": 10895.35
       }
     ],
     "B": [
       {
         "date": "2026-02-04",
-        "equity": 9541.98
+        "equity": 9229.01
       }
     ],
     "V": [
       {
         "date": "2026-02-04",
-        "equity": 9598.32
+        "equity": 9397.48
       }
     ],
     "M": [
       {
         "date": "2026-02-04",
-        "equity": 12900.0
+        "equity": 14775.37
       }
     ]
   }
