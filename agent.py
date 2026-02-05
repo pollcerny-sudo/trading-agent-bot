@@ -348,102 +348,113 @@ def optimize_sl_for_ticker_strategy(df, strategy_mode, ticker):
     return best['sl_factor'], best
 
 def run_backtest_60d(ticker_data, optimized_sl, ticker_performance):
-    """Spustí 60denní backtest s manuálně přiřazenými ticker skupinami"""
+
     print(f"\n{'='*70}")
     print(f"📊 BACKTEST POSLEDNÍCH {BACKTEST_DAYS} DNÍ")
     print(f"{'='*70}\n")
-    
+
     backtest_results = {}
-    
-    for mode in ['A', 'B', 'V', 'M']:
-        print(f"\n🎯 Strategie {mode}:")
-        print("-" * 70)
-        
-        # Použij přiřazenou skupinu tickerů
-        allowed_tickers = STRATEGY_TICKER_GROUPS[mode]
-        filtered_data = {t: ticker_data[t] for t in allowed_tickers if t in ticker_data}
-        
-        if not filtered_data:
-            print(f"  ⚠️  Žádné tickery k dispozici")
-            backtest_results[mode] = {'total_profit': 0, 'num_trades': 0, 'message': 'Žádné tickery'}
-            continue
-        
-        print(f"  📋 Použité tickery ({len(filtered_data)}): {', '.join(filtered_data.keys())}")
-        
-        daily_trades = []
-        equity_curve = [10000]
-        
-        for day_offset in range(BACKTEST_DAYS, 0, -1):
+
+    for mode in ['A','B','V','M']:
+
+        print(f"\n🎯 Strategie {mode}")
+        print("-"*70)
+
+        allowed = STRATEGY_TICKER_GROUPS[mode]
+        filtered = {t:ticker_data[t] for t in allowed if t in ticker_data}
+
+        equity = 10000
+        equity_curve = [equity]
+        trades = []
+
+        for day_offset in range(BACKTEST_DAYS,0,-1):
+
             candidates = []
-            
-            for t in filtered_data:
-                df = ticker_data[t]
-                
-                if len(df) < day_offset + 1:
+
+            for t,df in filtered.items():
+
+                if len(df) < day_offset+1:
                     continue
-                
-                row = df.iloc[-(day_offset + 1)]
-                current_row = df.iloc[-day_offset]
-                
-                is_signal = False
-                side = 'Long'
-                score = 0
-                
-                if mode == 'A':
-                    dist_h = abs(row['Prev_Close'] - row['Prev_High20_Strict']) / (row['Prev_AvgRange'] + 1e-9)
-                    if dist_h < 0.4:
-                        is_signal = True
-                        side = 'Long'
-                        score = ticker_performance[mode].get(t, 0)
-                elif mode == 'B':
-                    if row['Prev_Volume'] > row['Prev_V_Avg'] * 1.5:
-                        is_signal = True
-                        side = 'Long' if row['Prev_Close'] > row['Prev_Open'] else 'Short'
-                        score = ticker_performance[mode].get(t, 0)
-                elif mode == 'V':
-                    if row['Prev_High'] > row['Prev_High20_Strict']:
-                        is_signal = True
-                        side = 'Long'
-                        score = ticker_performance[mode].get(t, 0)
-                elif mode == 'M':
-                    is_signal = True
-                    side = 'Long'
-                    score = row['Day_Return_Pct']
-                
-                if is_signal:
-                    sl_factor = optimized_sl[mode].get(t, 0.5)
+
+                prev = df.iloc[-(day_offset+1)]
+                now  = df.iloc[-day_offset]
+
+                signal=False
+                side="Long"
+                score=0
+
+                if mode=="A":
+                    d = abs(prev['Prev_Close']-prev['Prev_High20_Strict'])/(prev['Prev_AvgRange']+1e-9)
+                    if d<0.4:
+                        signal=True
+                        score=ticker_performance[mode].get(t,0)
+
+                elif mode=="B":
+                    if prev['Prev_Volume']>prev['Prev_V_Avg']*1.5:
+                        signal=True
+                        side="Long" if prev['Prev_Close']>prev['Prev_Open'] else "Short"
+                        score=ticker_performance[mode].get(t,0)
+
+                elif mode=="V":
+                    if prev['Prev_High']>prev['Prev_High20_Strict']:
+                        signal=True
+                        score=ticker_performance[mode].get(t,0)
+
+                elif mode=="M":
+                    signal=True
+                    score=prev['Day_Return_Pct']
+
+                if signal:
+                    sl = optimized_sl[mode].get(t,0.5)
                     candidates.append({
-                        'ticker': t,
-                        'side': side,
-                        'score': score,
-                        'sl_factor': sl_factor,
-                        'row': current_row
+                        "ticker":t,
+                        "side":side,
+                        "score":score,
+                        "sl":sl,
+                        "row":now
                     })
-            
-            top3 = sorted(candidates, key=lambda x: x['score'], reverse=True)[:3]
-            
-            day_pnl = 0
-            for trade in top3:
-                profit, hit_sl = simulate_trade_with_sl(
-                    trade['row'], 
-                    trade['side'], 
-                    trade['sl_factor'], 
+
+            top3 = sorted(candidates,key=lambda x:x["score"],reverse=True)[:3]
+
+            day_pnl=0
+
+            for tr in top3:
+
+                pnl,hit = simulate_trade_with_sl(
+                    tr["row"],
+                    tr["side"],
+                    tr["sl"],
                     COMMISSION_PCT
                 )
-                day_pnl += profit
-                
-                daily_trades.append({
-                    'date': trade['row'].name,
-                    'ticker': trade['ticker'],
-                    'side': trade['side'],
-                    'profit': profit,
-                    'hit_sl': hit_sl,
-                    'score': trade['score'],
-                    'sl_factor': trade['sl_factor']
+
+                day_pnl += pnl
+
+                trades.append({
+                    "date":str(tr["row"].name),
+                    "ticker":tr["ticker"],
+                    "side":tr["side"],
+                    "profit":round(pnl,2),
+                    "hit_sl":hit
                 })
-            
-            if top3:
-                equity_curve.append(equity_curve[-1] + day_pnl)
+
+            equity += day_pnl
+            equity_curve.append(round(equity,2))
+
+        dd = calculate_max_drawdown(equity_curve)
+
+        backtest_results[mode] = {
+            "equity_curve": equity_curve,
+            "num_trades": len(trades),
+            "total_profit": round(equity-10000,2),
+            "max_drawdown": round(dd,2),
+            "trades": trades
+        }
+
+        print("profit:",round(equity-10000,2),
+              "trades:",len(trades),
+              "maxDD:",round(dd,2))
+
+    return backtest_results
         
 
 def calculate_max_drawdown(equity_curve):
