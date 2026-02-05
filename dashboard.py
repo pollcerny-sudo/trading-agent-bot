@@ -565,10 +565,19 @@ def export_dashboard_json(data):
     df_daily = df.groupby(['Date','Strategy'])['Profit'].sum().reset_index()
 
     equity = {}
-    for s in ['A','B','V','M']:
-        d = df_daily[df_daily['Strategy']==s].sort_values('Date')
-        equity[s] = list((10000 + d['Profit'].cumsum()).round(2))
 
+for s in ['A','B','V','M']:
+    d = df_daily[df_daily['Strategy']==s].sort_values('Date')
+    if d.empty:
+        equity[s] = []
+        continue
+
+    d['Equity'] = 10000 + d['Profit'].cumsum()
+
+    equity[s] = [
+        {"date": str(r['Date'])[:10], "equity": round(r['Equity'],2)}
+        for _, r in d.iterrows()
+    ]
     import os, json
     os.makedirs("public", exist_ok=True)
 
