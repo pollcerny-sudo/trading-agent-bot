@@ -1,125 +1,167 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Trading Agent Dashboard</title>
+<title>Trading Agent Dashboard V3</title>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
 <style>
-  body { background:#111; color:white; font-family:Arial, sans-serif; padding:20px;}
-  h1,h2,h3 { color:#FFD700; }
-  table { border-collapse: collapse; margin-bottom:20px; width:100%; }
-  th, td { border:1px solid #555; padding:5px 10px; text-align:center; }
-  th { background:#222; }
-  td { background:#111; }
-  .section { margin-bottom:40px; }
+body{background:#0f0f0f;color:#eee;font-family:Arial;padding:20px}
+table{border-collapse:collapse;width:100%}
+th,td{border:1px solid #333;padding:6px;text-align:center}
+th{background:#222}
+h2{margin-top:40px}
+.card{background:#1a1a1a;padding:15px;margin:10px 0;border-radius:8px}
+.small{font-size:12px;color:#aaa}
 </style>
 </head>
+
 <body>
 
-<h1>🚀 Trading Agent Dashboard</h1>
+<h1>🚀 Trading Agent Dashboard — V3</h1>
 <div id="updated">Loading...</div>
 
-<div class="section">
-<h2>📈 Equity Curves</h2>
-<div id="equity_chart" style="height:500px;"></div>
-</div>
-
-<div class="section">
 <h2>📊 Strategy Metrics</h2>
-<table id="metrics_table"></table>
-</div>
+<table id="metrics"></table>
 
-<div class="section">
-<h2>🎯 Today's Signals</h2>
+<h2>📈 Equity Curves</h2>
+<div id="equityChart"></div>
+
+<h2>🏆 Strategy Ranking</h2>
+<div id="rankingChart"></div>
+
+<h2>🎯 Signals</h2>
 <div id="signals"></div>
-</div>
-
-<div class="section">
-<h2>🔍 Backtest vs Actual</h2>
-<div id="backtest_diff"></div>
-</div>
 
 <script>
+
 fetch("dashboard_data.json")
 .then(r=>r.json())
 .then(d=>{
-  // Timestamp
-  document.getElementById("updated").innerText = "Updated: " + d.timestamp;
 
-  // --- Equity Curves ---
-  let traces=[];
-  for(const [k,e] of Object.entries(d.equity)){
-    traces.push({ y:e, mode:'lines+markers', name:d.strategies[k]?.name||k });
-  }
-  Plotly.newPlot("equity_chart", traces, {
-    plot_bgcolor:"#111", paper_bgcolor:"#111", font:{color:"white"},
-    title:"Equity Curves", xaxis:{title:"Day"}, yaxis:{title:"Equity ($)"}
-  });
+// ================= TIMESTAMP
+updated.innerText = "Updated: "+d.timestamp
 
-  // --- Strategy Metrics Table ---
-  let metrics_html=`<tr>
-    <th>Strategy</th>
-    <th>Total Profit</th>
-    <th>Return %</th>
-    <th>Trades</th>
-    <th>Win Rate</th>
-    <th>Avg Win</th>
-    <th>Avg Loss</th>
-    <th>Sharpe</th>
-    <th>Max DD</th>
-    <th>PF</th>
-  </tr>`;
-  for(const k in d.strategies){
-    let s=d.strategies[k];
-    let m=s.metrics;
-    metrics_html+=`<tr>
-      <td>${s.name}</td>
-      <td>$${(m.total_profit??0).toFixed(2)}</td>
-      <td>${(m.total_return_pct??0).toFixed(2)}%</td>
-      <td>${(m.trades??0)}</td>
-      <td>${(m.win_rate??0).toFixed(1)}%</td>
-      <td>$${(m.avg_win??0).toFixed(2)}</td>
-      <td>$${(m.avg_loss??0).toFixed(2)}</td>
-      <td>${(m.sharpe_ratio??0).toFixed(2)}</td>
-      <td>${(m.max_drawdown??0).toFixed(2)}%</td>
-      <td>${(m.profit_factor??0).toFixed(2)}</td>
-    </tr>`;
-  }
-  document.getElementById("metrics_table").innerHTML = metrics_html;
 
-  // --- Today's Signals ---
-  let sig_html="";
-  for(const strat in d.signals){
-    sig_html+="<b>"+strat+" - "+(d.strategies[strat]?.name||strat)+"</b><br>";
-    d.signals[strat].forEach(x=>{
-      sig_html+=`${x.ticker||x.symbol} | ${x.action||x.side} | Alloc: $${x.alloc??0} | SL: ${x.sl??0}`;
-      if(x.zscore) sig_html+=` | Z-Score: ${x.zscore.toFixed(2)}`;
-      if(x.prev_return) sig_html+=` | Prev Return: ${x.prev_return.toFixed(2)}%`;
-      sig_html+="<br>";
-    });
-    sig_html+="<br>";
-  }
-  document.getElementById("signals").innerHTML = sig_html;
+// ================= METRICS TABLE
 
-  // --- Backtest vs Actual ---
-  let bt_html="";
-  if(d.backtest){
-    for(const strat in d.backtest){
-      let bt=d.backtest[strat];
-      bt_html+=`<b>${strat} - ${d.strategies[strat]?.name||strat}</b><br>`;
-      bt_html+=`Backtest: Profit=$${bt.backtest_profit.toFixed(2)} | Return=${bt.backtest_return_pct.toFixed(2)}% | Sharpe=${bt.backtest_sharpe.toFixed(2)} | Trades=${bt.backtest_trades}<br>`;
-      bt_html+=`Actual  : Profit=$${bt.actual_profit.toFixed(2)} | Return=${bt.actual_return_pct.toFixed(2)}% | Sharpe=${bt.actual_sharpe.toFixed(2)} | Trades=${bt.actual_trades}<br>`;
-      bt_html+=`Diff    : $${bt.diff_profit.toFixed(2)} (${bt.diff_pct.toFixed(1)}%)<br><br>`;
-    }
-    document.getElementById("backtest_diff").innerHTML = bt_html;
-  } else {
-    document.getElementById("backtest_diff").innerHTML = "Backtest vs Actual data not available";
-  }
+let mhtml = `
+<tr>
+<th>Strategy</th>
+<th>Profit</th>
+<th>Return %</th>
+<th>Trades</th>
+<th>Win %</th>
+<th>Avg Win</th>
+<th>Avg Loss</th>
+<th>Sharpe</th>
+<th>MaxDD %</th>
+<th>PF</th>
+</tr>`
+
+let profits=[]
+let names=[]
+
+for(const [code,s] of Object.entries(d.strategies)){
+
+let m = s.metrics
+
+mhtml += `
+<tr>
+<td>${code} — ${s.name}</td>
+<td>${m.total_profit.toFixed(2)}</td>
+<td>${m.total_return_pct.toFixed(2)}</td>
+<td>${m.num_trades}</td>
+<td>${m.win_rate.toFixed(1)}</td>
+<td>${m.avg_win.toFixed(2)}</td>
+<td>${m.avg_loss.toFixed(2)}</td>
+<td>${m.sharpe_ratio.toFixed(2)}</td>
+<td>${m.max_drawdown_pct.toFixed(2)}</td>
+<td>${m.profit_factor.toFixed(2)}</td>
+</tr>
+`
+
+profits.push(m.total_profit)
+names.push(code)
+}
+
+metrics.innerHTML = mhtml
+
+
+// ================= EQUITY CURVES
+
+if(d.equity){
+
+let traces=[]
+
+for(const [k,e] of Object.entries(d.equity)){
+traces.push({
+y:e,
+mode:'lines',
+name:k
+})
+}
+
+Plotly.newPlot("equityChart", traces,
+{paper_bgcolor:"#111",plot_bgcolor:"#111",font:{color:"#eee"}})
+
+}
+
+
+// ================= RANKING BAR
+
+Plotly.newPlot("rankingChart", [{
+x:names,
+y:profits,
+type:'bar'
+}],
+{paper_bgcolor:"#111",plot_bgcolor:"#111",font:{color:"#eee"}})
+
+
+// ================= SIGNALS DETAIL
+
+let shtml=""
+
+for(const [code,list] of Object.entries(d.signals)){
+
+let stratName = d.strategies[code]?.name || code
+
+shtml += `<div class="card"><b>${code} — ${stratName}</b><br>`
+
+list.forEach(x=>{
+
+shtml += `
+${x.ticker} | ${x.action}
+| SL ${x.sl_factor}
+| Alloc $${x.allocation_usd}
+`
+
+if(x.z_score!=null)
+shtml += ` | Z ${x.z_score}`
+
+if(x.prev_return_pct!=null)
+shtml += ` | Prev ${x.prev_return_pct}%`
+
+if(x.vol_ratio!=null)
+shtml += ` | Vol ${x.vol_ratio}`
+
+if(x.ticker_group)
+shtml += ` <span class="small">(${x.ticker_group})</span>`
+
+shtml += "<br>"
+})
+
+shtml += "</div>"
+}
+
+signals.innerHTML = shtml
+
 
 })
 .catch(e=>{
-  document.getElementById("updated").innerText = "❌ ERROR: "+e;
-});
+document.body.innerHTML += "<h2>❌ ERROR: "+e+"</h2>"
+})
+
 </script>
 
 </body>
