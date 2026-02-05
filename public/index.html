@@ -1,168 +1,202 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Trading Agent Dashboard V3</title>
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<meta charset="utf-8">
+<title>Trading Agent Dashboard V4</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-body{background:#0f0f0f;color:#eee;font-family:Arial;padding:20px}
-table{border-collapse:collapse;width:100%}
-th,td{border:1px solid #333;padding:6px;text-align:center}
-th{background:#222}
-h2{margin-top:40px}
-.card{background:#1a1a1a;padding:15px;margin:10px 0;border-radius:8px}
-.small{font-size:12px;color:#aaa}
+body {
+  font-family: Arial;
+  background:#0f172a;
+  color:#e5e7eb;
+  padding:20px;
+}
+.card {
+  background:#020617;
+  padding:16px;
+  margin:12px 0;
+  border-radius:12px;
+}
+.grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap:12px;
+}
+.metric { font-size:14px; opacity:.8 }
+.value { font-size:20px; font-weight:bold }
+table { width:100%; border-collapse:collapse }
+td,th { padding:6px; border-bottom:1px solid #1f2937 }
+canvas { background:#020617; padding:10px; border-radius:12px }
 </style>
 </head>
 
 <body>
 
-<h1>🚀 Trading Agent Dashboard — V3</h1>
-<div id="updated">Loading...</div>
+<h1>🚀 Trading Agent Dashboard</h1>
 
-<h2>📊 Strategy Metrics</h2>
-<table id="metrics"></table>
+<div id="metrics" class="grid"></div>
 
-<h2>📈 Equity Curves</h2>
-<div id="equityChart"></div>
+<div class="card">
+<h2>📈 Live Equity Curves</h2>
+<canvas id="liveChart"></canvas>
+</div>
 
-<h2>🏆 Strategy Ranking</h2>
-<div id="rankingChart"></div>
+<div class="card">
+<h2>📉 Backtest Equity (60d)</h2>
+<canvas id="btChart"></canvas>
+</div>
 
-<h2>🎯 Signals</h2>
+<div class="card">
+<h2>🎯 Today Signals</h2>
 <div id="signals"></div>
+</div>
 
 <script>
 
-fetch("dashboard_data.json")
-.then(r=>r.json())
-.then(d=>{
+const DATA_URL = "dashboard_data.json";
+const BACKTEST_URL = "backtest_60d_results.json";
 
-// ================= TIMESTAMP
-updated.innerText = "Updated: "+d.timestamp
+const COLORS = {
+ A:"#38bdf8",
+ B:"#f472b6",
+ V:"#fb923c",
+ M:"#34d399"
+};
 
-
-// ================= METRICS TABLE
-
-let mhtml = `
-<tr>
-<th>Strategy</th>
-<th>Profit</th>
-<th>Return %</th>
-<th>Trades</th>
-<th>Win %</th>
-<th>Avg Win</th>
-<th>Avg Loss</th>
-<th>Sharpe</th>
-<th>MaxDD %</th>
-<th>PF</th>
-</tr>`
-
-let profits=[]
-let names=[]
-
-for(const [code,s] of Object.entries(d.strategies)){
-
-let m = s.metrics
-
-mhtml += `
-<tr>
-<td>${code} — ${s.name}</td>
-<td>${m.total_profit.toFixed(2)}</td>
-<td>${m.total_return_pct.toFixed(2)}</td>
-<td>${m.num_trades}</td>
-<td>${m.win_rate.toFixed(1)}</td>
-<td>${m.avg_win.toFixed(2)}</td>
-<td>${m.avg_loss.toFixed(2)}</td>
-<td>${m.sharpe_ratio.toFixed(2)}</td>
-<td>${m.max_drawdown_pct.toFixed(2)}</td>
-<td>${m.profit_factor.toFixed(2)}</td>
-</tr>
-`
-
-profits.push(m.total_profit)
-names.push(code)
+async function loadJSON(url){
+  const r = await fetch(url + "?t=" + Date.now());
+  if(!r.ok) throw new Error(url+" not found");
+  return await r.json();
 }
 
-metrics.innerHTML = mhtml
+function renderMetrics(strategies){
 
+  const root = document.getElementById("metrics");
+  root.innerHTML = "";
 
-// ================= EQUITY CURVES
+  Object.entries(strategies).forEach(([k,s]) => {
 
-if(d.equity){
+    const m = s.metrics;
 
-let traces=[]
-
-for(const [k,e] of Object.entries(d.equity)){
-traces.push({
-y:e,
-mode:'lines',
-name:k
-})
+    root.innerHTML += `
+      <div class="card">
+        <div class="value">${s.name}</div>
+        <div class="metric">Profit: $${m.total_profit}</div>
+        <div class="metric">Return: ${m.total_return_pct.toFixed(2)}%</div>
+        <div class="metric">Sharpe: ${m.sharpe_ratio.toFixed(2)}</div>
+        <div class="metric">WinRate: ${m.win_rate.toFixed(1)}%</div>
+        <div class="metric">Trades: ${m.num_trades}</div>
+        <div class="metric">MaxDD: ${m.max_drawdown_pct.toFixed(2)}%</div>
+      </div>
+    `;
+  });
 }
 
-Plotly.newPlot("equityChart", traces,
-{paper_bgcolor:"#111",plot_bgcolor:"#111",font:{color:"#eee"}})
+function renderSignals(signals){
 
+  let html="";
+
+  Object.entries(signals).forEach(([mode,list]) => {
+
+    if(!list.length) return;
+
+    html += `<h3>${mode}</h3><table>`;
+    html += "<tr><th>Ticker</th><th>Side</th><th>SL</th><th>Score</th></tr>";
+
+    list.forEach(s=>{
+      html += `<tr>
+        <td>${s.ticker}</td>
+        <td>${s.action}</td>
+        <td>${s.sl_factor}</td>
+        <td>${s.z_score ?? s.prev_return_pct ?? ""}</td>
+      </tr>`;
+    });
+
+    html += "</table>";
+  });
+
+  document.getElementById("signals").innerHTML = html;
 }
 
+function renderLiveEquity(equity){
 
-// ================= RANKING BAR
+  const datasets = [];
 
-Plotly.newPlot("rankingChart", [{
-x:names,
-y:profits,
-type:'bar'
-}],
-{paper_bgcolor:"#111",plot_bgcolor:"#111",font:{color:"#eee"}})
+  Object.entries(equity).forEach(([k,arr]) => {
 
+    const data = arr.map((p,i)=>({
+      x:i,
+      y:(typeof p === "object") ? p.equity : p
+    }));
 
-// ================= SIGNALS DETAIL
+    datasets.push({
+      label:"Live "+k,
+      data,
+      borderColor:COLORS[k],
+      tension:.2
+    });
+  });
 
-let shtml=""
-
-for(const [code,list] of Object.entries(d.signals)){
-
-let stratName = d.strategies[code]?.name || code
-
-shtml += `<div class="card"><b>${code} — ${stratName}</b><br>`
-
-list.forEach(x=>{
-
-shtml += `
-${x.ticker} | ${x.action}
-| SL ${x.sl_factor}
-| Alloc $${x.allocation_usd}
-`
-
-if(x.z_score!=null)
-shtml += ` | Z ${x.z_score}`
-
-if(x.prev_return_pct!=null)
-shtml += ` | Prev ${x.prev_return_pct}%`
-
-if(x.vol_ratio!=null)
-shtml += ` | Vol ${x.vol_ratio}`
-
-if(x.ticker_group)
-shtml += ` <span class="small">(${x.ticker_group})</span>`
-
-shtml += "<br>"
-})
-
-shtml += "</div>"
+  new Chart(liveChart,{
+    type:"line",
+    data:{datasets},
+    options:{
+      parsing:false,
+      scales:{x:{display:false}}
+    }
+  });
 }
 
-signals.innerHTML = shtml
+function renderBacktest(bt){
 
+  const datasets=[];
 
-})
-.catch(e=>{
-document.body.innerHTML += "<h2>❌ ERROR: "+e+"</h2>"
-})
+  Object.entries(bt).forEach(([k,s]) => {
+
+    const data = s.equity_curve.map((v,i)=>({x:i,y:v}));
+
+    datasets.push({
+      label:"Backtest "+k,
+      data,
+      borderDash:[6,6],
+      borderColor:COLORS[k],
+      tension:.2
+    });
+  });
+
+  new Chart(btChart,{
+    type:"line",
+    data:{datasets},
+    options:{
+      parsing:false,
+      scales:{x:{display:false}}
+    }
+  });
+}
+
+async function main(){
+
+  try {
+
+    const data = await loadJSON(DATA_URL);
+    const bt   = await loadJSON(BACKTEST_URL);
+
+    renderMetrics(data.strategies);
+    renderSignals(data.signals);
+    renderLiveEquity(data.equity);
+    renderBacktest(bt);
+
+    console.log("Dashboard loaded");
+
+  } catch(e){
+    document.body.innerHTML += "<h2>ERROR: "+e.message+"</h2>";
+  }
+}
+
+main();
 
 </script>
-
 </body>
 </html>
