@@ -2,6 +2,7 @@ name: dashboard
 
 on:
   schedule:
+    # Každý den v 21:30
     - cron: "30 21 * * *"
   workflow_dispatch:
 
@@ -10,19 +11,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ Checkout repozitáře
       - uses: actions/checkout@v4
 
+      # 2️⃣ Nastavení Pythonu
       - uses: actions/setup-python@v5
         with:
           python-version: 3.11
 
-      - run: pip install pandas numpy matplotlib seaborn requests
+      # 3️⃣ Instalace závislostí
+      - run: pip install pandas numpy matplotlib seaborn requests yfinance
 
-      - run: python dashboard.py
+      # 4️⃣ Spustit agent.py (vygeneruje backtest_60d_results.json + signály)
+      - name: Run trading agent
+        run: python agent.py
 
-      - run: |
-          git config --global user.name bot
-          git config --global user.email bot@bot.com
+      # 5️⃣ Spustit dashboard.py (vygeneruje dashboard_data.json)
+      - name: Generate dashboard JSON
+        run: python dashboard.py
+
+      # 6️⃣ Kontrola souborů
+      - name: List public files
+        run: ls -la public
+
+      # 7️⃣ Commit & push do main
+      - name: Commit & push JSON
+        run: |
+          git config --global user.name "bot"
+          git config --global user.email "bot@bot.com"
           git add public/*
-          git commit -m "dashboard update" || echo ok
+          git commit -m "Auto-update dashboard and backtest JSON" || echo "No changes to commit"
           git push
