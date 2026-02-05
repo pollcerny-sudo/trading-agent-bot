@@ -11,16 +11,6 @@
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "CCEP",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 1.6,
-            "z_score": 0.17,
-            "prev_return_pct": null,
-            "vol_ratio": 1.4,
-            "ticker_group": "BIG + ETF"
-        },
-        {
             "ticker": "CM",
             "action": "Long",
             "allocation_usd": 10000,
@@ -28,6 +18,16 @@
             "z_score": 0.16,
             "prev_return_pct": null,
             "vol_ratio": 0.78,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "CARR",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.4,
+            "z_score": 0.14,
+            "prev_return_pct": null,
+            "vol_ratio": 1.1,
             "ticker_group": "BIG + ETF"
         }
     ],
@@ -43,16 +43,6 @@
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "MSCI",
-            "action": "Short",
-            "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.16,
-            "prev_return_pct": null,
-            "vol_ratio": 2.19,
-            "ticker_group": "BIG + ETF"
-        },
-        {
             "ticker": "CME",
             "action": "Long",
             "allocation_usd": 10000,
@@ -60,6 +50,16 @@
             "z_score": 0.15,
             "prev_return_pct": null,
             "vol_ratio": 1.82,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "BX",
+            "action": "Short",
+            "allocation_usd": 10000,
+            "sl_factor": 1.6,
+            "z_score": 0.14,
+            "prev_return_pct": null,
+            "vol_ratio": 2.64,
             "ticker_group": "BIG + ETF"
         }
     ],
@@ -69,7 +69,7 @@
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 1.6,
-            "z_score": 0.15,
+            "z_score": 0.16,
             "prev_return_pct": null,
             "vol_ratio": 0.68,
             "ticker_group": "SMALL"
@@ -89,7 +89,7 @@
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.4,
-            "z_score": 0.08,
+            "z_score": 0.09,
             "prev_return_pct": null,
             "vol_ratio": 0.55,
             "ticker_group": "SMALL"
@@ -97,33 +97,33 @@
     ],
     "M": [
         {
-            "ticker": "CKHGF",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": null,
-            "prev_return_pct": 34.43,
-            "vol_ratio": 1.0,
-            "ticker_group": "SMALL"
-        },
-        {
             "ticker": "FTV",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
             "z_score": null,
-            "prev_return_pct": 12.09,
+            "prev_return_pct": 10.33,
             "vol_ratio": 1.65,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "NJDCY",
+            "ticker": "CAVA",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.4,
+            "sl_factor": 1.6,
             "z_score": null,
-            "prev_return_pct": 10.28,
-            "vol_ratio": 0.28,
+            "prev_return_pct": 10.03,
+            "vol_ratio": 0.87,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "NYT",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.6,
+            "z_score": null,
+            "prev_return_pct": 8.47,
+            "vol_ratio": 3.1,
             "ticker_group": "SMALL"
         }
     ]
