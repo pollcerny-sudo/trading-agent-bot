@@ -1,7 +1,13 @@
 import pandas as pd
 import numpy as np
 import yfinance as yf
-AAPL", "^GSPC", "GOOGL", "V", "WMT", "BRK-B", "PLTR", "NVDA", "SPY", "ABBV",    "BAC", "AMZN", "NFLX", "XOM", "GE", "JPM", "JNJ", "MA", "HD", "AVGO",
+import json
+import os
+from datetime import datetime, timedelta
+import sys
+
+# === MANUAL TICKER GROUPING ===
+BIG_TICKERS = ["AAPL", "^GSPC", "GOOGL", "V", "WMT", "BRK-B", "PLTR", "NVDA", "SPY", "ABBV",    "BAC", "AMZN", "NFLX", "XOM", "GE", "JPM", "JNJ", "MA", "HD", "AVGO",
     "TSLA", "PG", "CVX", "MSFT", "KO", "META", "ORCL", "ASML", "LLY", "BABA",
     "SAP", "COST", "AMD", "TMUS", "CSCO", "PM", "MS", "QQQ", "AZN", "NVS",
     "UNH", "TM", "IBM", "LIN", "SHEL", "GS", "RTX", "AXP", "CRM", "HSBC",
@@ -31,13 +37,7 @@ AAPL", "^GSPC", "GOOGL", "V", "WMT", "BRK-B", "PLTR", "NVDA", "SPY", "ABBV",    
     "ROP", "BDX", "NXPI", "TFC", "SRE", "PCAR", "VRT", "TRP", "COR", "FDX",
     "MFC", "O", "MET", "PTCAY", "D", "ALL", "IDXX", "E", "GM", "CPNG",
     "FLUT", "MPLX", "PSA", "SLB", "KR", "PAYX", "LHX", "MPC", "LNG", "WCN",
-    "AMP", "ROST", "CTVA", "SU", "PSX", "XYZ", "DHI", "JD", "TGT", "TAK"]import json
-import os
-from datetime import datetime, timedelta
-import sys
-
-# === MANUAL TICKER GROUPING ===
-BIG_TICKERS = ["
+    "AMP", "ROST", "CTVA", "SU", "PSX", "XYZ", "DHI", "JD", "TGT", "TAK"]
 SMALL_TICKERS = ["IP", "DSFIY", "CQP", "WSM", "TDY", "FTS", "HPQ", "FE", "TOST",    "INSM", "FIX", "SHG", "EXPE", "DG", "CNP", "VRSN", "JBL", "EQR", "TYL",
     "AFRM", "PPG", "TU", "YAHOY", "ES", "PTC", "CLS", "FCNCA", "LI", "PHM",
     "STE", "PINS", "MKL", "DOV", "NTRS", "TPG", "DRI", "STM", "HBAN", "DLTR",
