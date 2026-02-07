@@ -6,7 +6,6 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-
 :root{
   --bbg-black:#000000;
   --bbg-panel:#0b0b0b;
@@ -123,7 +122,6 @@ canvas {
   .controls { flex-direction:column; }
   table { font-size:12px; }
 }
-
 </style>
 </head>
 
@@ -131,6 +129,7 @@ canvas {
 
 <h1>Backtest Dashboard</h1>
 
+  
 <div class="controls">
   <label>Strategy:
     <select id="strategySelect"></select>
@@ -255,32 +254,44 @@ function buildDashboard(strategy,lastDays){
   if(chartInstance) chartInstance.destroy();
 
   const ctx = multiChart.getContext('2d');
-  const grad = ctx.createLinearGradient(0,0,0,200);
-  grad.addColorStop(0,'#4da3ff');
-  grad.addColorStop(1,'#003a8c');
 
-  chartInstance=new Chart(multiChart,{
-  type:'line',
-  data:{labels:dates,datasets:[
-    {
-      label:"CSV Cum P/L",
-      data:csvCum,
-      borderColor:grad,
-      borderWidth:3,
-      fill:false,
-      tension:0.25,
-      pointRadius:0
+  // gradient čára CSV
+  const gradLine = ctx.createLinearGradient(0,0,0,0);
+  gradLine.addColorStop(0,'#4da3ff');
+  gradLine.addColorStop(1,'#003a8c');
+
+  // gradient fill pod CSV od osy X nahoru
+  const gradFill = ctx.createLinearGradient(0, multiChart.height, 0, 0);
+  gradFill.addColorStop(0,'rgba(0,58,140,0.4)');  // tmavá u osy
+  gradFill.addColorStop(1,'rgba(77,163,255,0.3)'); // světlá u čáry
+
+  chartInstance = new Chart(multiChart, {
+    type:'line',
+    data: {
+      labels: dates,
+      datasets:[
+        {
+          label:"CSV Cum P/L",
+          data: csvCum,
+          borderColor: '#4da3ff',
+          borderWidth:3,
+          fill: true,
+          backgroundColor: gradFill,
+          tension:0.25,
+          pointRadius:0
+        },
+        {
+          label:"Backtest Cum P/L",
+          data: btCum,
+          borderColor:'#ff9f00',
+          borderWidth:2,
+          fill: true,
+          backgroundColor:'rgba(255,176,0,0.2)',
+          tension:0.25,
+          pointRadius:0
+        }
+      ]
     },
-    {
-      label:"Backtest Cum P/L",
-      data:btCum,
-      borderColor:'#ffb000',
-      borderWidth:2,
-      fill:false,
-      tension:0.25,
-      pointRadius:0
-    }
-  ]},
     options:{
       responsive:true,
       maintainAspectRatio:false,
@@ -330,6 +341,7 @@ function buildDashboard(strategy,lastDays){
   });
 }
 
+// ---------- load ----------
 async function loadAll(){
   backtestData = await (await fetch(BACKTEST_URL)).json();
   dashboardData = await (await fetch(DASHBOARD_URL)).json();
