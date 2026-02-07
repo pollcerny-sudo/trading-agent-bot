@@ -25,7 +25,7 @@ body {
 table {
   width:100%;
   border-collapse: collapse;
-  min-width: 400px;
+  min-width:400px;
 }
 
 th, td {
@@ -41,8 +41,7 @@ td.profit-negative { color: red; }
 canvas {
   background:white;
   border-radius:8px;
-  width: 100% !important;
-  height: auto !important;
+  width:100% !important;
 }
 
 .controls {
@@ -50,253 +49,225 @@ canvas {
   flex-wrap:wrap;
   gap:10px;
   margin-bottom:20px;
-  align-items:center;
 }
 
-label {
-  font-size:14px;
+.return-comparison {
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+  margin-bottom:20px;
 }
 
-input[type=number] {
-  width: 60px;
+.return-box {
+  background:#222;
+  padding:12px;
+  border-radius:8px;
+  flex:1 1 180px;
+  text-align:center;
+  font-weight:bold;
 }
 
-@media screen and (max-width: 768px) {
-  .controls {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  table {
-    font-size: 12px;
-  }
+@media(max-width:768px){
+  .controls { flex-direction:column; }
+  table { font-size:12px; }
 }
 </style>
 </head>
 
 <body>
 
-<h1>📊 Backtest Dashboard — All Strategies</h1>
+<h1>📊 Backtest Dashboard</h1>
 
 <div class="controls">
-  <label>
-    Strategy:
+  <label>Strategy:
     <select id="strategySelect"></select>
   </label>
-  <label>
-    Last Days (Equity & Trades):
+
+  <label>Last Days:
     <input type="number" id="lastDays" value="3" min="1" max="30">
   </label>
-  <button id="updateBtn">Update Chart</button>
+
+  <button id="updateBtn">Update</button>
 </div>
 
+<div id="returnComparison" class="return-comparison"></div>
+
 <div class="card">
-  <canvas id="multiChart" height="150"></canvas>
+  <canvas id="multiChart" height="140"></canvas>
 </div>
 
 <div id="stats"></div>
 
 <script>
-const BACKTEST_URL = "https://trading-agent-bot.pages.dev/backtest_60d_results.json";
-const DASHBOARD_URL = "https://trading-agent-bot.pages.dev/dashboard_data.json";
-const CSV_URL = "https://raw.githubusercontent.com/pollcerny-sudo/trading-agent-bot/main/final_backtest_results.csv";
+const BACKTEST_URL="https://trading-agent-bot.pages.dev/backtest_60d_results.json";
+const DASHBOARD_URL="https://trading-agent-bot.pages.dev/dashboard_data.json";
+const CSV_URL="https://raw.githubusercontent.com/pollcerny-sudo/trading-agent-bot/main/final_backtest_results.csv";
 
-let backtestData = {};
-let dashboardData = {};
-let csvData = [];
-let chartInstance = null;
+let backtestData={}, dashboardData={}, csvData=[];
+let chartInstance=null;
 
-// ================= HELPER FUNCTIONS =================
-function getTradePnl(t) {
-  const candidates = [t.Profit,t.profit,t.pnl,t.pnl_pct,t.profit_pct,t.return,t.ret];
-  for(let v of candidates){
-    if(v!==undefined && v!==null && v!==""){
-      let num = Number(v);
-      if(!isNaN(num)) return (Math.abs(num)<2 ? (num*100).toFixed(2)+"%" : num.toFixed(2));
-    }
-  }
-  return "-";
+// ---------- helpers ----------
+function pick(o,keys){
+  for(const k of keys) if(o[k]!=null && o[k]!="") return o[k];
+  return "";
 }
 
+function normDate(d){
+  if(!d) return "";
+  return String(d).slice(0,10);
+}
+
+function getTradePnl(t){
+  const v = pick(t,["Profit","profit","pnl","ret","return"]);
+  const n = Number(v);
+  return isNaN(n)?0:n;
+}
+
+// ---------- rendering ----------
 function renderTrades(trades){
-  if(!trades || trades.length===0) return "No trades";
-  let rows = trades.map(t=>{
-    const pnlClass = Number(t.Profit || t.profit || t.pnl || 0)>=0 ? "profit-positive" : "profit-negative";
-    return `
-    <tr>
-      <td>${t.Date||t.date||""}</td>
-      <td>${t.Strategy||t.strategy||""}</td>
-      <td>${t.Ticker||t.ticker||""}</td>
-      <td>${t.Side||t.side||""}</td>
-      <td class="${pnlClass}">${getTradePnl(t)}</td>
+  if(!trades.length) return "No trades";
+
+  return `<table>
+  <tr><th>Date</th><th>Ticker</th><th>Side</th><th>PnL</th></tr>`+
+  trades.map(t=>{
+    const d = normDate(pick(t,["Date","date","entry_date"]));
+    const ticker = pick(t,["Ticker","ticker","symbol","asset"]);
+    const side = pick(t,["Side","side","direction","position"]);
+    const pnl = getTradePnl(t);
+    return `<tr>
+      <td>${d}</td>
+      <td>${ticker}</td>
+      <td>${side}</td>
+      <td class="${pnl>=0?"profit-positive":"profit-negative"}">${pnl.toFixed(2)}</td>
     </tr>`;
-  }).join("");
-  return `
-  <table>
-    <tr><th>Date</th><th>Strategy</th><th>Ticker</th><th>Side</th><th>PnL</th></tr>
-    ${rows}
-  </table>`;
+  }).join("")+"</table>";
 }
 
 function renderSignals(signals){
-  if(!signals || signals.length===0) return "No signals";
-  let rows = signals.map(s=>`
-    <tr>
-      <td>${s.ticker}</td>
-      <td>${s.action}</td>
-      <td>$${s.allocation_usd.toLocaleString()}</td>
-      <td>${s.sl_factor}</td>
-      <td>${s.prev_return_pct!==null?s.prev_return_pct.toFixed(2)+"%":"-"}</td>
-    </tr>
-  `).join("");
-  return `
-  <table>
-    <tr><th>Ticker</th><th>Action</th><th>Allocation</th><th>SL Factor</th><th>Prev Return</th></tr>
-    ${rows}
-  </table>`;
+  if(!signals.length) return "No signals";
+  return `<table>
+  <tr><th>Ticker</th><th>Action</th><th>Allocation</th><th>SL</th></tr>`+
+  signals.map(s=>`
+  <tr>
+    <td>${s.ticker}</td>
+    <td>${s.action}</td>
+    <td>$${s.allocation_usd.toLocaleString()}</td>
+    <td>${s.sl_factor}</td>
+  </tr>`).join("")+"</table>";
 }
 
-// ================= CSV PARSING =================
+// ---------- CSV ----------
 async function loadCSV(){
-  try{
-    const res = await fetch(CSV_URL);
-    const text = await res.text();
-    const lines = text.trim().split("\n");
-    const header = lines[0].split(",");
-    csvData = lines.slice(1).map(l=>{
-      const cols = l.split(",");
-      const obj = {};
-      header.forEach((h,i)=> obj[h.trim()]=cols[i].trim());
-      return obj;
-    });
-  }catch(e){
-    console.error("CSV load error:", e);
-  }
-}
-
-function renderCSVTrades(strategyKey, lastDays){
-  if(csvData.length===0) return "CSV data not loaded";
-  const filtered = csvData.filter(t=>t.Strategy===strategyKey);
-  const grouped = {};
-  filtered.forEach(t=>{
-    if(!grouped[t.Date]) grouped[t.Date]=[];
-    grouped[t.Date].push(t);
+  const txt = await (await fetch(CSV_URL)).text();
+  const lines = txt.trim().split("\n");
+  const header = lines[0].split(",");
+  csvData = lines.slice(1).map(l=>{
+    const c=l.split(",");
+    let o={}; header.forEach((h,i)=>o[h.trim()]=c[i]);
+    return o;
   });
-  const dates = Object.keys(grouped).sort().slice(-lastDays).reverse();
-  return dates.map(d=>{
-    const dayProfit = grouped[d].reduce((a,b)=>a + Number(b.Profit||b.profit||b.pnl||0),0);
-    return `
-      <div class="card">
-        <h3>CSV Trades ${d} — Total Profit: $${dayProfit.toFixed(2)}</h3>
-        ${renderTrades(grouped[d])}
-      </div>
-    `;
-  }).join("");
 }
 
-// ================= BUILD DASHBOARD =================
-function buildDashboard(strategyKey, lastDays){
-  const statsDiv = document.getElementById("stats");
-  statsDiv.innerHTML="";
+function groupByDate(trades){
+  const g={};
+  trades.forEach(t=>{
+    const d = normDate(pick(t,["Date","date","entry_date"]));
+    if(!g[d]) g[d]=[];
+    g[d].push(t);
+  });
+  return g;
+}
 
-  const datasets = [];
-  const currEquityData = dashboardData.equity[strategyKey] || [];
-  const currEq = currEquityData.slice(-lastDays);
+// ---------- dashboard ----------
+function buildDashboard(strategy,lastDays){
 
-  const labels = currEq.map(e=>e.date);
-  const currValues = currEq.map(e=>e.equity);
-  datasets.push({label:"Current Equity "+strategyKey,data:currValues,borderColor:'lime',borderWidth:2,fill:false});
+  const stats=document.getElementById("stats");
+  stats.innerHTML="";
 
-  const currMetrics = dashboardData.strategies[strategyKey].metrics;
-  const signals = dashboardData.signals[strategyKey] || [];
+  const csvStrat = csvData.filter(t=>t.Strategy===strategy);
+  const btStrat = backtestData[strategy]?.trades || [];
 
-  statsDiv.innerHTML += `
-    <div class="card">
-      <h2>Current ${dashboardData.strategies[strategyKey].name} (${strategyKey})</h2>
-      Total Profit: $${currMetrics.total_profit.toLocaleString()}<br>
-      Total Return: ${(currMetrics.total_return_pct).toFixed(2)}%<br>
-      Trades: ${currMetrics.num_trades} | Win Rate: ${(currMetrics.win_rate).toFixed(2)}%<br>
-      Avg Win: $${currMetrics.avg_win.toFixed(2)} | Avg Loss: $${currMetrics.avg_loss.toFixed(2)}<br>
-      Sharpe: ${currMetrics.sharpe_ratio.toFixed(2)} | Max DD: ${(currMetrics.max_drawdown_pct).toFixed(2)}% | PF: ${currMetrics.profit_factor.toFixed(2)}
-      <h3>Current Signals</h3>
-      ${renderSignals(signals)}
-    </div>`;
+  const csvG = groupByDate(csvStrat);
+  const btG = groupByDate(btStrat);
 
-  // --- Backtest Trades podle dnů ---
-  if(backtestData[strategyKey] && backtestData[strategyKey].trades){
-    const btTrades = backtestData[strategyKey].trades;
-    const grouped = {};
-    btTrades.forEach(t=>{
-      const d = t.Date || t.date || t.entry_date || "Unknown";
-      if(!grouped[d]) grouped[d]=[];
-      grouped[d].push(t);
-    });
-    const dates = Object.keys(grouped).sort().slice(-lastDays).reverse();
+  const dates = Object.keys({...csvG,...btG}).sort().slice(-lastDays);
 
-    dates.forEach(d=>{
-      const dayProfit = grouped[d].reduce((a,b)=>a + Number(b.Profit || b.profit || b.pnl || 0),0);
-      statsDiv.innerHTML += `
-        <div class="card">
-          <h3>Backtest Trades ${d} — Total Profit: $${dayProfit.toFixed(2)}</h3>
-          ${renderTrades(grouped[d])}
-        </div>`;
-    });
-  }
+  const csvDaily = dates.map(d=> (csvG[d]||[]).reduce((a,b)=>a+getTradePnl(b),0));
+  const btDaily  = dates.map(d=> (btG[d]||[]).reduce((a,b)=>a+getTradePnl(b),0));
 
-  // --- CSV Trades posledních X dní ---
-  statsDiv.innerHTML += renderCSVTrades(strategyKey, lastDays);
+  let csvCum=[], btCum=[], s=0, b=0;
+  csvDaily.forEach(v=>{s+=v; csvCum.push(s)});
+  btDaily.forEach(v=>{b+=v; btCum.push(b)});
 
-  // --- Current Equity vs Backtest ---
-  if(backtestData[strategyKey] && backtestData[strategyKey].equity_curve){
-    let eq_bt = backtestData[strategyKey].equity_curve.slice(-currEq.length);
-    const lastCurr = currValues[currValues.length-1];
-    const lastBt = eq_bt[eq_bt.length-1];
-    const factor = lastCurr / lastBt;
-    eq_bt = eq_bt.map(v=>v*factor);
-    datasets.push({label:"Backtest "+strategyKey,data:eq_bt,borderColor:'cyan',borderWidth:2,fill:false});
-  }
-
+  // chart
   if(chartInstance) chartInstance.destroy();
-  chartInstance = new Chart(document.getElementById("multiChart"),{
+  chartInstance=new Chart(multiChart,{
     type:'line',
-    data:{labels,datasets},
-    options:{
-      responsive:true,
-      maintainAspectRatio:false,
-      interaction:{mode:'index',intersect:false},
-      plugins:{legend:{display:true}},
-      scales:{x:{display:true},y:{display:true}}
+    data:{labels:dates,datasets:[
+      {label:"CSV Cum P/L",data:csvCum,borderColor:'lime',borderWidth:2},
+      {label:"Backtest Cum P/L",data:btCum,borderColor:'cyan',borderWidth:2}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false}
+  });
+
+  // return compare
+  returnComparison.innerHTML=`
+  <div class="return-box">Equity Total: $${s.toFixed(2)}</div>
+  <div class="return-box">Backtest Total: $${b.toFixed(2)}</div>`;
+
+  // current metrics
+  const m = dashboardData.strategies[strategy];
+  if(m){
+    const met=m.metrics;
+    stats.innerHTML+=`
+    <div class="card">
+    <h2>Current ${m.name} (${strategy})</h2>
+    Total Profit: $${met.total_profit.toFixed(2)}<br>
+    Total Return: ${met.total_return_pct.toFixed(2)}%<br>
+    Trades: ${met.num_trades} | Win Rate: ${met.win_rate.toFixed(2)}%<br>
+    Sharpe: ${met.sharpe_ratio.toFixed(2)} | PF: ${met.profit_factor.toFixed(2)}
+    <h3>Signals</h3>
+    ${renderSignals(dashboardData.signals[strategy]||[])}
+    </div>`;
+  }
+
+  // backtest day cards
+  dates.forEach(d=>{
+    if(btG[d]){
+      const p = btG[d].reduce((a,b)=>a+getTradePnl(b),0);
+      stats.innerHTML+=`<div class="card">
+      <h3>Backtest ${d} — $${p.toFixed(2)}</h3>
+      ${renderTrades(btG[d])}</div>`;
+    }
+  });
+
+  // csv day cards
+  dates.forEach(d=>{
+    if(csvG[d]){
+      const p = csvG[d].reduce((a,b)=>a+getTradePnl(b),0);
+      stats.innerHTML+=`<div class="card">
+      <h3>CSV ${d} — $${p.toFixed(2)}</h3>
+      ${renderTrades(csvG[d])}</div>`;
     }
   });
 }
 
-// ================= LOAD DATA =================
-async function loadData(){
-  try{
-    const [btRes,dashRes] = await Promise.all([fetch(BACKTEST_URL),fetch(DASHBOARD_URL)]);
-    backtestData = await btRes.json();
-    dashboardData = await dashRes.json();
-    await loadCSV();
+// ---------- load ----------
+async function loadAll(){
+  backtestData = await (await fetch(BACKTEST_URL)).json();
+  dashboardData = await (await fetch(DASHBOARD_URL)).json();
+  await loadCSV();
 
-    const sel = document.getElementById("strategySelect");
-    Object.keys(dashboardData.strategies).forEach(k=>{
-      const opt = document.createElement("option"); opt.value=k; opt.text=k;
-      sel.appendChild(opt);
-    });
+  Object.keys(dashboardData.strategies).forEach(k=>{
+    strategySelect.innerHTML += `<option value="${k}">${k}</option>`;
+  });
 
-    buildDashboard(sel.value, Number(document.getElementById("lastDays").value));
-
-  }catch(e){
-    document.body.innerHTML += "<h2>❌ LOAD ERROR</h2><pre>"+e+"</pre>";
-  }
+  buildDashboard(strategySelect.value, Number(lastDays.value));
 }
 
-document.getElementById("updateBtn").onclick = ()=>{
-  const strat = document.getElementById("strategySelect").value;
-  const days = Number(document.getElementById("lastDays").value);
-  buildDashboard(strat,days);
-}
+updateBtn.onclick=()=>buildDashboard(strategySelect.value,Number(lastDays.value));
 
-loadData();
+loadAll();
 </script>
 </body>
 </html>
