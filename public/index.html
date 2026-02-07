@@ -6,20 +6,40 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
+
+:root{
+  --bbg-black:#000000;
+  --bbg-panel:#0b0b0b;
+  --bbg-panel-2:#121212;
+  --bbg-border:#ff9f00;
+  --bbg-amber:#ffb000;
+  --bbg-blue-light:#4da3ff;
+  --bbg-blue-dark:#003a8c;
+  --bbg-green:#00c853;
+  --bbg-red:#d50000;
+}
+
 body {
   font-family: Arial, sans-serif;
-  background:#111;
-  color:#eee;
+  background:var(--bbg-black);
+  color:#d0d0d0;
   padding:20px;
   margin:0;
 }
 
+h1,h2,h3{
+  color:var(--bbg-amber);
+  letter-spacing:0.5px;
+}
+
 .card {
-  background:#1b1b1b;
+  background:linear-gradient(180deg,var(--bbg-panel),var(--bbg-panel-2));
   padding:20px;
   margin-bottom:25px;
-  border-radius:10px;
+  border-radius:8px;
   overflow-x:auto;
+  border:1px solid #222;
+  box-shadow:0 0 0 1px #111 inset;
 }
 
 table {
@@ -28,19 +48,49 @@ table {
   min-width:400px;
 }
 
+th {
+  background:#111;
+  color:var(--bbg-amber);
+  font-weight:bold;
+}
+
 th, td {
-  border:1px solid #333;
+  border:1px solid #222;
   padding:6px;
   font-size:13px;
   text-align:center;
 }
 
-td.profit-positive { color: lime; }
-td.profit-negative { color: red; }
+tr:nth-child(even){
+  background:#0f0f0f;
+}
+
+td.profit-positive { color: var(--bbg-green); font-weight:bold; }
+td.profit-negative { color: var(--bbg-red); font-weight:bold; }
+
+select, input, button{
+  background:#111;
+  color:#ddd;
+  border:1px solid #333;
+  padding:6px 10px;
+  border-radius:6px;
+}
+
+button{
+  background:#1a1a1a;
+  border:1px solid var(--bbg-amber);
+  color:var(--bbg-amber);
+  cursor:pointer;
+}
+
+button:hover{
+  background:#262626;
+}
 
 canvas {
-  background:white;
+  background:#050505;
   border-radius:8px;
+  border:1px solid #222;
   width:100% !important;
 }
 
@@ -59,24 +109,27 @@ canvas {
 }
 
 .return-box {
-  background:#222;
+  background:#0f0f0f;
   padding:12px;
   border-radius:8px;
   flex:1 1 180px;
   text-align:center;
   font-weight:bold;
+  border:1px solid #222;
+  color:var(--bbg-amber);
 }
 
 @media(max-width:768px){
   .controls { flex-direction:column; }
   table { font-size:12px; }
 }
+
 </style>
 </head>
 
 <body>
 
-<h1>📊 Backtest Dashboard</h1>
+<h1>Backtest Dashboard</h1>
 
 <div class="controls">
   <label>Strategy:
@@ -199,23 +252,50 @@ function buildDashboard(strategy,lastDays){
   csvDaily.forEach(v=>{s+=v; csvCum.push(s)});
   btDaily.forEach(v=>{b+=v; btCum.push(b)});
 
-  // chart
   if(chartInstance) chartInstance.destroy();
+
+  const ctx = multiChart.getContext('2d');
+  const grad = ctx.createLinearGradient(0,0,0,200);
+  grad.addColorStop(0,'#4da3ff');
+  grad.addColorStop(1,'#003a8c');
+
   chartInstance=new Chart(multiChart,{
-    type:'line',
-    data:{labels:dates,datasets:[
-      {label:"CSV Cum P/L",data:csvCum,borderColor:'lime',borderWidth:2},
-      {label:"Backtest Cum P/L",data:btCum,borderColor:'cyan',borderWidth:2}
-    ]},
-    options:{responsive:true,maintainAspectRatio:false}
+  type:'line',
+  data:{labels:dates,datasets:[
+    {
+      label:"CSV Cum P/L",
+      data:csvCum,
+      borderColor:grad,
+      borderWidth:3,
+      fill:false,
+      tension:0.25,
+      pointRadius:0
+    },
+    {
+      label:"Backtest Cum P/L",
+      data:btCum,
+      borderColor:'#ffb000',
+      borderWidth:2,
+      fill:false,
+      tension:0.25,
+      pointRadius:0
+    }
+  ]},
+    options:{
+      responsive:true,
+      maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:'#ddd'}}},
+      scales:{
+        x:{ticks:{color:'#aaa'},grid:{color:'#222'}},
+        y:{ticks:{color:'#aaa'},grid:{color:'#222'}}
+      }
+    }
   });
 
-  // return compare
   returnComparison.innerHTML=`
   <div class="return-box">Equity Total: $${s.toFixed(2)}</div>
   <div class="return-box">Backtest Total: $${b.toFixed(2)}</div>`;
 
-  // current metrics
   const m = dashboardData.strategies[strategy];
   if(m){
     const met=m.metrics;
@@ -231,7 +311,6 @@ function buildDashboard(strategy,lastDays){
     </div>`;
   }
 
-  // backtest day cards
   dates.forEach(d=>{
     if(btG[d]){
       const p = btG[d].reduce((a,b)=>a+getTradePnl(b),0);
@@ -241,7 +320,6 @@ function buildDashboard(strategy,lastDays){
     }
   });
 
-  // csv day cards
   dates.forEach(d=>{
     if(csvG[d]){
       const p = csvG[d].reduce((a,b)=>a+getTradePnl(b),0);
@@ -252,7 +330,6 @@ function buildDashboard(strategy,lastDays){
   });
 }
 
-// ---------- load ----------
 async function loadAll(){
   backtestData = await (await fetch(BACKTEST_URL)).json();
   dashboardData = await (await fetch(DASHBOARD_URL)).json();
@@ -266,7 +343,6 @@ async function loadAll(){
 }
 
 updateBtn.onclick=()=>buildDashboard(strategySelect.value,Number(lastDays.value));
-
 loadAll();
 </script>
 </body>
