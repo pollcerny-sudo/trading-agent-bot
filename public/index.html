@@ -7,10 +7,11 @@
 
 <style>
 body {
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   background:#111;
   color:#eee;
   padding:20px;
+  margin:0;
 }
 
 .card {
@@ -18,17 +19,20 @@ body {
   padding:20px;
   margin-bottom:25px;
   border-radius:10px;
+  overflow-x:auto;
 }
 
 table {
   width:100%;
   border-collapse: collapse;
+  min-width: 400px;
 }
 
 th, td {
   border:1px solid #333;
   padding:6px;
   font-size:13px;
+  text-align:center;
 }
 
 td.profit-positive { color: lime; }
@@ -37,17 +41,34 @@ td.profit-negative { color: red; }
 canvas {
   background:white;
   border-radius:8px;
+  width: 100% !important;
+  height: auto !important;
 }
 
 .controls {
   display:flex;
-  gap:20px;
+  flex-wrap:wrap;
+  gap:10px;
   margin-bottom:20px;
   align-items:center;
 }
 
 label {
   font-size:14px;
+}
+
+input[type=number] {
+  width: 60px;
+}
+
+@media screen and (max-width: 768px) {
+  .controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  table {
+    font-size: 12px;
+  }
 }
 </style>
 </head>
@@ -63,13 +84,13 @@ label {
   </label>
   <label>
     Last Days (Equity & Trades):
-    <input type="number" id="lastDays" value="3" min="1" max="30" style="width:60px;">
+    <input type="number" id="lastDays" value="3" min="1" max="30">
   </label>
   <button id="updateBtn">Update Chart</button>
 </div>
 
 <div class="card">
-  <canvas id="multiChart" height="120"></canvas>
+  <canvas id="multiChart" height="150"></canvas>
 </div>
 
 <div id="stats"></div>
@@ -85,19 +106,6 @@ let csvData = [];
 let chartInstance = null;
 
 // ================= HELPER FUNCTIONS =================
-function calcMetrics(equity) {
-  if(equity.length < 2) return {profit:0, sharpe:0, maxdd:0};
-  let rets=[];
-  for(let i=1;i<equity.length;i++) rets.push(equity[i]/equity[i-1]-1);
-  let mean = rets.reduce((a,b)=>a+b,0)/rets.length;
-  let vol = Math.sqrt(rets.map(x=>(x-mean)**2).reduce((a,b)=>a+b)/rets.length);
-  let sharpe = vol ? mean/vol*Math.sqrt(252) : 0;
-  let peak = equity[0], maxdd=0;
-  equity.forEach(v=>{ if(v>peak) peak=v; maxdd = Math.min(maxdd, v/peak-1); });
-  let profit = equity[equity.length-1]/equity[0]-1;
-  return {profit, sharpe, maxdd};
-}
-
 function getTradePnl(t) {
   const candidates = [t.Profit,t.profit,t.pnl,t.pnl_pct,t.profit_pct,t.return,t.ret];
   for(let v of candidates){
@@ -208,7 +216,7 @@ function buildDashboard(strategyKey, lastDays){
       Total Return: ${(currMetrics.total_return_pct).toFixed(2)}%<br>
       Trades: ${currMetrics.num_trades} | Win Rate: ${(currMetrics.win_rate).toFixed(2)}%<br>
       Avg Win: $${currMetrics.avg_win.toFixed(2)} | Avg Loss: $${currMetrics.avg_loss.toFixed(2)}<br>
-      Sharpe: ${currMetrics.sharpe_ratio.toFixed(2)} | Max DD: ${currMetrics.max_drawdown_pct.toFixed(2)}% | PF: ${currMetrics.profit_factor.toFixed(2)}
+      Sharpe: ${currMetrics.sharpe_ratio.toFixed(2)} | Max DD: ${(currMetrics.max_drawdown_pct).toFixed(2)}% | PF: ${currMetrics.profit_factor.toFixed(2)}
       <h3>Current Signals</h3>
       ${renderSignals(signals)}
     </div>`;
@@ -253,6 +261,7 @@ function buildDashboard(strategyKey, lastDays){
     data:{labels,datasets},
     options:{
       responsive:true,
+      maintainAspectRatio:false,
       interaction:{mode:'index',intersect:false},
       plugins:{legend:{display:true}},
       scales:{x:{display:true},y:{display:true}}
