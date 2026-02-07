@@ -3,7 +3,7 @@ name: Market Agent
 on:
   schedule:
     # 21:05 UTC (16:05 EST) - Po close pro vyhodnocení
-    - cron: '20 21 * * 1-5'
+    - cron: '15 22 * * 1-5'
   workflow_dispatch:
 
 jobs:
