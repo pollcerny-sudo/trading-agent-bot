@@ -3,7 +3,7 @@ name: dashboard
 on:
   schedule:
     # Každý den v 21:30
-    - cron: "20 10 * * *"
+    - cron: "55 22 * * *"
   workflow_dispatch:
 
 jobs:
