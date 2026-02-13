@@ -1,13 +1,23 @@
 {
     "A": [
         {
-            "ticker": "GEV",
+            "ticker": "NGG",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
-            "z_score": 0.27,
+            "z_score": 0.22,
             "prev_return_pct": null,
-            "vol_ratio": 0.79,
+            "vol_ratio": 2.65,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "TAK",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 1.6,
+            "z_score": 0.17,
+            "prev_return_pct": null,
+            "vol_ratio": 0.81,
             "ticker_group": "BIG + ETF"
         },
         {
@@ -17,113 +27,103 @@
             "sl_factor": 0.8,
             "z_score": 0.16,
             "prev_return_pct": null,
-            "vol_ratio": 0.91,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "CARR",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.14,
-            "prev_return_pct": null,
-            "vol_ratio": 0.64,
+            "vol_ratio": 1.51,
             "ticker_group": "BIG + ETF"
         }
     ],
     "B": [
         {
-            "ticker": "HOOD",
+            "ticker": "RELX",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 1.6,
-            "z_score": 0.15,
-            "prev_return_pct": null,
-            "vol_ratio": 2.01,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "PANW",
-            "action": "Short",
-            "allocation_usd": 10000,
-            "sl_factor": 0.6,
-            "z_score": 0.12,
-            "prev_return_pct": null,
-            "vol_ratio": 3.9,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "NET",
-            "action": "Short",
-            "allocation_usd": 10000,
             "sl_factor": 0.4,
-            "z_score": 0.1,
+            "z_score": 0.19,
             "prev_return_pct": null,
-            "vol_ratio": 2.49,
+            "vol_ratio": 1.73,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "DE",
+            "action": "Short",
+            "allocation_usd": 10000,
+            "sl_factor": 1.6,
+            "z_score": 0.18,
+            "prev_return_pct": null,
+            "vol_ratio": 1.77,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "ALNY",
+            "action": "Short",
+            "allocation_usd": 10000,
+            "sl_factor": 3.2,
+            "z_score": 0.17,
+            "prev_return_pct": null,
+            "vol_ratio": 1.74,
             "ticker_group": "BIG + ETF"
         }
     ],
     "V": [
         {
-            "ticker": "AS",
+            "ticker": "RSHGY",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 1.6,
-            "z_score": 0.22,
+            "z_score": 0.34,
             "prev_return_pct": null,
-            "vol_ratio": 1.16,
+            "vol_ratio": 0.75,
             "ticker_group": "SMALL"
         },
         {
             "ticker": "NCLTY",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": 0.21,
+            "sl_factor": 0.4,
+            "z_score": 0.22,
             "prev_return_pct": null,
-            "vol_ratio": 0.57,
+            "vol_ratio": 0.35,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "EDPFY",
+            "ticker": "UUGRY",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 1.6,
-            "z_score": 0.2,
+            "sl_factor": 0.4,
+            "z_score": 0.19,
             "prev_return_pct": null,
-            "vol_ratio": 0.27,
+            "vol_ratio": 0.83,
             "ticker_group": "SMALL"
         }
     ],
     "M": [
         {
-            "ticker": "USFD",
+            "ticker": "NJDCY",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.6,
+            "sl_factor": 0.4,
             "z_score": null,
-            "prev_return_pct": 14.05,
-            "vol_ratio": 1.7,
+            "prev_return_pct": 17.14,
+            "vol_ratio": 0.15,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "PAYC",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.6,
-            "z_score": null,
-            "prev_return_pct": 12.15,
-            "vol_ratio": 2.24,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "LECO",
+            "ticker": "ICLR",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
             "z_score": null,
-            "prev_return_pct": 9.28,
-            "vol_ratio": 1.72,
+            "prev_return_pct": 13.91,
+            "vol_ratio": 10.47,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "NBIS",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 1.6,
+            "z_score": null,
+            "prev_return_pct": 9.3,
+            "vol_ratio": 1.82,
             "ticker_group": "SMALL"
         }
     ]
