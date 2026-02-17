@@ -7,7 +7,7 @@
             "sl_factor": 3.2,
             "z_score": 0.22,
             "prev_return_pct": null,
-            "vol_ratio": 2.65,
+            "vol_ratio": 2.76,
             "ticker_group": "BIG + ETF"
         },
         {
@@ -17,17 +17,17 @@
             "sl_factor": 1.6,
             "z_score": 0.17,
             "prev_return_pct": null,
-            "vol_ratio": 0.81,
+            "vol_ratio": 0.85,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "SMFG",
+            "ticker": "AMT",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.8,
-            "z_score": 0.16,
+            "sl_factor": 3.2,
+            "z_score": 0.1,
             "prev_return_pct": null,
-            "vol_ratio": 1.51,
+            "vol_ratio": 0.97,
             "ticker_group": "BIG + ETF"
         }
     ],
@@ -39,49 +39,39 @@
             "sl_factor": 0.4,
             "z_score": 0.19,
             "prev_return_pct": null,
-            "vol_ratio": 1.73,
+            "vol_ratio": 1.69,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "DE",
-            "action": "Short",
+            "ticker": "LIN",
+            "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 1.6,
-            "z_score": 0.18,
+            "z_score": 0.11,
             "prev_return_pct": null,
-            "vol_ratio": 1.77,
+            "vol_ratio": 1.57,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "ALNY",
-            "action": "Short",
+            "ticker": "UL",
+            "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": 0.17,
+            "sl_factor": 0.4,
+            "z_score": 0.11,
             "prev_return_pct": null,
-            "vol_ratio": 1.74,
+            "vol_ratio": 1.79,
             "ticker_group": "BIG + ETF"
         }
     ],
     "V": [
         {
-            "ticker": "RSHGY",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 1.6,
-            "z_score": 0.34,
-            "prev_return_pct": null,
-            "vol_ratio": 0.75,
-            "ticker_group": "SMALL"
-        },
-        {
             "ticker": "NCLTY",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
-            "z_score": 0.21,
+            "z_score": 0.22,
             "prev_return_pct": null,
-            "vol_ratio": 0.35,
+            "vol_ratio": 0.73,
             "ticker_group": "SMALL"
         },
         {
@@ -91,7 +81,17 @@
             "sl_factor": 3.2,
             "z_score": 0.2,
             "prev_return_pct": null,
-            "vol_ratio": 0.83,
+            "vol_ratio": 1.74,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "RDEIY",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 3.2,
+            "z_score": 0.17,
+            "prev_return_pct": null,
+            "vol_ratio": 0.18,
             "ticker_group": "SMALL"
         }
     ],
@@ -107,23 +107,23 @@
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "ICLR",
+            "ticker": "WING",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
             "z_score": null,
-            "prev_return_pct": 14.11,
-            "vol_ratio": 10.47,
+            "prev_return_pct": 12.79,
+            "vol_ratio": 1.51,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "NBIS",
+            "ticker": "CNH",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 1.6,
+            "sl_factor": 0.4,
             "z_score": null,
-            "prev_return_pct": 9.07,
-            "vol_ratio": 1.82,
+            "prev_return_pct": 9.17,
+            "vol_ratio": 1.54,
             "ticker_group": "SMALL"
         }
     ]
