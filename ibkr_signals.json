@@ -1,33 +1,33 @@
 {
     "A": [
         {
-            "ticker": "GEV",
+            "ticker": "SPG",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
-            "z_score": 0.27,
+            "z_score": 0.12,
             "prev_return_pct": null,
-            "vol_ratio": 0.52,
+            "vol_ratio": 0.83,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "CM",
+            "ticker": "PSA",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": 0.18,
-            "prev_return_pct": null,
-            "vol_ratio": 0.93,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "BHP",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.6,
+            "sl_factor": 0.8,
             "z_score": 0.09,
             "prev_return_pct": null,
-            "vol_ratio": 0.79,
+            "vol_ratio": 0.99,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "MO",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.4,
+            "z_score": 0.08,
+            "prev_return_pct": null,
+            "vol_ratio": 0.66,
             "ticker_group": "BIG + ETF"
         }
     ],
@@ -43,27 +43,37 @@
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "DE",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 1.6,
-            "z_score": 0.18,
-            "prev_return_pct": null,
-            "vol_ratio": 3.47,
-            "ticker_group": "BIG + ETF"
-        },
-        {
             "ticker": "BX",
             "action": "Short",
             "allocation_usd": 10000,
             "sl_factor": 1.6,
             "z_score": 0.15,
             "prev_return_pct": null,
-            "vol_ratio": 1.54,
+            "vol_ratio": 1.88,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "PANW",
+            "action": "Short",
+            "allocation_usd": 10000,
+            "sl_factor": 0.6,
+            "z_score": 0.12,
+            "prev_return_pct": null,
+            "vol_ratio": 1.73,
             "ticker_group": "BIG + ETF"
         }
     ],
     "V": [
+        {
+            "ticker": "AS",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 1.6,
+            "z_score": 0.22,
+            "prev_return_pct": null,
+            "vol_ratio": 0.9,
+            "ticker_group": "SMALL"
+        },
         {
             "ticker": "ULS",
             "action": "Long",
@@ -71,7 +81,7 @@
             "sl_factor": 0.8,
             "z_score": 0.17,
             "prev_return_pct": null,
-            "vol_ratio": 2.57,
+            "vol_ratio": 0.91,
             "ticker_group": "SMALL"
         },
         {
@@ -79,51 +89,41 @@
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.8,
-            "z_score": 0.12,
-            "prev_return_pct": null,
-            "vol_ratio": 1.63,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "ONON",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.6,
             "z_score": 0.11,
             "prev_return_pct": null,
-            "vol_ratio": 0.71,
+            "vol_ratio": 1.91,
             "ticker_group": "SMALL"
         }
     ],
     "M": [
         {
-            "ticker": "CSXXY",
+            "ticker": "BE",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.4,
             "z_score": null,
-            "prev_return_pct": 8.7,
-            "vol_ratio": 6.1,
+            "prev_return_pct": 8.52,
+            "vol_ratio": 0.86,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "NJDCY",
+            "ticker": "ASTS",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.4,
+            "sl_factor": 1.6,
             "z_score": null,
-            "prev_return_pct": 8.7,
-            "vol_ratio": 0.5,
+            "prev_return_pct": 7.22,
+            "vol_ratio": 0.72,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "COHR",
+            "ticker": "FN",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.6,
+            "sl_factor": 1.6,
             "z_score": null,
-            "prev_return_pct": 6.97,
-            "vol_ratio": 0.7,
+            "prev_return_pct": 6.79,
+            "vol_ratio": 1.0,
             "ticker_group": "SMALL"
         }
     ]
