@@ -7,17 +7,17 @@
             "sl_factor": 3.2,
             "z_score": 0.22,
             "prev_return_pct": null,
-            "vol_ratio": 0.8,
+            "vol_ratio": 0.72,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "TD",
+            "ticker": "TAK",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.6,
+            "sl_factor": 1.6,
             "z_score": 0.16,
             "prev_return_pct": null,
-            "vol_ratio": 1.55,
+            "vol_ratio": 0.74,
             "ticker_group": "BIG + ETF"
         },
         {
@@ -27,21 +27,11 @@
             "sl_factor": 3.2,
             "z_score": 0.12,
             "prev_return_pct": null,
-            "vol_ratio": 0.63,
+            "vol_ratio": 1.2,
             "ticker_group": "BIG + ETF"
         }
     ],
     "B": [
-        {
-            "ticker": "RELX",
-            "action": "Short",
-            "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.18,
-            "prev_return_pct": null,
-            "vol_ratio": 1.9,
-            "ticker_group": "BIG + ETF"
-        },
         {
             "ticker": "KKR",
             "action": "Short",
@@ -49,17 +39,27 @@
             "sl_factor": 0.6,
             "z_score": 0.13,
             "prev_return_pct": null,
-            "vol_ratio": 1.58,
+            "vol_ratio": 2.06,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "AMX",
-            "action": "Long",
+            "ticker": "APO",
+            "action": "Short",
             "allocation_usd": 10000,
             "sl_factor": 0.4,
             "z_score": 0.12,
             "prev_return_pct": null,
-            "vol_ratio": 1.74,
+            "vol_ratio": 2.35,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "ROST",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.6,
+            "z_score": 0.1,
+            "prev_return_pct": null,
+            "vol_ratio": 1.86,
             "ticker_group": "BIG + ETF"
         }
     ],
@@ -69,9 +69,9 @@
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
-            "z_score": 0.19,
+            "z_score": 0.2,
             "prev_return_pct": null,
-            "vol_ratio": 2.18,
+            "vol_ratio": 0.47,
             "ticker_group": "SMALL"
         },
         {
@@ -81,49 +81,49 @@
             "sl_factor": 0.8,
             "z_score": 0.17,
             "prev_return_pct": null,
-            "vol_ratio": 0.6,
+            "vol_ratio": 0.63,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "JBL",
+            "ticker": "BSY",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.09,
+            "sl_factor": 1.6,
+            "z_score": 0.11,
             "prev_return_pct": null,
-            "vol_ratio": 0.86,
+            "vol_ratio": 3.98,
             "ticker_group": "SMALL"
         }
     ],
     "M": [
         {
-            "ticker": "DUOL",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.6,
-            "z_score": null,
-            "prev_return_pct": 9.71,
-            "vol_ratio": 2.72,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "NJDCY",
+            "ticker": "HIMS",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.4,
             "z_score": null,
-            "prev_return_pct": 9.04,
-            "vol_ratio": 1.38,
+            "prev_return_pct": 13.58,
+            "vol_ratio": 0.59,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "WLK",
+            "ticker": "MP",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 3.2,
+            "sl_factor": 0.4,
             "z_score": null,
-            "prev_return_pct": 7.31,
-            "vol_ratio": 0.61,
+            "prev_return_pct": 10.97,
+            "vol_ratio": 1.09,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "ASTS",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 1.6,
+            "z_score": null,
+            "prev_return_pct": 10.24,
+            "vol_ratio": 1.72,
             "ticker_group": "SMALL"
         }
     ]
