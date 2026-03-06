@@ -1,69 +1,79 @@
 {
     "A": [
         {
-            "ticker": "BAESY",
+            "ticker": "INTU",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.6,
-            "z_score": 0.15,
+            "z_score": 0.06,
             "prev_return_pct": null,
-            "vol_ratio": 1.57,
+            "vol_ratio": 1.36,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "TRI",
+            "ticker": "WM",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.8,
-            "z_score": 0.1,
+            "z_score": 0.04,
             "prev_return_pct": null,
-            "vol_ratio": 0.61,
+            "vol_ratio": 1.55,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "PSA",
+            "ticker": "CEG",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.8,
-            "z_score": 0.09,
+            "sl_factor": 0.4,
+            "z_score": 0.03,
             "prev_return_pct": null,
-            "vol_ratio": 0.78,
+            "vol_ratio": 0.77,
             "ticker_group": "BIG + ETF"
         }
     ],
     "B": [
         {
-            "ticker": "ROST",
+            "ticker": "MGCLY",
             "action": "Short",
             "allocation_usd": 10000,
-            "sl_factor": 0.6,
-            "z_score": 0.1,
+            "sl_factor": 3.2,
+            "z_score": 0.22,
             "prev_return_pct": null,
-            "vol_ratio": 2.78,
+            "vol_ratio": 2.15,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "BAESY",
-            "action": "Long",
+            "ticker": "MCK",
+            "action": "Short",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
             "z_score": 0.09,
             "prev_return_pct": null,
-            "vol_ratio": 1.57,
+            "vol_ratio": 1.7,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "SE",
+            "ticker": "CTAS",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.4,
-            "z_score": 0.08,
+            "z_score": 0.09,
             "prev_return_pct": null,
-            "vol_ratio": 1.55,
+            "vol_ratio": 2.09,
             "ticker_group": "BIG + ETF"
         }
     ],
     "V": [
+        {
+            "ticker": "MORN",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 1.6,
+            "z_score": 0.17,
+            "prev_return_pct": null,
+            "vol_ratio": 0.69,
+            "ticker_group": "SMALL"
+        },
         {
             "ticker": "THC",
             "action": "Long",
@@ -71,59 +81,49 @@
             "sl_factor": 1.6,
             "z_score": 0.12,
             "prev_return_pct": null,
-            "vol_ratio": 0.93,
+            "vol_ratio": 0.78,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "BSY",
+            "ticker": "IOT",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 1.6,
-            "z_score": 0.1,
+            "sl_factor": 3.2,
+            "z_score": 0.11,
             "prev_return_pct": null,
-            "vol_ratio": 0.66,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "FRHC",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.6,
-            "z_score": 0.09,
-            "prev_return_pct": null,
-            "vol_ratio": 0.53,
+            "vol_ratio": 2.26,
             "ticker_group": "SMALL"
         }
     ],
     "M": [
         {
-            "ticker": "NJDCY",
+            "ticker": "CKHGF",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.4,
             "z_score": null,
-            "prev_return_pct": 17.54,
-            "vol_ratio": 2.05,
+            "prev_return_pct": 34.43,
+            "vol_ratio": 1.0,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "OKTA",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 1.6,
-            "z_score": null,
-            "prev_return_pct": 9.41,
-            "vol_ratio": 1.9,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "SAIL",
+            "ticker": "IOT",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
             "z_score": null,
-            "prev_return_pct": 8.95,
-            "vol_ratio": 1.23,
+            "prev_return_pct": 9.85,
+            "vol_ratio": 2.26,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "AVAV",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.8,
+            "z_score": null,
+            "prev_return_pct": 7.07,
+            "vol_ratio": 1.17,
             "ticker_group": "SMALL"
         }
     ]
