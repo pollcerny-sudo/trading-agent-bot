@@ -1,87 +1,77 @@
 {
     "A": [
         {
-            "ticker": "INTU",
+            "ticker": "CNQ",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.6,
-            "z_score": 0.06,
+            "z_score": 0.1,
             "prev_return_pct": null,
-            "vol_ratio": 1.36,
+            "vol_ratio": 1.5,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "WM",
+            "ticker": "TRI",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.8,
-            "z_score": 0.04,
+            "z_score": 0.1,
             "prev_return_pct": null,
-            "vol_ratio": 1.55,
+            "vol_ratio": 0.83,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "CEG",
+            "ticker": "SO",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.03,
+            "sl_factor": 0.8,
+            "z_score": 0.08,
             "prev_return_pct": null,
-            "vol_ratio": 0.77,
+            "vol_ratio": 0.79,
             "ticker_group": "BIG + ETF"
         }
     ],
     "B": [
         {
             "ticker": "MGCLY",
-            "action": "Short",
+            "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
             "z_score": 0.22,
             "prev_return_pct": null,
-            "vol_ratio": 2.15,
+            "vol_ratio": 2.03,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "MCK",
+            "ticker": "AMX",
             "action": "Short",
             "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": 0.09,
+            "sl_factor": 0.4,
+            "z_score": 0.12,
             "prev_return_pct": null,
-            "vol_ratio": 1.7,
+            "vol_ratio": 1.61,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "CTAS",
+            "ticker": "PBR",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.09,
+            "sl_factor": 0.6,
+            "z_score": 0.04,
             "prev_return_pct": null,
-            "vol_ratio": 2.09,
+            "vol_ratio": 1.73,
             "ticker_group": "BIG + ETF"
         }
     ],
     "V": [
         {
-            "ticker": "MORN",
+            "ticker": "BSY",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 1.6,
-            "z_score": 0.17,
+            "z_score": 0.11,
             "prev_return_pct": null,
-            "vol_ratio": 0.69,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "THC",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 1.6,
-            "z_score": 0.12,
-            "prev_return_pct": null,
-            "vol_ratio": 0.78,
+            "vol_ratio": 0.66,
             "ticker_group": "SMALL"
         },
         {
@@ -91,39 +81,49 @@
             "sl_factor": 3.2,
             "z_score": 0.11,
             "prev_return_pct": null,
-            "vol_ratio": 2.26,
+            "vol_ratio": 3.4,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "FRHC",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.6,
+            "z_score": 0.09,
+            "prev_return_pct": null,
+            "vol_ratio": 0.67,
             "ticker_group": "SMALL"
         }
     ],
     "M": [
         {
-            "ticker": "CKHGF",
+            "ticker": "BE",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.4,
             "z_score": null,
-            "prev_return_pct": 34.43,
-            "vol_ratio": 1.0,
+            "prev_return_pct": 12.46,
+            "vol_ratio": 1.33,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "IOT",
+            "ticker": "TER",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 3.2,
+            "sl_factor": 0.6,
             "z_score": null,
-            "prev_return_pct": 9.85,
-            "vol_ratio": 2.26,
+            "prev_return_pct": 11.44,
+            "vol_ratio": 1.66,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "AVAV",
+            "ticker": "CSXXY",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.8,
+            "sl_factor": 0.4,
             "z_score": null,
-            "prev_return_pct": 7.07,
-            "vol_ratio": 1.17,
+            "prev_return_pct": 10.45,
+            "vol_ratio": 2.92,
             "ticker_group": "SMALL"
         }
     ]
