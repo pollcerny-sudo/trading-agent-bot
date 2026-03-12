@@ -1,33 +1,33 @@
 {
     "A": [
         {
-            "ticker": "BAESY",
+            "ticker": "CNQ",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.6,
-            "z_score": 0.15,
+            "z_score": 0.1,
             "prev_return_pct": null,
-            "vol_ratio": 0.74,
+            "vol_ratio": 0.93,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "SBUX",
+            "ticker": "ORCL",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.03,
+            "sl_factor": 0.6,
+            "z_score": 0.08,
             "prev_return_pct": null,
-            "vol_ratio": 1.03,
+            "vol_ratio": 2.92,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "CRWD",
+            "ticker": "MPC",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": 0.02,
+            "sl_factor": 0.8,
+            "z_score": 0.04,
             "prev_return_pct": null,
-            "vol_ratio": 0.62,
+            "vol_ratio": 0.87,
             "ticker_group": "BIG + ETF"
         }
     ],
@@ -39,41 +39,31 @@
             "sl_factor": 1.6,
             "z_score": 0.11,
             "prev_return_pct": null,
-            "vol_ratio": 1.9,
+            "vol_ratio": 2.92,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "ECL",
-            "action": "Short",
-            "allocation_usd": 10000,
-            "sl_factor": 0.8,
-            "z_score": 0.05,
-            "prev_return_pct": null,
-            "vol_ratio": 1.58,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "VRTX",
+            "ticker": "CTAS",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 1.6,
-            "z_score": 0.04,
+            "sl_factor": 0.4,
+            "z_score": 0.09,
             "prev_return_pct": null,
-            "vol_ratio": 2.19,
+            "vol_ratio": 2.43,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "SYK",
+            "action": "Short",
+            "allocation_usd": 10000,
+            "sl_factor": 0.4,
+            "z_score": 0.01,
+            "prev_return_pct": null,
+            "vol_ratio": 2.18,
             "ticker_group": "BIG + ETF"
         }
     ],
     "V": [
-        {
-            "ticker": "BZLFY",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": 0.13,
-            "prev_return_pct": null,
-            "vol_ratio": 0.44,
-            "ticker_group": "SMALL"
-        },
         {
             "ticker": "HIMS",
             "action": "Long",
@@ -81,7 +71,7 @@
             "sl_factor": 0.8,
             "z_score": 0.12,
             "prev_return_pct": null,
-            "vol_ratio": 2.78,
+            "vol_ratio": 2.44,
             "ticker_group": "SMALL"
         },
         {
@@ -91,7 +81,17 @@
             "sl_factor": 0.6,
             "z_score": 0.09,
             "prev_return_pct": null,
-            "vol_ratio": 0.51,
+            "vol_ratio": 0.62,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "COKE",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 1.6,
+            "z_score": 0.09,
+            "prev_return_pct": null,
+            "vol_ratio": 0.71,
             "ticker_group": "SMALL"
         }
     ],
@@ -103,27 +103,27 @@
             "sl_factor": 0.4,
             "z_score": null,
             "prev_return_pct": 99.64,
-            "vol_ratio": 20.0,
+            "vol_ratio": 0.0,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "HIMS",
+            "ticker": "LYB",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.4,
             "z_score": null,
-            "prev_return_pct": 11.94,
-            "vol_ratio": 2.78,
+            "prev_return_pct": 7.44,
+            "vol_ratio": 1.09,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "MOS",
+            "ticker": "WLK",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 1.6,
+            "sl_factor": 3.2,
             "z_score": null,
-            "prev_return_pct": 6.93,
-            "vol_ratio": 1.08,
+            "prev_return_pct": 6.51,
+            "vol_ratio": 0.77,
             "ticker_group": "SMALL"
         }
     ]
