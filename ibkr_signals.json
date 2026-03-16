@@ -1,23 +1,23 @@
 {
     "A": [
         {
-            "ticker": "BAESY",
+            "ticker": "DELL",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.6,
-            "z_score": 0.15,
+            "sl_factor": 3.2,
+            "z_score": 0.11,
             "prev_return_pct": null,
-            "vol_ratio": 0.72,
+            "vol_ratio": 0.68,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "SO",
+            "ticker": "CNQ",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.8,
-            "z_score": 0.08,
+            "sl_factor": 0.6,
+            "z_score": 0.1,
             "prev_return_pct": null,
-            "vol_ratio": 1.15,
+            "vol_ratio": 0.98,
             "ticker_group": "BIG + ETF"
         },
         {
@@ -27,51 +27,51 @@
             "sl_factor": 3.2,
             "z_score": 0.07,
             "prev_return_pct": null,
-            "vol_ratio": 1.16,
+            "vol_ratio": 0.96,
             "ticker_group": "BIG + ETF"
         }
     ],
     "B": [
         {
-            "ticker": "CFRUY",
-            "action": "Short",
-            "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": 0.14,
-            "prev_return_pct": null,
-            "vol_ratio": 1.91,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "CARR",
-            "action": "Short",
-            "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.08,
-            "prev_return_pct": null,
-            "vol_ratio": 1.53,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "TDG",
+            "ticker": "IFNNY",
             "action": "Short",
             "allocation_usd": 10000,
             "sl_factor": 0.4,
             "z_score": 0.07,
             "prev_return_pct": null,
-            "vol_ratio": 1.82,
+            "vol_ratio": 1.73,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "ATEYY",
+            "action": "Short",
+            "allocation_usd": 10000,
+            "sl_factor": 0.4,
+            "z_score": 0.03,
+            "prev_return_pct": null,
+            "vol_ratio": 1.52,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "GBTC",
+            "action": "Short",
+            "allocation_usd": 10000,
+            "sl_factor": 0.4,
+            "z_score": 0.0,
+            "prev_return_pct": null,
+            "vol_ratio": 1.79,
             "ticker_group": "BIG + ETF"
         }
     ],
     "V": [
         {
-            "ticker": "BZLFY",
+            "ticker": "ULS",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": 0.14,
+            "sl_factor": 0.8,
+            "z_score": 0.17,
             "prev_return_pct": null,
-            "vol_ratio": 0.16,
+            "vol_ratio": 1.0,
             "ticker_group": "SMALL"
         },
         {
@@ -81,7 +81,7 @@
             "sl_factor": 0.6,
             "z_score": 0.09,
             "prev_return_pct": null,
-            "vol_ratio": 0.64,
+            "vol_ratio": 0.74,
             "ticker_group": "SMALL"
         },
         {
@@ -91,39 +91,39 @@
             "sl_factor": 1.6,
             "z_score": 0.08,
             "prev_return_pct": null,
-            "vol_ratio": 1.36,
+            "vol_ratio": 0.93,
             "ticker_group": "SMALL"
         }
     ],
     "M": [
         {
-            "ticker": "PMDIY",
+            "ticker": "CAVA",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.4,
+            "sl_factor": 1.6,
             "z_score": null,
-            "prev_return_pct": 13.43,
-            "vol_ratio": 4.58,
+            "prev_return_pct": 5.91,
+            "vol_ratio": 0.56,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "CRDO",
+            "ticker": "CIEN",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 3.2,
+            "sl_factor": 1.6,
             "z_score": null,
-            "prev_return_pct": 4.13,
-            "vol_ratio": 0.85,
+            "prev_return_pct": 5.47,
+            "vol_ratio": 0.83,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "DUOL",
+            "ticker": "BROS",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.6,
+            "sl_factor": 1.6,
             "z_score": null,
-            "prev_return_pct": 3.3,
-            "vol_ratio": 0.58,
+            "prev_return_pct": 5.04,
+            "vol_ratio": 0.76,
             "ticker_group": "SMALL"
         }
     ]
