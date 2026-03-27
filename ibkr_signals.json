@@ -1,89 +1,69 @@
 {
     "A": [
         {
-            "ticker": "GEV",
+            "ticker": "CTVA",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
-            "z_score": 0.25,
+            "z_score": 0.06,
             "prev_return_pct": null,
-            "vol_ratio": 1.08,
+            "vol_ratio": 0.72,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "ROST",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.05,
-            "prev_return_pct": null,
-            "vol_ratio": 1.19,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "VRT",
+            "ticker": "MPC",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.8,
-            "z_score": 0.01,
+            "z_score": 0.03,
             "prev_return_pct": null,
-            "vol_ratio": 0.5,
+            "vol_ratio": 0.62,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "PFE",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 3.2,
+            "z_score": 0.02,
+            "prev_return_pct": null,
+            "vol_ratio": 0.68,
             "ticker_group": "BIG + ETF"
         }
     ],
     "B": [
         {
-            "ticker": "ARM",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.06,
-            "prev_return_pct": null,
-            "vol_ratio": 4.85,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "PDD",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.06,
-            "prev_return_pct": null,
-            "vol_ratio": 2.7,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "PAYX",
+            "ticker": "MGCLY",
             "action": "Short",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
-            "z_score": 0.04,
+            "z_score": 0.3,
             "prev_return_pct": null,
-            "vol_ratio": 1.72,
+            "vol_ratio": 1.79,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "CARR",
+            "action": "Short",
+            "allocation_usd": 10000,
+            "sl_factor": 0.4,
+            "z_score": 0.08,
+            "prev_return_pct": null,
+            "vol_ratio": 1.7,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "CP",
+            "action": "Short",
+            "allocation_usd": 10000,
+            "sl_factor": 0.4,
+            "z_score": 0.06,
+            "prev_return_pct": null,
+            "vol_ratio": 1.53,
             "ticker_group": "BIG + ETF"
         }
     ],
     "V": [
-        {
-            "ticker": "PUGBY",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 1.6,
-            "z_score": 0.3,
-            "prev_return_pct": null,
-            "vol_ratio": 0.13,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "ULS",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.8,
-            "z_score": 0.17,
-            "prev_return_pct": null,
-            "vol_ratio": 1.61,
-            "ticker_group": "SMALL"
-        },
         {
             "ticker": "SMMT",
             "action": "Long",
@@ -91,39 +71,59 @@
             "sl_factor": 0.4,
             "z_score": 0.13,
             "prev_return_pct": null,
-            "vol_ratio": 2.22,
+            "vol_ratio": 1.72,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "FRHC",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.6,
+            "z_score": 0.09,
+            "prev_return_pct": null,
+            "vol_ratio": 1.47,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "FFIV",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 3.2,
+            "z_score": 0.04,
+            "prev_return_pct": null,
+            "vol_ratio": 0.83,
             "ticker_group": "SMALL"
         }
     ],
     "M": [
         {
-            "ticker": "BF-A",
+            "ticker": "PAAS",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.4,
+            "sl_factor": 0.8,
             "z_score": null,
-            "prev_return_pct": 8.79,
-            "vol_ratio": 0.5,
+            "prev_return_pct": 5.75,
+            "vol_ratio": 0.77,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "KVYO",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": null,
-            "prev_return_pct": 5.72,
-            "vol_ratio": 0.8,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "BBY",
+            "ticker": "AGI",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 1.6,
             "z_score": null,
-            "prev_return_pct": 5.3,
-            "vol_ratio": 0.66,
+            "prev_return_pct": 5.53,
+            "vol_ratio": 0.75,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "SQM",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.4,
+            "z_score": null,
+            "prev_return_pct": 5.35,
+            "vol_ratio": 0.67,
             "ticker_group": "SMALL"
         }
     ]
