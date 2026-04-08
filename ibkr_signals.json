@@ -1,13 +1,13 @@
 {
     "A": [
         {
-            "ticker": "GS",
+            "ticker": "TD",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.6,
             "z_score": 0.17,
             "prev_return_pct": null,
-            "vol_ratio": 0.66,
+            "vol_ratio": 2.76,
             "ticker_group": "BIG + ETF"
         },
         {
@@ -17,39 +17,49 @@
             "sl_factor": 0.4,
             "z_score": 0.09,
             "prev_return_pct": null,
-            "vol_ratio": 0.62,
+            "vol_ratio": 0.67,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "MFC",
+            "ticker": "MS",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.6,
+            "sl_factor": 1.6,
             "z_score": 0.09,
             "prev_return_pct": null,
-            "vol_ratio": 0.56,
+            "vol_ratio": 0.86,
             "ticker_group": "BIG + ETF"
         }
     ],
     "B": [
         {
-            "ticker": "RTNTF",
-            "action": "Long",
+            "ticker": "AAPL",
+            "action": "Short",
             "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.0,
+            "sl_factor": 0.8,
+            "z_score": 0.18,
             "prev_return_pct": null,
-            "vol_ratio": 1.54,
+            "vol_ratio": 1.53,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "BNS",
+            "ticker": "PNC",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.8,
+            "z_score": 0.07,
+            "prev_return_pct": null,
+            "vol_ratio": 1.52,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "DTEGY",
             "action": "Short",
             "allocation_usd": 10000,
             "sl_factor": 0.4,
-            "z_score": -0.03,
+            "z_score": 0.01,
             "prev_return_pct": null,
-            "vol_ratio": 3.68,
+            "vol_ratio": 2.18,
             "ticker_group": "BIG + ETF"
         }
     ],
@@ -71,7 +81,7 @@
             "sl_factor": 1.6,
             "z_score": 0.24,
             "prev_return_pct": null,
-            "vol_ratio": 0.09,
+            "vol_ratio": 0.38,
             "ticker_group": "SMALL"
         },
         {
@@ -81,39 +91,39 @@
             "sl_factor": 1.6,
             "z_score": 0.18,
             "prev_return_pct": null,
-            "vol_ratio": 0.37,
+            "vol_ratio": 0.81,
             "ticker_group": "SMALL"
         }
     ],
     "M": [
         {
-            "ticker": "LKNCY",
+            "ticker": "CF",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 3.2,
+            "z_score": null,
+            "prev_return_pct": 10.56,
+            "vol_ratio": 0.66,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "DSEEY",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.4,
             "z_score": null,
-            "prev_return_pct": 6.82,
-            "vol_ratio": 1.07,
+            "prev_return_pct": 7.58,
+            "vol_ratio": 1.41,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "NJDCY",
+            "ticker": "DOW",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.4,
             "z_score": null,
-            "prev_return_pct": 6.29,
-            "vol_ratio": 5.94,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "NBIS",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.8,
-            "z_score": null,
-            "prev_return_pct": 6.12,
-            "vol_ratio": 0.57,
+            "prev_return_pct": 7.26,
+            "vol_ratio": 0.93,
             "ticker_group": "SMALL"
         }
     ]
