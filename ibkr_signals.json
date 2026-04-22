@@ -11,55 +11,55 @@
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "RY",
+            "ticker": "ARM",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.8,
-            "z_score": 0.21,
+            "sl_factor": 0.6,
+            "z_score": 0.12,
             "prev_return_pct": null,
-            "vol_ratio": 0.69,
+            "vol_ratio": 0.75,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "AAPL",
+            "ticker": "UBS",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": 0.18,
+            "sl_factor": 0.4,
+            "z_score": 0.1,
             "prev_return_pct": null,
-            "vol_ratio": 0.88,
+            "vol_ratio": 0.7,
             "ticker_group": "BIG + ETF"
         }
     ],
     "B": [
         {
-            "ticker": "MUFG",
+            "ticker": "ABT",
             "action": "Short",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
-            "z_score": 0.13,
+            "z_score": 0.12,
             "prev_return_pct": null,
-            "vol_ratio": 1.54,
+            "vol_ratio": 1.52,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "AZO",
-            "action": "Long",
+            "ticker": "JNJ",
+            "action": "Short",
             "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.04,
+            "sl_factor": 1.6,
+            "z_score": 0.11,
             "prev_return_pct": null,
-            "vol_ratio": 1.61,
+            "vol_ratio": 1.55,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "NWG",
+            "ticker": "TEL",
             "action": "Short",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
-            "z_score": -0.04,
+            "z_score": 0.1,
             "prev_return_pct": null,
-            "vol_ratio": 1.5,
+            "vol_ratio": 2.03,
             "ticker_group": "BIG + ETF"
         }
     ],
@@ -71,7 +71,7 @@
             "sl_factor": 0.4,
             "z_score": 0.32,
             "prev_return_pct": null,
-            "vol_ratio": 1.01,
+            "vol_ratio": 0.81,
             "ticker_group": "SMALL"
         },
         {
@@ -79,51 +79,51 @@
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 1.6,
-            "z_score": 0.24,
+            "z_score": 0.25,
             "prev_return_pct": null,
             "vol_ratio": 0.12,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "ULS",
+            "ticker": "TPG",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.8,
-            "z_score": 0.16,
+            "sl_factor": 1.6,
+            "z_score": 0.18,
             "prev_return_pct": null,
-            "vol_ratio": 0.69,
+            "vol_ratio": 0.77,
             "ticker_group": "SMALL"
         }
     ],
     "M": [
         {
-            "ticker": "PUGBY",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": null,
-            "prev_return_pct": 9.74,
-            "vol_ratio": 0.22,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "MLI",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 1.6,
-            "z_score": null,
-            "prev_return_pct": 9.51,
-            "vol_ratio": 1.08,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "HPQ",
+            "ticker": "OKLO",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.4,
             "z_score": null,
-            "prev_return_pct": 7.16,
-            "vol_ratio": 0.71,
+            "prev_return_pct": 11.08,
+            "vol_ratio": 1.43,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "RCI",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 1.6,
+            "z_score": null,
+            "prev_return_pct": 9.65,
+            "vol_ratio": 0.83,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "RS",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 3.2,
+            "z_score": null,
+            "prev_return_pct": 4.14,
+            "vol_ratio": 1.14,
             "ticker_group": "SMALL"
         }
     ]
