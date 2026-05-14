@@ -1,129 +1,129 @@
 {
     "A": [
         {
-            "ticker": "RY",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.8,
-            "z_score": 0.21,
-            "prev_return_pct": null,
-            "vol_ratio": 0.62,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "AAPL",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": 0.18,
-            "prev_return_pct": null,
-            "vol_ratio": 0.93,
-            "ticker_group": "BIG + ETF"
-        },
-        {
             "ticker": "GS",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.6,
             "z_score": 0.17,
             "prev_return_pct": null,
-            "vol_ratio": 1.22,
+            "vol_ratio": 1.29,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "QQQ",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.6,
+            "z_score": 0.13,
+            "prev_return_pct": null,
+            "vol_ratio": 1.01,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "MS",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 1.6,
+            "z_score": 0.09,
+            "prev_return_pct": null,
+            "vol_ratio": 0.86,
             "ticker_group": "BIG + ETF"
         }
     ],
     "B": [
         {
-            "ticker": "PTCAY",
+            "ticker": "ROST",
             "action": "Short",
             "allocation_usd": 10000,
             "sl_factor": 0.4,
-            "z_score": 0.17,
+            "z_score": 0.11,
             "prev_return_pct": null,
-            "vol_ratio": 6.11,
+            "vol_ratio": 1.59,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "GLW",
-            "action": "Short",
-            "allocation_usd": 10000,
-            "sl_factor": 0.8,
-            "z_score": 0.1,
-            "prev_return_pct": null,
-            "vol_ratio": 1.67,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "APH",
+            "ticker": "BAESY",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
+            "z_score": 0.11,
+            "prev_return_pct": null,
+            "vol_ratio": 1.63,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "SE",
+            "action": "Short",
+            "allocation_usd": 10000,
+            "sl_factor": 0.8,
             "z_score": 0.07,
             "prev_return_pct": null,
-            "vol_ratio": 1.61,
+            "vol_ratio": 2.07,
             "ticker_group": "BIG + ETF"
         }
     ],
     "V": [
         {
-            "ticker": "RSHGY",
+            "ticker": "AUR",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 1.6,
-            "z_score": 0.26,
+            "sl_factor": 3.2,
+            "z_score": 0.08,
             "prev_return_pct": null,
-            "vol_ratio": 0.11,
+            "vol_ratio": 1.99,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "SOLV",
+            "ticker": "BCE",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.8,
-            "z_score": 0.19,
+            "z_score": 0.04,
             "prev_return_pct": null,
-            "vol_ratio": 1.69,
+            "vol_ratio": 0.98,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "PAYC",
+            "ticker": "BEN",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.6,
-            "z_score": 0.07,
+            "z_score": 0.04,
             "prev_return_pct": null,
-            "vol_ratio": 1.28,
+            "vol_ratio": 0.62,
             "ticker_group": "SMALL"
         }
     ],
     "M": [
         {
-            "ticker": "AUR",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.6,
-            "z_score": null,
-            "prev_return_pct": 16.02,
-            "vol_ratio": 0.91,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "MBLY",
+            "ticker": "SAIL",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
             "z_score": null,
-            "prev_return_pct": 12.62,
-            "vol_ratio": 0.77,
+            "prev_return_pct": 10.76,
+            "vol_ratio": 1.09,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "NIO",
+            "ticker": "ASTS",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 3.2,
+            "sl_factor": 1.6,
             "z_score": null,
-            "prev_return_pct": 7.39,
-            "vol_ratio": 0.71,
+            "prev_return_pct": 8.31,
+            "vol_ratio": 0.75,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "RKLB",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 1.6,
+            "z_score": null,
+            "prev_return_pct": 7.68,
+            "vol_ratio": 0.97,
             "ticker_group": "SMALL"
         }
     ]
