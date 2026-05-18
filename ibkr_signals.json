@@ -7,123 +7,123 @@
             "sl_factor": 0.8,
             "z_score": 0.21,
             "prev_return_pct": null,
-            "vol_ratio": 0.42,
+            "vol_ratio": 0.46,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "QQQ",
+            "ticker": "AAPL",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.6,
-            "z_score": 0.13,
+            "sl_factor": 3.2,
+            "z_score": 0.18,
             "prev_return_pct": null,
-            "vol_ratio": 0.85,
+            "vol_ratio": 1.13,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "UBS",
+            "ticker": "COST",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.1,
+            "sl_factor": 3.2,
+            "z_score": 0.08,
             "prev_return_pct": null,
-            "vol_ratio": 0.69,
+            "vol_ratio": 1.13,
             "ticker_group": "BIG + ETF"
         }
     ],
     "B": [
         {
-            "ticker": "AMAT",
+            "ticker": "MGCLY",
             "action": "Short",
             "allocation_usd": 10000,
-            "sl_factor": 0.6,
-            "z_score": 0.08,
+            "sl_factor": 3.2,
+            "z_score": 0.23,
             "prev_return_pct": null,
-            "vol_ratio": 2.15,
+            "vol_ratio": 2.0,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "TJX",
+            "ticker": "MUFG",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
-            "z_score": 0.07,
+            "z_score": 0.14,
             "prev_return_pct": null,
-            "vol_ratio": 1.66,
+            "vol_ratio": 1.65,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "WM",
-            "action": "Long",
+            "ticker": "JNJ",
+            "action": "Short",
             "allocation_usd": 10000,
             "sl_factor": 1.6,
-            "z_score": 0.07,
+            "z_score": 0.12,
             "prev_return_pct": null,
-            "vol_ratio": 1.65,
+            "vol_ratio": 1.57,
             "ticker_group": "BIG + ETF"
         }
     ],
     "V": [
         {
-            "ticker": "ARNNY",
+            "ticker": "AES",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 1.6,
-            "z_score": 0.33,
+            "z_score": 0.04,
             "prev_return_pct": null,
-            "vol_ratio": 5.23,
+            "vol_ratio": 0.79,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "THC",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 1.6,
-            "z_score": 0.1,
-            "prev_return_pct": null,
-            "vol_ratio": 0.9,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "BE",
+            "ticker": "RBRK",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.4,
-            "z_score": 0.06,
+            "z_score": 0.04,
             "prev_return_pct": null,
-            "vol_ratio": 0.78,
+            "vol_ratio": 1.07,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "WMG",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 3.2,
+            "z_score": 0.04,
+            "prev_return_pct": null,
+            "vol_ratio": 1.22,
             "ticker_group": "SMALL"
         }
     ],
     "M": [
         {
-            "ticker": "WING",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.8,
-            "z_score": null,
-            "prev_return_pct": 7.96,
-            "vol_ratio": 1.17,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "HUBS",
+            "ticker": "MNDY",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.4,
             "z_score": null,
-            "prev_return_pct": 6.37,
-            "vol_ratio": 1.24,
+            "prev_return_pct": 9.22,
+            "vol_ratio": 0.86,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "ASTS",
+            "ticker": "SAIL",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 1.6,
+            "sl_factor": 3.2,
             "z_score": null,
-            "prev_return_pct": 5.98,
-            "vol_ratio": 1.33,
+            "prev_return_pct": 8.88,
+            "vol_ratio": 1.79,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "YPF",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 3.2,
+            "z_score": null,
+            "prev_return_pct": 7.59,
+            "vol_ratio": 0.57,
             "ticker_group": "SMALL"
         }
     ]
