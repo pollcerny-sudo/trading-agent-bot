@@ -65,6 +65,16 @@
     ],
     "V": [
         {
+            "ticker": "SOTGY",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 1.6,
+            "z_score": 0.25,
+            "prev_return_pct": null,
+            "vol_ratio": 0.2,
+            "ticker_group": "SMALL"
+        },
+        {
             "ticker": "SOAGY",
             "action": "Long",
             "allocation_usd": 10000,
@@ -83,16 +93,6 @@
             "prev_return_pct": null,
             "vol_ratio": 0.76,
             "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "ONON",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.6,
-            "z_score": 0.11,
-            "prev_return_pct": null,
-            "vol_ratio": 1.13,
-            "ticker_group": "SMALL"
         }
     ],
     "M": [
@@ -102,8 +102,8 @@
             "allocation_usd": 10000,
             "sl_factor": 0.4,
             "z_score": null,
-            "prev_return_pct": 12.87,
-            "vol_ratio": 0.3,
+            "prev_return_pct": 22.5,
+            "vol_ratio": 1.52,
             "ticker_group": "SMALL"
         },
         {
