@@ -7,7 +7,7 @@
             "sl_factor": 3.2,
             "z_score": 0.18,
             "prev_return_pct": null,
-            "vol_ratio": 0.96,
+            "vol_ratio": 1.43,
             "ticker_group": "BIG + ETF"
         },
         {
@@ -17,7 +17,7 @@
             "sl_factor": 0.6,
             "z_score": 0.17,
             "prev_return_pct": null,
-            "vol_ratio": 1.13,
+            "vol_ratio": 1.07,
             "ticker_group": "BIG + ETF"
         },
         {
@@ -27,7 +27,7 @@
             "sl_factor": 0.6,
             "z_score": 0.15,
             "prev_return_pct": null,
-            "vol_ratio": 2.11,
+            "vol_ratio": 1.65,
             "ticker_group": "BIG + ETF"
         }
     ],
@@ -39,31 +39,41 @@
             "sl_factor": 1.6,
             "z_score": 0.19,
             "prev_return_pct": null,
-            "vol_ratio": 1.51,
+            "vol_ratio": 1.78,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "HOOD",
-            "action": "Long",
+            "ticker": "ORLY",
+            "action": "Short",
             "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.11,
+            "sl_factor": 3.2,
+            "z_score": 0.19,
             "prev_return_pct": null,
-            "vol_ratio": 1.89,
+            "vol_ratio": 1.82,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "TMO",
-            "action": "Long",
+            "ticker": "CME",
+            "action": "Short",
             "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.11,
+            "sl_factor": 0.8,
+            "z_score": 0.18,
             "prev_return_pct": null,
-            "vol_ratio": 1.72,
+            "vol_ratio": 2.57,
             "ticker_group": "BIG + ETF"
         }
     ],
     "V": [
+        {
+            "ticker": "NCLTY",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 3.2,
+            "z_score": 0.23,
+            "prev_return_pct": null,
+            "vol_ratio": 1.1,
+            "ticker_group": "SMALL"
+        },
         {
             "ticker": "SOAGY",
             "action": "Long",
@@ -71,59 +81,49 @@
             "sl_factor": 3.2,
             "z_score": 0.18,
             "prev_return_pct": null,
-            "vol_ratio": 0.52,
+            "vol_ratio": 0.88,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "ICLR",
+            "ticker": "IP",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": 0.17,
+            "sl_factor": 1.6,
+            "z_score": 0.15,
             "prev_return_pct": null,
-            "vol_ratio": 3.2,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "IOT",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": 0.11,
-            "prev_return_pct": null,
-            "vol_ratio": 1.04,
+            "vol_ratio": 1.34,
             "ticker_group": "SMALL"
         }
     ],
     "M": [
         {
-            "ticker": "NJDCY",
+            "ticker": "MDB",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.4,
             "z_score": null,
-            "prev_return_pct": 22.22,
-            "vol_ratio": 0.63,
+            "prev_return_pct": 16.89,
+            "vol_ratio": 3.95,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "OKTA",
+            "ticker": "TWLO",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 1.6,
+            "sl_factor": 0.6,
             "z_score": null,
-            "prev_return_pct": 14.63,
-            "vol_ratio": 2.78,
+            "prev_return_pct": 16.47,
+            "vol_ratio": 1.25,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "SAIL",
+            "ticker": "HUBS",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.8,
+            "sl_factor": 0.4,
             "z_score": null,
-            "prev_return_pct": 11.49,
-            "vol_ratio": 1.03,
+            "prev_return_pct": 13.02,
+            "vol_ratio": 2.83,
             "ticker_group": "SMALL"
         }
     ]
