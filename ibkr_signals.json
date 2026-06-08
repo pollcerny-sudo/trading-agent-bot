@@ -1,13 +1,13 @@
 {
     "A": [
         {
-            "ticker": "TD",
+            "ticker": "AMT",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.6,
-            "z_score": 0.14,
+            "sl_factor": 3.2,
+            "z_score": 0.11,
             "prev_return_pct": null,
-            "vol_ratio": 0.73,
+            "vol_ratio": 0.93,
             "ticker_group": "BIG + ETF"
         },
         {
@@ -17,49 +17,49 @@
             "sl_factor": 1.6,
             "z_score": 0.11,
             "prev_return_pct": null,
-            "vol_ratio": 1.19,
+            "vol_ratio": 1.41,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "RCL",
+            "ticker": "JNJ",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": 0.11,
+            "sl_factor": 1.6,
+            "z_score": 0.08,
             "prev_return_pct": null,
-            "vol_ratio": 0.87,
+            "vol_ratio": 1.04,
             "ticker_group": "BIG + ETF"
         }
     ],
     "B": [
         {
-            "ticker": "BX",
+            "ticker": "ORLY",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.8,
-            "z_score": 0.16,
+            "sl_factor": 3.2,
+            "z_score": 0.19,
             "prev_return_pct": null,
-            "vol_ratio": 1.58,
+            "vol_ratio": 1.65,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "MRK",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 1.6,
-            "z_score": 0.11,
-            "prev_return_pct": null,
-            "vol_ratio": 1.72,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "DHR",
-            "action": "Long",
+            "ticker": "PTCAY",
+            "action": "Short",
             "allocation_usd": 10000,
             "sl_factor": 0.4,
-            "z_score": 0.1,
+            "z_score": 0.17,
             "prev_return_pct": null,
-            "vol_ratio": 1.61,
+            "vol_ratio": 3.0,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "PEP",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.6,
+            "z_score": 0.12,
+            "prev_return_pct": null,
+            "vol_ratio": 1.69,
             "ticker_group": "BIG + ETF"
         }
     ],
@@ -71,59 +71,59 @@
             "sl_factor": 0.8,
             "z_score": 0.17,
             "prev_return_pct": null,
-            "vol_ratio": 1.04,
+            "vol_ratio": 0.72,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "ICLR",
+            "ticker": "BZLFY",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
-            "z_score": 0.17,
+            "z_score": 0.16,
             "prev_return_pct": null,
-            "vol_ratio": 1.51,
+            "vol_ratio": 1.46,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "IP",
+            "ticker": "DSEEY",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 1.6,
-            "z_score": 0.16,
+            "sl_factor": 0.4,
+            "z_score": 0.13,
             "prev_return_pct": null,
-            "vol_ratio": 0.93,
+            "vol_ratio": 0.41,
             "ticker_group": "SMALL"
         }
     ],
     "M": [
         {
-            "ticker": "FNMA",
+            "ticker": "NJDCY",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.4,
+            "z_score": null,
+            "prev_return_pct": 20.0,
+            "vol_ratio": 0.46,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "GLXY",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
             "z_score": null,
-            "prev_return_pct": 6.13,
-            "vol_ratio": 2.68,
+            "prev_return_pct": 15.83,
+            "vol_ratio": 2.32,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "COKE",
+            "ticker": "DUOL",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 1.6,
+            "sl_factor": 0.6,
             "z_score": null,
-            "prev_return_pct": 5.3,
-            "vol_ratio": 0.55,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "TXRH",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": null,
-            "prev_return_pct": 4.19,
-            "vol_ratio": 1.42,
+            "prev_return_pct": 9.56,
+            "vol_ratio": 0.74,
             "ticker_group": "SMALL"
         }
     ]
