@@ -7,59 +7,59 @@
             "sl_factor": 0.8,
             "z_score": 0.21,
             "prev_return_pct": null,
-            "vol_ratio": 1.45,
+            "vol_ratio": 1.52,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "TD",
+            "ticker": "BCS",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.6,
-            "z_score": 0.14,
+            "sl_factor": 1.6,
+            "z_score": 0.11,
             "prev_return_pct": null,
-            "vol_ratio": 0.77,
+            "vol_ratio": 1.1,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "SPG",
+            "ticker": "RCL",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
-            "z_score": 0.12,
+            "z_score": 0.11,
             "prev_return_pct": null,
-            "vol_ratio": 1.09,
+            "vol_ratio": 0.66,
             "ticker_group": "BIG + ETF"
         }
     ],
     "B": [
         {
-            "ticker": "KLAC",
-            "action": "Long",
+            "ticker": "RY",
+            "action": "Short",
             "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.06,
+            "sl_factor": 0.6,
+            "z_score": 0.02,
             "prev_return_pct": null,
-            "vol_ratio": 1.58,
+            "vol_ratio": 1.52,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "SPY",
+            "ticker": "ADBE",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.8,
-            "z_score": 0.05,
+            "sl_factor": 1.6,
+            "z_score": -0.02,
             "prev_return_pct": null,
-            "vol_ratio": 1.61,
+            "vol_ratio": 3.57,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "ITUB",
+            "ticker": "BMWKY",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.4,
-            "z_score": 0.05,
+            "z_score": -0.03,
             "prev_return_pct": null,
-            "vol_ratio": 1.57,
+            "vol_ratio": 1.55,
             "ticker_group": "BIG + ETF"
         }
     ],
@@ -81,14 +81,14 @@
             "sl_factor": 3.2,
             "z_score": 0.17,
             "prev_return_pct": null,
-            "vol_ratio": 1.59,
+            "vol_ratio": 0.82,
             "ticker_group": "SMALL"
         },
         {
             "ticker": "RDEIY",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 3.2,
+            "sl_factor": 1.6,
             "z_score": 0.16,
             "prev_return_pct": null,
             "vol_ratio": 0.46,
@@ -97,33 +97,33 @@
     ],
     "M": [
         {
-            "ticker": "ROKU",
+            "ticker": "HIMS",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.4,
             "z_score": null,
-            "prev_return_pct": 15.2,
-            "vol_ratio": 1.15,
+            "prev_return_pct": 8.21,
+            "vol_ratio": 0.99,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "SMMT",
+            "ticker": "SNAP",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 3.2,
+            "sl_factor": 0.4,
             "z_score": null,
-            "prev_return_pct": 7.77,
-            "vol_ratio": 1.55,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "RIVN",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.8,
-            "z_score": null,
-            "prev_return_pct": 6.89,
+            "prev_return_pct": 5.94,
             "vol_ratio": 0.85,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "TEM",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.4,
+            "z_score": null,
+            "prev_return_pct": 4.69,
+            "vol_ratio": 0.89,
             "ticker_group": "SMALL"
         }
     ]
