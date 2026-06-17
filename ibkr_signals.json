@@ -1,23 +1,23 @@
 {
     "A": [
         {
-            "ticker": "CPNG",
+            "ticker": "RY",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 1.6,
-            "z_score": 0.19,
+            "sl_factor": 0.8,
+            "z_score": 0.21,
             "prev_return_pct": null,
-            "vol_ratio": 0.84,
+            "vol_ratio": 0.82,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "CARR",
+            "ticker": "GS",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.15,
+            "sl_factor": 0.6,
+            "z_score": 0.17,
             "prev_return_pct": null,
-            "vol_ratio": 0.76,
+            "vol_ratio": 0.83,
             "ticker_group": "BIG + ETF"
         },
         {
@@ -27,103 +27,103 @@
             "sl_factor": 0.6,
             "z_score": 0.15,
             "prev_return_pct": null,
-            "vol_ratio": 1.05,
+            "vol_ratio": 0.88,
             "ticker_group": "BIG + ETF"
         }
     ],
     "B": [
         {
-            "ticker": "KLAC",
-            "action": "Short",
+            "ticker": "AZO",
+            "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.4,
-            "z_score": 0.06,
+            "z_score": 0.04,
             "prev_return_pct": null,
-            "vol_ratio": 1.59,
+            "vol_ratio": 1.65,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "BTI",
-            "action": "Short",
+            "ticker": "PBR",
+            "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.8,
-            "z_score": 0.06,
+            "sl_factor": 0.6,
+            "z_score": 0.02,
+            "prev_return_pct": null,
+            "vol_ratio": 1.5,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "EMR",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 3.2,
+            "z_score": 0.01,
             "prev_return_pct": null,
             "vol_ratio": 1.55,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "PNC",
-            "action": "Short",
-            "allocation_usd": 10000,
-            "sl_factor": 0.8,
-            "z_score": 0.06,
-            "prev_return_pct": null,
-            "vol_ratio": 1.98,
             "ticker_group": "BIG + ETF"
         }
     ],
     "V": [
         {
-            "ticker": "TPG",
+            "ticker": "CART",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 1.6,
-            "z_score": 0.18,
+            "sl_factor": 0.4,
+            "z_score": 0.12,
             "prev_return_pct": null,
-            "vol_ratio": 0.69,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "RDEIY",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 1.6,
-            "z_score": 0.16,
-            "prev_return_pct": null,
-            "vol_ratio": 0.82,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "IP",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 1.6,
-            "z_score": 0.16,
-            "prev_return_pct": null,
-            "vol_ratio": 1.22,
-            "ticker_group": "SMALL"
-        }
-    ],
-    "M": [
-        {
-            "ticker": "MRNA",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": null,
-            "prev_return_pct": 6.46,
-            "vol_ratio": 1.2,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "CELH",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": null,
-            "prev_return_pct": 5.22,
-            "vol_ratio": 0.94,
+            "vol_ratio": 1.13,
             "ticker_group": "SMALL"
         },
         {
             "ticker": "HIMS",
             "action": "Long",
             "allocation_usd": 10000,
+            "sl_factor": 0.8,
+            "z_score": 0.11,
+            "prev_return_pct": null,
+            "vol_ratio": 1.18,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "ASR",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 3.2,
+            "z_score": 0.1,
+            "prev_return_pct": null,
+            "vol_ratio": 1.03,
+            "ticker_group": "SMALL"
+        }
+    ],
+    "M": [
+        {
+            "ticker": "NJDCY",
+            "action": "Long",
+            "allocation_usd": 10000,
             "sl_factor": 0.4,
             "z_score": null,
-            "prev_return_pct": 4.97,
-            "vol_ratio": 1.2,
+            "prev_return_pct": 23.08,
+            "vol_ratio": 0.82,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "MRNA",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 3.2,
+            "z_score": null,
+            "prev_return_pct": 9.94,
+            "vol_ratio": 2.3,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "NBIS",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 1.6,
+            "z_score": null,
+            "prev_return_pct": 5.72,
+            "vol_ratio": 0.87,
             "ticker_group": "SMALL"
         }
     ]
