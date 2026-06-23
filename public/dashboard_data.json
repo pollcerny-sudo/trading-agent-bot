@@ -1,60 +1,60 @@
 {
-  "timestamp": "2026-06-23T00:00:43.474096",
+  "timestamp": "2026-06-23T23:47:13.067581",
   "strategies": {
     "A": {
       "name": "Mean Reversion",
       "metrics": {
-        "total_profit": 1478.9399999999996,
-        "total_return_pct": 14.789399999999997,
-        "num_trades": 294,
-        "win_rate": 51.70068027210885,
-        "avg_win": 112.57625,
-        "avg_loss": -110.08908450704224,
-        "sharpe_ratio": 0.5209843325429986,
+        "total_profit": 1425.1699999999996,
+        "total_return_pct": 14.251699999999994,
+        "num_trades": 297,
+        "win_rate": 51.85185185185185,
+        "avg_win": 111.94279220779222,
+        "avg_loss": -110.58755244755245,
+        "sharpe_ratio": 0.4979886242220912,
         "max_drawdown_pct": 17.146927323860776,
-        "profit_factor": 1.0225922988105025
+        "profit_factor": 1.0122549032892514
       }
     },
     "B": {
       "name": "Volume Breakout",
       "metrics": {
-        "total_profit": -6097.27,
-        "total_return_pct": -60.9727,
-        "num_trades": 294,
-        "win_rate": 39.795918367346935,
-        "avg_win": 148.96273504273506,
-        "avg_loss": -132.91474576271185,
-        "sharpe_ratio": -1.802460859089898,
+        "total_profit": -5916.400000000001,
+        "total_return_pct": -59.16400000000001,
+        "num_trades": 297,
+        "win_rate": 39.73063973063973,
+        "avg_win": 149.7783050847458,
+        "avg_loss": -131.7890502793296,
+        "sharpe_ratio": -1.733737828325699,
         "max_drawdown_pct": 62.73596753363619,
-        "profit_factor": 1.1207389683359372
+        "profit_factor": 1.1365003751623342
       }
     },
     "V": {
       "name": "Trend Breakout",
       "metrics": {
-        "total_profit": 2534.8300000000004,
-        "total_return_pct": 25.348300000000002,
-        "num_trades": 297,
-        "win_rate": 45.79124579124579,
-        "avg_win": 168.2496323529412,
+        "total_profit": 3102.32,
+        "total_return_pct": 31.0232,
+        "num_trades": 300,
+        "win_rate": 46.33333333333333,
+        "avg_win": 168.70100719424462,
         "avg_loss": -126.37962732919256,
-        "sharpe_ratio": 0.6267875203722304,
+        "sharpe_ratio": 0.7595531050045432,
         "max_drawdown_pct": 23.112774116025523,
-        "profit_factor": 1.331303437971739
+        "profit_factor": 1.3348750171165935
       }
     },
     "M": {
       "name": "Momentum",
       "metrics": {
-        "total_profit": 20706.449999999997,
-        "total_return_pct": 207.06449999999998,
-        "num_trades": 267,
-        "win_rate": 47.565543071161045,
-        "avg_win": 447.965905511811,
-        "avg_loss": -258.46585714285715,
-        "sharpe_ratio": 2.5888016933086138,
+        "total_profit": 20886.11,
+        "total_return_pct": 208.86110000000002,
+        "num_trades": 270,
+        "win_rate": 47.77777777777778,
+        "avg_win": 443.8785271317829,
+        "avg_loss": -257.97319148936174,
+        "sharpe_ratio": 2.5945975521486995,
         "max_drawdown_pct": 32.70445190427066,
-        "profit_factor": 1.7331724602380072
+        "profit_factor": 1.720638197206191
       }
     }
   },
@@ -67,17 +67,17 @@
         "sl_factor": 3.2,
         "z_score": 0.24,
         "prev_return_pct": null,
-        "vol_ratio": 1.44,
+        "vol_ratio": 1.25,
         "ticker_group": "BIG + ETF"
       },
       {
-        "ticker": "CARR",
+        "ticker": "RY",
         "action": "Long",
         "allocation_usd": 10000,
-        "sl_factor": 0.4,
-        "z_score": 0.15,
+        "sl_factor": 0.8,
+        "z_score": 0.21,
         "prev_return_pct": null,
-        "vol_ratio": 1.12,
+        "vol_ratio": 1.66,
         "ticker_group": "BIG + ETF"
       },
       {
@@ -87,61 +87,61 @@
         "sl_factor": 0.6,
         "z_score": 0.15,
         "prev_return_pct": null,
-        "vol_ratio": 1.22,
+        "vol_ratio": 0.65,
         "ticker_group": "BIG + ETF"
       }
     ],
     "B": [
       {
-        "ticker": "^GSPC",
+        "ticker": "ABBV",
         "action": "Long",
         "allocation_usd": 10000,
-        "sl_factor": 0.4,
-        "z_score": 0.19,
+        "sl_factor": 3.2,
+        "z_score": 0.17,
         "prev_return_pct": null,
-        "vol_ratio": 1.55,
+        "vol_ratio": 1.72,
         "ticker_group": "BIG + ETF"
       },
       {
-        "ticker": "ORLY",
+        "ticker": "MUFG",
         "action": "Short",
         "allocation_usd": 10000,
         "sl_factor": 3.2,
-        "z_score": 0.19,
+        "z_score": 0.16,
         "prev_return_pct": null,
-        "vol_ratio": 2.03,
+        "vol_ratio": 1.59,
         "ticker_group": "BIG + ETF"
       },
       {
-        "ticker": "CME",
+        "ticker": "V",
         "action": "Short",
         "allocation_usd": 10000,
-        "sl_factor": 0.8,
-        "z_score": 0.18,
+        "sl_factor": 3.2,
+        "z_score": 0.07,
         "prev_return_pct": null,
-        "vol_ratio": 1.69,
+        "vol_ratio": 1.78,
         "ticker_group": "BIG + ETF"
       }
     ],
     "V": [
       {
-        "ticker": "IP",
+        "ticker": "CIB",
         "action": "Long",
         "allocation_usd": 10000,
-        "sl_factor": 1.6,
-        "z_score": 0.15,
+        "sl_factor": 3.2,
+        "z_score": 0.17,
         "prev_return_pct": null,
-        "vol_ratio": 1.79,
+        "vol_ratio": 2.35,
         "ticker_group": "SMALL"
       },
       {
-        "ticker": "CART",
+        "ticker": "DSEEY",
         "action": "Long",
         "allocation_usd": 10000,
         "sl_factor": 0.4,
-        "z_score": 0.12,
+        "z_score": 0.13,
         "prev_return_pct": null,
-        "vol_ratio": 2.38,
+        "vol_ratio": 0.76,
         "ticker_group": "SMALL"
       },
       {
@@ -151,39 +151,39 @@
         "sl_factor": 0.8,
         "z_score": 0.11,
         "prev_return_pct": null,
-        "vol_ratio": 1.66,
+        "vol_ratio": 1.17,
         "ticker_group": "SMALL"
       }
     ],
     "M": [
       {
-        "ticker": "COHR",
-        "action": "Long",
-        "allocation_usd": 10000,
-        "sl_factor": 0.6,
-        "z_score": null,
-        "prev_return_pct": 7.71,
-        "vol_ratio": 1.26,
-        "ticker_group": "SMALL"
-      },
-      {
-        "ticker": "FN",
+        "ticker": "NBIS",
         "action": "Long",
         "allocation_usd": 10000,
         "sl_factor": 1.6,
         "z_score": null,
-        "prev_return_pct": 6.81,
-        "vol_ratio": 1.43,
+        "prev_return_pct": 7.36,
+        "vol_ratio": 0.82,
         "ticker_group": "SMALL"
       },
       {
-        "ticker": "MTZ",
+        "ticker": "LKNCY",
         "action": "Long",
         "allocation_usd": 10000,
-        "sl_factor": 3.2,
+        "sl_factor": 0.4,
         "z_score": null,
-        "prev_return_pct": 5.94,
-        "vol_ratio": 1.34,
+        "prev_return_pct": 6.01,
+        "vol_ratio": 0.48,
+        "ticker_group": "SMALL"
+      },
+      {
+        "ticker": "NCLH",
+        "action": "Long",
+        "allocation_usd": 10000,
+        "sl_factor": 0.4,
+        "z_score": null,
+        "prev_return_pct": 5.59,
+        "vol_ratio": 0.68,
         "ticker_group": "SMALL"
       }
     ]
@@ -569,6 +569,10 @@
       {
         "date": "2026-06-22",
         "equity": 11478.94
+      },
+      {
+        "date": "2026-06-23",
+        "equity": 11425.17
       }
     ],
     "B": [
@@ -951,6 +955,10 @@
       {
         "date": "2026-06-22",
         "equity": 3902.73
+      },
+      {
+        "date": "2026-06-23",
+        "equity": 4083.6
       }
     ],
     "V": [
@@ -1333,6 +1341,10 @@
       {
         "date": "2026-06-22",
         "equity": 12534.83
+      },
+      {
+        "date": "2026-06-23",
+        "equity": 13102.32
       }
     ],
     "M": [
@@ -1715,6 +1727,10 @@
       {
         "date": "2026-06-22",
         "equity": 30706.45
+      },
+      {
+        "date": "2026-06-23",
+        "equity": 30886.11
       }
     ]
   }
