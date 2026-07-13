@@ -7,17 +7,7 @@
             "sl_factor": 0.8,
             "z_score": 0.69,
             "prev_return_pct": null,
-            "vol_ratio": 0.87,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "RY",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.8,
-            "z_score": 0.2,
-            "prev_return_pct": null,
-            "vol_ratio": 0.47,
+            "vol_ratio": 0.25,
             "ticker_group": "BIG + ETF"
         },
         {
@@ -27,7 +17,17 @@
             "sl_factor": 3.2,
             "z_score": 0.19,
             "prev_return_pct": null,
-            "vol_ratio": 0.73,
+            "vol_ratio": 0.53,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "UBS",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.4,
+            "z_score": 0.13,
+            "prev_return_pct": null,
+            "vol_ratio": 0.68,
             "ticker_group": "BIG + ETF"
         }
     ],
@@ -39,91 +39,91 @@
             "sl_factor": 3.2,
             "z_score": 0.18,
             "prev_return_pct": null,
-            "vol_ratio": 4.01,
+            "vol_ratio": 1.64,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "RELX",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.14,
-            "prev_return_pct": null,
-            "vol_ratio": 1.52,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "UL",
+            "ticker": "CFRUY",
             "action": "Short",
             "allocation_usd": 10000,
-            "sl_factor": 0.4,
+            "sl_factor": 3.2,
             "z_score": 0.13,
             "prev_return_pct": null,
-            "vol_ratio": 2.08,
+            "vol_ratio": 3.07,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "SE",
+            "action": "Short",
+            "allocation_usd": 10000,
+            "sl_factor": 0.8,
+            "z_score": 0.07,
+            "prev_return_pct": null,
+            "vol_ratio": 1.9,
             "ticker_group": "BIG + ETF"
         }
     ],
     "V": [
         {
-            "ticker": "ARNNY",
+            "ticker": "CHYM",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 1.6,
-            "z_score": 0.43,
+            "sl_factor": 0.4,
+            "z_score": 0.32,
             "prev_return_pct": null,
-            "vol_ratio": 0.59,
+            "vol_ratio": 0.58,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "GMAB",
+            "ticker": "UUGRY",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.8,
-            "z_score": 0.16,
+            "sl_factor": 3.2,
+            "z_score": 0.22,
             "prev_return_pct": null,
-            "vol_ratio": 1.62,
+            "vol_ratio": 0.42,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "QGEN",
+            "ticker": "SOAGY",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.8,
-            "z_score": 0.1,
+            "sl_factor": 3.2,
+            "z_score": 0.18,
             "prev_return_pct": null,
-            "vol_ratio": 4.04,
+            "vol_ratio": 1.18,
             "ticker_group": "SMALL"
         }
     ],
     "M": [
         {
-            "ticker": "CAVA",
+            "ticker": "DUOL",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 1.6,
+            "sl_factor": 0.6,
             "z_score": null,
-            "prev_return_pct": 5.84,
-            "vol_ratio": 0.75,
+            "prev_return_pct": 5.41,
+            "vol_ratio": 0.45,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "SBAC",
+            "ticker": "BIIB",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
             "z_score": null,
-            "prev_return_pct": 4.02,
-            "vol_ratio": 1.01,
+            "prev_return_pct": 4.87,
+            "vol_ratio": 0.87,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "TECK",
+            "ticker": "GTM",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 1.6,
+            "sl_factor": 0.4,
             "z_score": null,
-            "prev_return_pct": 3.57,
-            "vol_ratio": 1.17,
+            "prev_return_pct": 4.58,
+            "vol_ratio": 0.75,
             "ticker_group": "SMALL"
         }
     ]
