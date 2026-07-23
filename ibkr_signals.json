@@ -1,37 +1,47 @@
 {
     "A": [
         {
-            "ticker": "TAK",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 1.6,
-            "z_score": 0.2,
-            "prev_return_pct": null,
-            "vol_ratio": 1.4,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "CFRUY",
+            "ticker": "NWG",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.4,
-            "z_score": 0.12,
+            "z_score": 0.11,
             "prev_return_pct": null,
-            "vol_ratio": 0.88,
+            "vol_ratio": 0.48,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "EQNR",
+            "ticker": "CTVA",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
-            "z_score": 0.05,
+            "z_score": 0.08,
             "prev_return_pct": null,
-            "vol_ratio": 1.01,
+            "vol_ratio": 0.61,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "ROST",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 1.6,
+            "z_score": 0.07,
+            "prev_return_pct": null,
+            "vol_ratio": 0.57,
             "ticker_group": "BIG + ETF"
         }
     ],
     "B": [
+        {
+            "ticker": "AMX",
+            "action": "Short",
+            "allocation_usd": 10000,
+            "sl_factor": 0.4,
+            "z_score": 0.15,
+            "prev_return_pct": null,
+            "vol_ratio": 2.18,
+            "ticker_group": "BIG + ETF"
+        },
         {
             "ticker": "DHR",
             "action": "Long",
@@ -39,39 +49,39 @@
             "sl_factor": 0.4,
             "z_score": 0.1,
             "prev_return_pct": null,
-            "vol_ratio": 5.13,
+            "vol_ratio": 1.87,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "TMO",
+            "ticker": "TEL",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.1,
+            "sl_factor": 3.2,
+            "z_score": 0.09,
             "prev_return_pct": null,
-            "vol_ratio": 1.67,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "T",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.08,
-            "prev_return_pct": null,
-            "vol_ratio": 1.67,
+            "vol_ratio": 3.3,
             "ticker_group": "BIG + ETF"
         }
     ],
     "V": [
         {
-            "ticker": "ARNNY",
+            "ticker": "EDPFY",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 1.6,
-            "z_score": 0.51,
+            "z_score": 0.22,
             "prev_return_pct": null,
-            "vol_ratio": 0.58,
+            "vol_ratio": 0.99,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "CIB",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 3.2,
+            "z_score": 0.16,
+            "prev_return_pct": null,
+            "vol_ratio": 0.97,
             "ticker_group": "SMALL"
         },
         {
@@ -79,16 +89,6 @@
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.4,
-            "z_score": 0.09,
-            "prev_return_pct": null,
-            "vol_ratio": 0.7,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "PCOR",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 3.2,
             "z_score": 0.07,
             "prev_return_pct": null,
             "vol_ratio": 0.94,
@@ -97,33 +97,33 @@
     ],
     "M": [
         {
-            "ticker": "STRL",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": null,
-            "prev_return_pct": 6.69,
-            "vol_ratio": 0.58,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "WAL",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 1.6,
-            "z_score": null,
-            "prev_return_pct": 6.27,
-            "vol_ratio": 1.44,
-            "ticker_group": "SMALL"
-        },
-        {
             "ticker": "CRDO",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
             "z_score": null,
-            "prev_return_pct": 5.41,
-            "vol_ratio": 0.55,
+            "prev_return_pct": 5.68,
+            "vol_ratio": 0.48,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "HIMS",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.4,
+            "z_score": null,
+            "prev_return_pct": 5.51,
+            "vol_ratio": 0.63,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "WYNN",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.4,
+            "z_score": null,
+            "prev_return_pct": 4.27,
+            "vol_ratio": 1.0,
             "ticker_group": "SMALL"
         }
     ]
