@@ -1,37 +1,47 @@
 {
     "A": [
         {
-            "ticker": "NWG",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.11,
-            "prev_return_pct": null,
-            "vol_ratio": 0.48,
-            "ticker_group": "BIG + ETF"
-        },
-        {
             "ticker": "CTVA",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
             "z_score": 0.08,
             "prev_return_pct": null,
-            "vol_ratio": 0.61,
+            "vol_ratio": 0.93,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "ROST",
+            "ticker": "PCAR",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.8,
+            "z_score": 0.05,
+            "prev_return_pct": null,
+            "vol_ratio": 1.66,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "VST",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 1.6,
-            "z_score": 0.07,
+            "z_score": 0.05,
             "prev_return_pct": null,
-            "vol_ratio": 0.57,
+            "vol_ratio": 0.64,
             "ticker_group": "BIG + ETF"
         }
     ],
     "B": [
+        {
+            "ticker": "BX",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.8,
+            "z_score": 0.16,
+            "prev_return_pct": null,
+            "vol_ratio": 1.75,
+            "ticker_group": "BIG + ETF"
+        },
         {
             "ticker": "AMX",
             "action": "Short",
@@ -39,7 +49,7 @@
             "sl_factor": 0.4,
             "z_score": 0.15,
             "prev_return_pct": null,
-            "vol_ratio": 2.18,
+            "vol_ratio": 1.87,
             "ticker_group": "BIG + ETF"
         },
         {
@@ -49,17 +59,7 @@
             "sl_factor": 0.4,
             "z_score": 0.1,
             "prev_return_pct": null,
-            "vol_ratio": 1.87,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "TEL",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": 0.09,
-            "prev_return_pct": null,
-            "vol_ratio": 3.3,
+            "vol_ratio": 1.89,
             "ticker_group": "BIG + ETF"
         }
     ],
@@ -81,49 +81,49 @@
             "sl_factor": 3.2,
             "z_score": 0.16,
             "prev_return_pct": null,
-            "vol_ratio": 0.97,
+            "vol_ratio": 1.32,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "SFD",
+            "ticker": "ICLR",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.07,
+            "sl_factor": 3.2,
+            "z_score": 0.15,
             "prev_return_pct": null,
-            "vol_ratio": 0.94,
+            "vol_ratio": 1.55,
             "ticker_group": "SMALL"
         }
     ],
     "M": [
         {
-            "ticker": "CRDO",
+            "ticker": "IP",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 1.6,
+            "z_score": null,
+            "prev_return_pct": 11.68,
+            "vol_ratio": 0.89,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "SW",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.8,
+            "z_score": null,
+            "prev_return_pct": 11.5,
+            "vol_ratio": 0.79,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "PKG",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
             "z_score": null,
-            "prev_return_pct": 5.68,
-            "vol_ratio": 0.48,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "HIMS",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": null,
-            "prev_return_pct": 5.51,
-            "vol_ratio": 0.63,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "WYNN",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": null,
-            "prev_return_pct": 4.27,
-            "vol_ratio": 1.0,
+            "prev_return_pct": 8.82,
+            "vol_ratio": 2.03,
             "ticker_group": "SMALL"
         }
     ]
