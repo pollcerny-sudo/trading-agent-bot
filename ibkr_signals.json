@@ -1,69 +1,79 @@
 {
     "A": [
         {
-            "ticker": "ADSK",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.07,
-            "prev_return_pct": null,
-            "vol_ratio": 0.84,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "ORCL",
+            "ticker": "BAESY",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.6,
-            "z_score": 0.07,
+            "z_score": 0.16,
             "prev_return_pct": null,
-            "vol_ratio": 0.61,
+            "vol_ratio": 0.58,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "ROST",
+            "ticker": "AMGN",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 1.6,
-            "z_score": 0.07,
+            "z_score": 0.11,
             "prev_return_pct": null,
-            "vol_ratio": 0.58,
+            "vol_ratio": 0.72,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "LLY",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 3.2,
+            "z_score": 0.09,
+            "prev_return_pct": null,
+            "vol_ratio": 1.08,
             "ticker_group": "BIG + ETF"
         }
     ],
     "B": [
         {
-            "ticker": "KKR",
+            "ticker": "VRTX",
             "action": "Short",
             "allocation_usd": 10000,
-            "sl_factor": 0.6,
-            "z_score": 0.13,
+            "sl_factor": 1.6,
+            "z_score": 0.06,
             "prev_return_pct": null,
-            "vol_ratio": 1.67,
+            "vol_ratio": 1.92,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "MCK",
+            "ticker": "NET",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": 0.1,
+            "sl_factor": 0.4,
+            "z_score": 0.05,
             "prev_return_pct": null,
-            "vol_ratio": 1.52,
+            "vol_ratio": 2.06,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "MNST",
-            "action": "Short",
+            "ticker": "ABNB",
+            "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.8,
-            "z_score": 0.07,
+            "sl_factor": 0.4,
+            "z_score": 0.05,
             "prev_return_pct": null,
-            "vol_ratio": 1.63,
+            "vol_ratio": 2.18,
             "ticker_group": "BIG + ETF"
         }
     ],
     "V": [
+        {
+            "ticker": "ARNNY",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 1.6,
+            "z_score": 0.44,
+            "prev_return_pct": null,
+            "vol_ratio": 1.66,
+            "ticker_group": "SMALL"
+        },
         {
             "ticker": "NCLTY",
             "action": "Long",
@@ -75,55 +85,45 @@
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "UUGRY",
+            "ticker": "PEN",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
-            "z_score": 0.22,
-            "prev_return_pct": null,
-            "vol_ratio": 0.37,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "TPG",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.4,
             "z_score": 0.17,
             "prev_return_pct": null,
-            "vol_ratio": 1.74,
+            "vol_ratio": 0.49,
             "ticker_group": "SMALL"
         }
     ],
     "M": [
-        {
-            "ticker": "KVYO",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": null,
-            "prev_return_pct": 9.77,
-            "vol_ratio": 1.6,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "AKAM",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.6,
-            "z_score": null,
-            "prev_return_pct": 9.57,
-            "vol_ratio": 2.26,
-            "ticker_group": "SMALL"
-        },
         {
             "ticker": "UWMC",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.6,
             "z_score": null,
-            "prev_return_pct": 9.3,
-            "vol_ratio": 1.74,
+            "prev_return_pct": 10.07,
+            "vol_ratio": 1.67,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "RKLB",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 3.2,
+            "z_score": null,
+            "prev_return_pct": 4.9,
+            "vol_ratio": 1.73,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "OKLO",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.4,
+            "z_score": null,
+            "prev_return_pct": 4.47,
+            "vol_ratio": 1.47,
             "ticker_group": "SMALL"
         }
     ]
