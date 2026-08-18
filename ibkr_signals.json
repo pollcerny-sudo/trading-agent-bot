@@ -7,7 +7,17 @@
             "sl_factor": 0.8,
             "z_score": 0.2,
             "prev_return_pct": null,
-            "vol_ratio": 0.85,
+            "vol_ratio": 0.44,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "CM",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.8,
+            "z_score": 0.15,
+            "prev_return_pct": null,
+            "vol_ratio": 1.53,
             "ticker_group": "BIG + ETF"
         },
         {
@@ -17,17 +27,7 @@
             "sl_factor": 0.6,
             "z_score": 0.15,
             "prev_return_pct": null,
-            "vol_ratio": 0.61,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "QQQ",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": 0.13,
-            "prev_return_pct": null,
-            "vol_ratio": 0.61,
+            "vol_ratio": 0.47,
             "ticker_group": "BIG + ETF"
         }
     ],
@@ -39,41 +39,31 @@
             "sl_factor": 3.2,
             "z_score": 0.14,
             "prev_return_pct": null,
-            "vol_ratio": 2.19,
+            "vol_ratio": 1.57,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "AMAT",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.6,
-            "z_score": 0.08,
-            "prev_return_pct": null,
-            "vol_ratio": 1.7,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "AZO",
+            "ticker": "TGT",
             "action": "Short",
             "allocation_usd": 10000,
             "sl_factor": 0.4,
-            "z_score": 0.04,
+            "z_score": 0.12,
             "prev_return_pct": null,
-            "vol_ratio": 1.54,
+            "vol_ratio": 1.61,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "MNST",
+            "action": "Short",
+            "allocation_usd": 10000,
+            "sl_factor": 0.8,
+            "z_score": 0.06,
+            "prev_return_pct": null,
+            "vol_ratio": 1.52,
             "ticker_group": "BIG + ETF"
         }
     ],
     "V": [
-        {
-            "ticker": "RSHGY",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.8,
-            "z_score": 0.28,
-            "prev_return_pct": null,
-            "vol_ratio": 0.92,
-            "ticker_group": "SMALL"
-        },
         {
             "ticker": "GMAB",
             "action": "Long",
@@ -81,49 +71,59 @@
             "sl_factor": 0.8,
             "z_score": 0.17,
             "prev_return_pct": null,
-            "vol_ratio": 1.55,
+            "vol_ratio": 1.46,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "TPG",
+            "ticker": "EXPE",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.17,
+            "sl_factor": 3.2,
+            "z_score": 0.09,
             "prev_return_pct": null,
-            "vol_ratio": 2.11,
+            "vol_ratio": 1.34,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "NBIS",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.6,
+            "z_score": 0.06,
+            "prev_return_pct": null,
+            "vol_ratio": 0.73,
             "ticker_group": "SMALL"
         }
     ],
     "M": [
         {
-            "ticker": "CELH",
+            "ticker": "FRHC",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
             "z_score": null,
-            "prev_return_pct": 6.23,
-            "vol_ratio": 1.07,
+            "prev_return_pct": 8.06,
+            "vol_ratio": 1.32,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "COHR",
+            "ticker": "PODD",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.6,
             "z_score": null,
-            "prev_return_pct": 5.31,
-            "vol_ratio": 1.27,
+            "prev_return_pct": 5.8,
+            "vol_ratio": 1.13,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "ICLR",
+            "ticker": "MNDY",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 3.2,
+            "sl_factor": 0.4,
             "z_score": null,
-            "prev_return_pct": 5.03,
-            "vol_ratio": 0.38,
+            "prev_return_pct": 4.54,
+            "vol_ratio": 0.57,
             "ticker_group": "SMALL"
         }
     ]
