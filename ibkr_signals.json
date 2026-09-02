@@ -1,33 +1,33 @@
 {
     "A": [
         {
-            "ticker": "AAPL",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": 0.18,
-            "prev_return_pct": null,
-            "vol_ratio": 0.9,
-            "ticker_group": "BIG + ETF"
-        },
-        {
             "ticker": "CTVA",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
             "z_score": 0.08,
             "prev_return_pct": null,
-            "vol_ratio": 0.67,
+            "vol_ratio": 1.2,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "UBS",
+            "ticker": "ALNY",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.08,
+            "sl_factor": 3.2,
+            "z_score": 0.06,
             "prev_return_pct": null,
-            "vol_ratio": 1.19,
+            "vol_ratio": 0.88,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "CRWD",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 3.2,
+            "z_score": 0.06,
+            "prev_return_pct": null,
+            "vol_ratio": 1.89,
             "ticker_group": "BIG + ETF"
         }
     ],
@@ -39,27 +39,27 @@
             "sl_factor": 0.8,
             "z_score": 0.17,
             "prev_return_pct": null,
-            "vol_ratio": 1.65,
+            "vol_ratio": 1.81,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "BAESY",
+            "ticker": "NEM",
             "action": "Short",
             "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": 0.1,
+            "sl_factor": 0.4,
+            "z_score": 0.12,
             "prev_return_pct": null,
-            "vol_ratio": 2.78,
+            "vol_ratio": 2.02,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "CRWD",
-            "action": "Short",
+            "ticker": "PANW",
+            "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": 0.02,
+            "sl_factor": 0.6,
+            "z_score": 0.11,
             "prev_return_pct": null,
-            "vol_ratio": 1.62,
+            "vol_ratio": 1.54,
             "ticker_group": "BIG + ETF"
         }
     ],
@@ -71,7 +71,7 @@
             "sl_factor": 1.6,
             "z_score": 0.52,
             "prev_return_pct": null,
-            "vol_ratio": 1.01,
+            "vol_ratio": 0.69,
             "ticker_group": "SMALL"
         },
         {
@@ -81,7 +81,7 @@
             "sl_factor": 0.8,
             "z_score": 0.28,
             "prev_return_pct": null,
-            "vol_ratio": 0.37,
+            "vol_ratio": 0.41,
             "ticker_group": "SMALL"
         },
         {
@@ -97,33 +97,33 @@
     ],
     "M": [
         {
-            "ticker": "GLXY",
+            "ticker": "MRNA",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
             "z_score": null,
-            "prev_return_pct": 6.26,
-            "vol_ratio": 0.7,
+            "prev_return_pct": 10.22,
+            "vol_ratio": 0.6,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "ASND",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": null,
-            "prev_return_pct": 6.21,
-            "vol_ratio": 0.64,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "OKTA",
+            "ticker": "EIX",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.8,
             "z_score": null,
-            "prev_return_pct": 4.87,
-            "vol_ratio": 1.24,
+            "prev_return_pct": 8.87,
+            "vol_ratio": 5.42,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "BWXT",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 1.6,
+            "z_score": null,
+            "prev_return_pct": 6.98,
+            "vol_ratio": 0.96,
             "ticker_group": "SMALL"
         }
     ]
