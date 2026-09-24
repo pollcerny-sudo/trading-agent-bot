@@ -7,17 +7,7 @@
             "sl_factor": 3.2,
             "z_score": 0.17,
             "prev_return_pct": null,
-            "vol_ratio": 1.99,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "ARM",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.6,
-            "z_score": 0.15,
-            "prev_return_pct": null,
-            "vol_ratio": 1.71,
+            "vol_ratio": 0.82,
             "ticker_group": "BIG + ETF"
         },
         {
@@ -28,6 +18,16 @@
             "z_score": 0.11,
             "prev_return_pct": null,
             "vol_ratio": 0.87,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "RBLX",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.4,
+            "z_score": 0.1,
+            "prev_return_pct": null,
+            "vol_ratio": 0.95,
             "ticker_group": "BIG + ETF"
         }
     ],
@@ -85,13 +85,13 @@
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "TEM",
+            "ticker": "MRNA",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.8,
-            "z_score": 0.09,
+            "z_score": 0.05,
             "prev_return_pct": null,
-            "vol_ratio": 1.21,
+            "vol_ratio": 1.12,
             "ticker_group": "SMALL"
         }
     ],
@@ -117,13 +117,13 @@
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "TWLO",
+            "ticker": "MRNA",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.6,
+            "sl_factor": 3.2,
             "z_score": null,
-            "prev_return_pct": 7.66,
-            "vol_ratio": 2.3,
+            "prev_return_pct": 8.34,
+            "vol_ratio": 1.12,
             "ticker_group": "SMALL"
         }
     ]
