@@ -53,27 +53,17 @@
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "DTEGY",
+            "ticker": "CVS",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.01,
+            "sl_factor": 0.6,
+            "z_score": 0.0,
             "prev_return_pct": null,
-            "vol_ratio": 1.92,
+            "vol_ratio": 2.08,
             "ticker_group": "BIG + ETF"
         }
     ],
     "V": [
-        {
-            "ticker": "NPXYY",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": 0.32,
-            "prev_return_pct": null,
-            "vol_ratio": 0.39,
-            "ticker_group": "SMALL"
-        },
         {
             "ticker": "PAC",
             "action": "Long",
@@ -92,6 +82,16 @@
             "z_score": 0.09,
             "prev_return_pct": null,
             "vol_ratio": 1.19,
+            "ticker_group": "SMALL"
+        },
+        {
+            "ticker": "FRHC",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.4,
+            "z_score": 0.08,
+            "prev_return_pct": null,
+            "vol_ratio": 1.03,
             "ticker_group": "SMALL"
         }
     ],
