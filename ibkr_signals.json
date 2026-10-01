@@ -1,23 +1,13 @@
 {
     "A": [
         {
-            "ticker": "ISRG",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": 0.11,
-            "prev_return_pct": null,
-            "vol_ratio": 1.03,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "ANET",
+            "ticker": "PANW",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 1.6,
-            "z_score": 0.07,
+            "z_score": 0.06,
             "prev_return_pct": null,
-            "vol_ratio": 0.92,
+            "vol_ratio": 0.85,
             "ticker_group": "BIG + ETF"
         },
         {
@@ -27,43 +17,63 @@
             "sl_factor": 1.6,
             "z_score": 0.06,
             "prev_return_pct": null,
-            "vol_ratio": 0.85,
+            "vol_ratio": 0.98,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "CRWD",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 3.2,
+            "z_score": 0.06,
+            "prev_return_pct": null,
+            "vol_ratio": 0.75,
             "ticker_group": "BIG + ETF"
         }
     ],
     "B": [
         {
-            "ticker": "COST",
-            "action": "Long",
+            "ticker": "BX",
+            "action": "Short",
             "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.07,
+            "sl_factor": 0.8,
+            "z_score": 0.17,
             "prev_return_pct": null,
-            "vol_ratio": 1.99,
+            "vol_ratio": 2.01,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "MPLX",
+            "ticker": "KKR",
+            "action": "Short",
+            "allocation_usd": 10000,
+            "sl_factor": 0.6,
+            "z_score": 0.14,
+            "prev_return_pct": null,
+            "vol_ratio": 1.55,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "BAESY",
             "action": "Short",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
-            "z_score": 0.02,
+            "z_score": 0.11,
             "prev_return_pct": null,
-            "vol_ratio": 1.58,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "CVS",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.6,
-            "z_score": 0.0,
-            "prev_return_pct": null,
-            "vol_ratio": 2.08,
+            "vol_ratio": 2.13,
             "ticker_group": "BIG + ETF"
         }
     ],
     "V": [
+        {
+            "ticker": "GMAB",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.8,
+            "z_score": 0.17,
+            "prev_return_pct": null,
+            "vol_ratio": 1.35,
+            "ticker_group": "SMALL"
+        },
         {
             "ticker": "PAC",
             "action": "Long",
@@ -71,59 +81,49 @@
             "sl_factor": 0.6,
             "z_score": 0.1,
             "prev_return_pct": null,
-            "vol_ratio": 1.15,
+            "vol_ratio": 0.9,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "TEM",
+            "ticker": "QGEN",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.8,
-            "z_score": 0.09,
+            "sl_factor": 1.6,
+            "z_score": 0.1,
             "prev_return_pct": null,
-            "vol_ratio": 1.19,
-            "ticker_group": "SMALL"
-        },
-        {
-            "ticker": "FRHC",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.4,
-            "z_score": 0.08,
-            "prev_return_pct": null,
-            "vol_ratio": 1.03,
+            "vol_ratio": 1.54,
             "ticker_group": "SMALL"
         }
     ],
     "M": [
         {
-            "ticker": "MDB",
+            "ticker": "BE",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.4,
             "z_score": null,
-            "prev_return_pct": 7.49,
-            "vol_ratio": 0.68,
+            "prev_return_pct": 6.76,
+            "vol_ratio": 0.92,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "TWLO",
+            "ticker": "DUOL",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.6,
             "z_score": null,
-            "prev_return_pct": 7.14,
-            "vol_ratio": 1.84,
+            "prev_return_pct": 6.08,
+            "vol_ratio": 1.34,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "RBRK",
+            "ticker": "WING",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.8,
+            "sl_factor": 3.2,
             "z_score": null,
-            "prev_return_pct": 5.75,
-            "vol_ratio": 0.87,
+            "prev_return_pct": 5.19,
+            "vol_ratio": 1.22,
             "ticker_group": "SMALL"
         }
     ]
