@@ -33,16 +33,6 @@
     ],
     "B": [
         {
-            "ticker": "MGCLY",
-            "action": "Short",
-            "allocation_usd": 10000,
-            "sl_factor": 3.2,
-            "z_score": 0.17,
-            "prev_return_pct": null,
-            "vol_ratio": 1.79,
-            "ticker_group": "BIG + ETF"
-        },
-        {
             "ticker": "APO",
             "action": "Short",
             "allocation_usd": 10000,
@@ -60,6 +50,16 @@
             "z_score": 0.12,
             "prev_return_pct": null,
             "vol_ratio": 1.55,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "BRK-B",
+            "action": "Short",
+            "allocation_usd": 10000,
+            "sl_factor": 1.6,
+            "z_score": 0.11,
+            "prev_return_pct": null,
+            "vol_ratio": 1.53,
             "ticker_group": "BIG + ETF"
         }
     ],
