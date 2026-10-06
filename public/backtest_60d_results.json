@@ -2,99 +2,71 @@
   "A": {
     "equity_curve": [
       10000,
-      9077.39,
-      8985.39,
-      9045.84,
-      9622.63,
-      9414.49,
-      9444.23,
-      9266.61,
-      9389.77,
-      9384.2,
-      9477.5,
-      9748.39,
-      9545.87,
-      9692.32,
-      9651.34,
-      9300.16,
-      9262.97,
-      9213.38,
-      9186.81,
-      9215.95,
-      8881.02,
-      8720.26,
-      8767.82,
-      8607.78,
-      8805.49,
-      9171.63,
-      8922.24,
-      9052.87,
-      8825.22,
-      8493.86,
-      8480.63,
-      8761.5,
-      8688.65,
-      8528.22,
-      8369.5,
-      8306.25,
-      8274.32,
-      9026.39,
-      9599.48,
-      10906.05,
-      10742.11,
-      10481.58,
-      9959.81,
-      9613.86,
-      9102.97,
-      10298.07,
-      10021.72,
-      10031.84,
-      10263.02,
-      10536.44,
-      9998.28,
-      10340.98,
-      10656.2,
-      10374.5,
-      10704.55,
-      9957.94,
-      11250.56,
-      10980.14,
-      11041.95,
-      11129.32,
-      11020.73
+      9960.17,
+      9854.61,
+      10289.64,
+      10081.49,
+      10111.23,
+      9933.61,
+      10056.77,
+      9904.63,
+      9997.93,
+      10268.82,
+      10066.3,
+      10310.66,
+      10269.68,
+      10111.1,
+      10073.91,
+      10024.32,
+      9997.75,
+      10026.89,
+      9691.96,
+      9624.41,
+      9622.73,
+      9313.91,
+      9511.62,
+      9889.0,
+      9639.61,
+      9722.98,
+      9495.33,
+      9163.97,
+      9150.74,
+      9431.61,
+      9358.76,
+      9198.33,
+      9039.6,
+      8976.36,
+      8944.42,
+      9696.5,
+      10361.69,
+      11668.26,
+      11504.32,
+      11243.79,
+      10722.02,
+      10376.07,
+      9865.18,
+      11060.28,
+      10783.93,
+      10794.05,
+      11025.23,
+      11559.37,
+      10804.65,
+      11617.41,
+      11932.64,
+      11650.93,
+      11980.98,
+      11218.63,
+      12511.25,
+      12240.83,
+      12302.64,
+      12390.01,
+      12281.42,
+      12157.63
     ],
     "num_trades": 180,
-    "total_profit": 1020.73,
-    "max_drawdown": 17.26,
+    "total_profit": 2157.63,
+    "max_drawdown": 15.45,
     "trades": [
-      {
-        "date": "2026-07-10 00:00:00",
-        "ticker": "DELL",
-        "side": "Long",
-        "profit": -312.57,
-        "hit_sl": false
-      },
-      {
-        "date": "2026-07-10 00:00:00",
-        "ticker": "ALNY",
-        "side": "Long",
-        "profit": -496.45,
-        "hit_sl": false
-      },
-      {
-        "date": "2026-07-10 00:00:00",
-        "ticker": "PDD",
-        "side": "Long",
-        "profit": -113.6,
-        "hit_sl": true
-      },
-      {
-        "date": "2026-07-13 00:00:00",
-        "ticker": "MGCLY",
-        "side": "Long",
-        "profit": -63.81,
-        "hit_sl": false
-      },
       {
         "date": "2026-07-13 00:00:00",
         "ticker": "RY",
@@ -110,10 +82,17 @@
         "hit_sl": false
       },
       {
-        "date": "2026-07-14 00:00:00",
+        "date": "2026-07-13 00:00:00",
+        "ticker": "MFC",
+        "side": "Long",
+        "profit": -11.64,
+        "hit_sl": false
+      },
+      {
+        "date": "2026-07-13 00:00:00",
         "ticker": "MGCLY",
         "side": "Long",
-        "profit": -26.12,
+        "profit": -63.81,
         "hit_sl": false
       },
       {
@@ -125,9 +104,16 @@
       },
       {
         "date": "2026-07-14 00:00:00",
-        "ticker": "BNS",
+        "ticker": "ANET",
         "side": "Long",
-        "profit": 54.5,
+        "profit": -73.82,
+        "hit_sl": false
+      },
+      {
+        "date": "2026-07-14 00:00:00",
+        "ticker": "MGCLY",
+        "side": "Long",
+        "profit": -26.12,
         "hit_sl": false
       },
       {
@@ -142,13 +128,6 @@
         "ticker": "AAPL",
         "side": "Long",
         "profit": 304.02,
-        "hit_sl": false
-      },
-      {
-        "date": "2026-07-15 00:00:00",
-        "ticker": "CM",
-        "side": "Long",
-        "profit": 115.65,
         "hit_sl": false
       },
       {
@@ -251,9 +230,9 @@
       },
       {
         "date": "2026-07-22 00:00:00",
-        "ticker": "SU",
+        "ticker": "WELL",
         "side": "Long",
-        "profit": 56.9,
+        "profit": -89.67,
         "hit_sl": false
       },
       {
@@ -335,9 +314,9 @@
       },
       {
         "date": "2026-07-28 00:00:00",
-        "ticker": "MFC",
+        "ticker": "AMGN",
         "side": "Long",
-        "profit": 154.7,
+        "profit": 252.61,
         "hit_sl": false
       },
       {
@@ -370,17 +349,17 @@
       },
       {
         "date": "2026-07-30 00:00:00",
-        "ticker": "MO",
-        "side": "Long",
-        "profit": -139.87,
-        "hit_sl": true
-      },
-      {
-        "date": "2026-07-30 00:00:00",
         "ticker": "RCL",
         "side": "Long",
         "profit": -219.2,
         "hit_sl": true
+      },
+      {
+        "date": "2026-07-30 00:00:00",
+        "ticker": "AMP",
+        "side": "Long",
+        "profit": 52.73,
+        "hit_sl": false
       },
       {
         "date": "2026-07-31 00:00:00",
@@ -405,16 +384,16 @@
       },
       {
         "date": "2026-08-03 00:00:00",
-        "ticker": "MFC",
+        "ticker": "CNQ",
         "side": "Long",
-        "profit": -22.17,
+        "profit": -57.66,
         "hit_sl": false
       },
       {
         "date": "2026-08-03 00:00:00",
-        "ticker": "CNQ",
+        "ticker": "MFC",
         "side": "Long",
-        "profit": -57.66,
+        "profit": -22.17,
         "hit_sl": false
       },
       {
@@ -454,16 +433,16 @@
       },
       {
         "date": "2026-08-05 00:00:00",
-        "ticker": "SAN",
+        "ticker": "NWG",
         "side": "Long",
-        "profit": -15.64,
+        "profit": 29.27,
         "hit_sl": false
       },
       {
         "date": "2026-08-05 00:00:00",
-        "ticker": "NWG",
+        "ticker": "SAN",
         "side": "Long",
-        "profit": 29.27,
+        "profit": -15.64,
         "hit_sl": false
       },
       {
@@ -503,10 +482,10 @@
       },
       {
         "date": "2026-08-07 00:00:00",
-        "ticker": "SAN",
+        "ticker": "XYZ",
         "side": "Long",
-        "profit": -90.17,
-        "hit_sl": true
+        "profit": 3.04,
+        "hit_sl": false
       },
       {
         "date": "2026-08-10 00:00:00",
@@ -524,10 +503,10 @@
       },
       {
         "date": "2026-08-10 00:00:00",
-        "ticker": "SAN",
+        "ticker": "LOW",
         "side": "Long",
-        "profit": -49.39,
-        "hit_sl": false
+        "profit": -98.63,
+        "hit_sl": true
       },
       {
         "date": "2026-08-11 00:00:00",
@@ -545,9 +524,9 @@
       },
       {
         "date": "2026-08-11 00:00:00",
-        "ticker": "ORLY",
+        "ticker": "ROST",
         "side": "Long",
-        "profit": 95.01,
+        "profit": -53.77,
         "hit_sl": false
       },
       {
@@ -580,16 +559,16 @@
       },
       {
         "date": "2026-08-13 00:00:00",
-        "ticker": "CNQ",
+        "ticker": "AMGN",
         "side": "Long",
-        "profit": 133.74,
+        "profit": -49.56,
         "hit_sl": false
       },
       {
         "date": "2026-08-13 00:00:00",
-        "ticker": "ISRG",
+        "ticker": "CNQ",
         "side": "Long",
-        "profit": -60.8,
+        "profit": 133.74,
         "hit_sl": false
       },
       {
@@ -629,9 +608,9 @@
       },
       {
         "date": "2026-08-17 00:00:00",
-        "ticker": "CNQ",
+        "ticker": "AMGN",
         "side": "Long",
-        "profit": 197.97,
+        "profit": 150.71,
         "hit_sl": false
       },
       {
@@ -678,16 +657,16 @@
       },
       {
         "date": "2026-08-20 00:00:00",
-        "ticker": "CNQ",
+        "ticker": "AMGN",
         "side": "Long",
-        "profit": 142.7,
+        "profit": -48.88,
         "hit_sl": false
       },
       {
         "date": "2026-08-20 00:00:00",
-        "ticker": "AMGN",
+        "ticker": "CNQ",
         "side": "Long",
-        "profit": -48.88,
+        "profit": 142.7,
         "hit_sl": false
       },
       {
@@ -741,16 +720,16 @@
       },
       {
         "date": "2026-08-25 00:00:00",
-        "ticker": "CNQ",
+        "ticker": "AMGN",
         "side": "Long",
-        "profit": -62.06,
+        "profit": -24.44,
         "hit_sl": false
       },
       {
         "date": "2026-08-25 00:00:00",
-        "ticker": "AMGN",
+        "ticker": "CNQ",
         "side": "Long",
-        "profit": -24.44,
+        "profit": -62.06,
         "hit_sl": false
       },
       {
@@ -811,16 +790,23 @@
       },
       {
         "date": "2026-08-28 00:00:00",
+        "ticker": "SPGI",
+        "side": "Long",
+        "profit": 149.58,
+        "hit_sl": false
+      },
+      {
+        "date": "2026-08-28 00:00:00",
         "ticker": "UBS",
         "side": "Long",
         "profit": -47.73,
         "hit_sl": true
       },
       {
-        "date": "2026-08-28 00:00:00",
-        "ticker": "SPGI",
+        "date": "2026-08-31 00:00:00",
+        "ticker": "CRWD",
         "side": "Long",
-        "profit": 149.58,
+        "profit": 410.42,
         "hit_sl": false
       },
       {
@@ -828,13 +814,6 @@
         "ticker": "FTNT",
         "side": "Long",
         "profit": 257.8,
-        "hit_sl": false
-      },
-      {
-        "date": "2026-08-31 00:00:00",
-        "ticker": "CRWD",
-        "side": "Long",
-        "profit": 410.42,
         "hit_sl": false
       },
       {
@@ -860,9 +839,9 @@
       },
       {
         "date": "2026-09-01 00:00:00",
-        "ticker": "UBS",
+        "ticker": "SPGI",
         "side": "Long",
-        "profit": 64.6,
+        "profit": 156.7,
         "hit_sl": false
       },
       {
@@ -1091,9 +1070,9 @@
       },
       {
         "date": "2026-09-17 00:00:00",
-        "ticker": "FTNT",
+        "ticker": "CRWD",
         "side": "Long",
-        "profit": 143.0,
+        "profit": 403.72,
         "hit_sl": false
       },
       {
@@ -1112,10 +1091,10 @@
       },
       {
         "date": "2026-09-18 00:00:00",
-        "ticker": "FTNT",
+        "ticker": "CRWD",
         "side": "Long",
-        "profit": -158.64,
-        "hit_sl": true
+        "profit": -375.2,
+        "hit_sl": false
       },
       {
         "date": "2026-09-21 00:00:00",
@@ -1133,9 +1112,9 @@
       },
       {
         "date": "2026-09-21 00:00:00",
-        "ticker": "FTNT",
+        "ticker": "CRWD",
         "side": "Long",
-        "profit": 290.32,
+        "profit": 760.39,
         "hit_sl": false
       },
       {
@@ -1217,9 +1196,9 @@
       },
       {
         "date": "2026-09-25 00:00:00",
-        "ticker": "FTNT",
+        "ticker": "DE",
         "side": "Long",
-        "profit": -163.04,
+        "profit": -178.79,
         "hit_sl": true
       },
       {
@@ -1231,16 +1210,16 @@
       },
       {
         "date": "2026-09-28 00:00:00",
-        "ticker": "FTNT",
+        "ticker": "CRWD",
         "side": "Long",
-        "profit": 324.54,
+        "profit": 411.6,
         "hit_sl": false
       },
       {
         "date": "2026-09-28 00:00:00",
-        "ticker": "CRWD",
+        "ticker": "FTNT",
         "side": "Long",
-        "profit": 411.6,
+        "profit": 324.54,
         "hit_sl": false
       },
       {
@@ -1326,98 +1305,98 @@
         "side": "Long",
         "profit": -119.77,
         "hit_sl": true
+      },
+      {
+        "date": "2026-10-05 00:00:00",
+        "ticker": "GEV",
+        "side": "Long",
+        "profit": 17.4,
+        "hit_sl": false
+      },
+      {
+        "date": "2026-10-05 00:00:00",
+        "ticker": "RCL",
+        "side": "Long",
+        "profit": -193.86,
+        "hit_sl": true
+      },
+      {
+        "date": "2026-10-05 00:00:00",
+        "ticker": "CAT",
+        "side": "Long",
+        "profit": 52.67,
+        "hit_sl": false
       }
     ]
   },
   "B": {
     "equity_curve": [
       10000,
-      9932.72,
-      10466.12,
-      10617.48,
-      10773.32,
-      10369.04,
-      10343.05,
-      10436.35,
-      10731.8,
-      10551.74,
-      10894.41,
-      10883.63,
-      11256.2,
-      11937.55,
-      11563.51,
-      11412.4,
-      11518.12,
-      11585.72,
-      11882.22,
-      11358.4,
-      11406.38,
-      11785.33,
-      11822.33,
-      11977.85,
-      11969.19,
-      12188.35,
-      12379.17,
-      11784.86,
-      11815.62,
-      11635.89,
-      11316.0,
-      10897.83,
-      10996.27,
-      11427.98,
-      11373.64,
-      11271.7,
-      11426.84,
-      11831.13,
-      12047.09,
-      12251.81,
-      12463.67,
-      12635.96,
-      11869.61,
-      11768.05,
-      11675.35,
-      11574.28,
-      11560.29,
-      11473.8,
-      11896.35,
-      12015.34,
-      11801.97,
-      11816.33,
-      11695.7,
-      11422.19,
-      11231.47,
-      11068.28,
-      11181.39,
-      11331.14,
-      11832.54,
-      11809.13,
-      11742.43
+      10595.21,
+      10620.86,
+      10553.06,
+      10059.61,
+      10106.22,
+      10236.89,
+      10473.73,
+      10451.33,
+      10706.36,
+      11297.5,
+      11670.07,
+      12351.42,
+      11977.38,
+      11826.27,
+      11931.99,
+      11999.59,
+      12296.09,
+      11772.27,
+      11820.25,
+      12199.2,
+      12236.2,
+      12391.72,
+      12383.06,
+      12602.22,
+      12793.04,
+      12198.73,
+      12458.21,
+      12278.48,
+      11958.59,
+      11540.42,
+      11552.44,
+      11142.67,
+      11088.33,
+      10986.39,
+      11141.53,
+      11545.82,
+      11761.78,
+      11768.19,
+      11713.59,
+      11885.88,
+      11119.53,
+      11017.97,
+      10925.27,
+      10824.2,
+      10810.2,
+      10723.72,
+      11146.27,
+      11265.26,
+      11051.89,
+      11131.08,
+      11010.44,
+      10684.48,
+      10643.01,
+      10479.82,
+      10592.93,
+      10719.37,
+      11073.21,
+      11049.8,
+      10891.54,
+      10904.29
     ],
     "num_trades": 180,
-    "total_profit": 1742.43,
-    "max_drawdown": 12.41,
+    "total_profit": 904.29,
+    "max_drawdown": 18.08,
     "trades": [
-      {
-        "date": "2026-07-10 00:00:00",
-        "ticker": "MGCLY",
-        "side": "Long",
-        "profit": -2.0,
-        "hit_sl": false
-      },
-      {
-        "date": "2026-07-10 00:00:00",
-        "ticker": "RIO",
-        "side": "Long",
-        "profit": 16.8,
-        "hit_sl": false
-      },
-      {
-        "date": "2026-07-10 00:00:00",
-        "ticker": "BABA",
-        "side": "Long",
-        "profit": -82.08,
-        "hit_sl": false
-      },
       {
         "date": "2026-07-13 00:00:00",
         "ticker": "ALNY",
@@ -1426,10 +1405,10 @@
         "hit_sl": false
       },
       {
-        "date": "2026-07-13 00:00:00",
+        "date": "2026-07-10 00:00:00",
         "ticker": "MGCLY",
         "side": "Long",
-        "profit": -63.81,
+        "profit": -2.0,
         "hit_sl": false
       },
       {
@@ -1447,17 +1426,17 @@
         "hit_sl": false
       },
       {
-        "date": "2026-07-14 00:00:00",
-        "ticker": "CFRUY",
-        "side": "Short",
-        "profit": 11.31,
+        "date": "2026-07-13 00:00:00",
+        "ticker": "MGCLY",
+        "side": "Long",
+        "profit": -63.81,
         "hit_sl": false
       },
       {
         "date": "2026-07-14 00:00:00",
-        "ticker": "SE",
+        "ticker": "CFRUY",
         "side": "Short",
-        "profit": 61.9,
+        "profit": 11.31,
         "hit_sl": false
       },
       {
@@ -1469,23 +1448,23 @@
       },
       {
         "date": "2026-07-15 00:00:00",
-        "ticker": "MGCLY",
-        "side": "Short",
-        "profit": -65.49,
-        "hit_sl": false
-      },
-      {
-        "date": "2026-07-15 00:00:00",
         "ticker": "RELX",
         "side": "Long",
         "profit": 133.73,
         "hit_sl": false
       },
       {
-        "date": "2026-07-16 00:00:00",
+        "date": "2026-07-15 00:00:00",
+        "ticker": "APP",
+        "side": "Short",
+        "profit": -289.13,
+        "hit_sl": true
+      },
+      {
+        "date": "2026-07-15 00:00:00",
         "ticker": "MGCLY",
         "side": "Short",
-        "profit": 23.68,
+        "profit": -65.49,
         "hit_sl": false
       },
       {
@@ -1503,10 +1482,10 @@
         "hit_sl": true
       },
       {
-        "date": "2026-07-17 00:00:00",
+        "date": "2026-07-16 00:00:00",
         "ticker": "MGCLY",
-        "side": "Long",
-        "profit": -48.92,
+        "side": "Short",
+        "profit": 23.68,
         "hit_sl": false
       },
       {
@@ -1524,6 +1503,13 @@
         "hit_sl": false
       },
       {
+        "date": "2026-07-17 00:00:00",
+        "ticker": "MGCLY",
+        "side": "Long",
+        "profit": -48.92,
+        "hit_sl": false
+      },
+      {
         "date": "2026-07-20 00:00:00",
         "ticker": "IBM",
         "side": "Long",
@@ -1535,20 +1521,6 @@
         "ticker": "RIO",
         "side": "Short",
         "profit": 44.85,
-        "hit_sl": false
-      },
-      {
-        "date": "2026-07-20 00:00:00",
-        "ticker": "BAESY",
-        "side": "Long",
-        "profit": -86.28,
-        "hit_sl": false
-      },
-      {
-        "date": "2026-07-21 00:00:00",
-        "ticker": "MGCLY",
-        "side": "Short",
-        "profit": 220.75,
         "hit_sl": false
       },
       {
@@ -1566,6 +1538,20 @@
         "hit_sl": true
       },
       {
+        "date": "2026-07-21 00:00:00",
+        "ticker": "CB",
+        "side": "Long",
+        "profit": 162.14,
+        "hit_sl": false
+      },
+      {
+        "date": "2026-07-21 00:00:00",
+        "ticker": "MGCLY",
+        "side": "Short",
+        "profit": 220.75,
+        "hit_sl": false
+      },
+      {
         "date": "2026-07-22 00:00:00",
         "ticker": "DHI",
         "side": "Short",
@@ -1577,20 +1563,6 @@
         "ticker": "ISRG",
         "side": "Long",
         "profit": -314.76,
-        "hit_sl": false
-      },
-      {
-        "date": "2026-07-22 00:00:00",
-        "ticker": "UPS",
-        "side": "Short",
-        "profit": 63.08,
-        "hit_sl": false
-      },
-      {
-        "date": "2026-07-23 00:00:00",
-        "ticker": "MGCLY",
-        "side": "Short",
-        "profit": 483.46,
         "hit_sl": false
       },
       {
@@ -1608,6 +1580,20 @@
         "hit_sl": true
       },
       {
+        "date": "2026-07-23 00:00:00",
+        "ticker": "DHR",
+        "side": "Long",
+        "profit": 395.82,
+        "hit_sl": false
+      },
+      {
+        "date": "2026-07-23 00:00:00",
+        "ticker": "MGCLY",
+        "side": "Short",
+        "profit": 483.46,
+        "hit_sl": false
+      },
+      {
         "date": "2026-07-24 00:00:00",
         "ticker": "AMX",
         "side": "Short",
@@ -1620,13 +1606,6 @@
         "side": "Long",
         "profit": 198.72,
         "hit_sl": false
-      },
-      {
-        "date": "2026-07-24 00:00:00",
-        "ticker": "T",
-        "side": "Short",
-        "profit": -118.46,
-        "hit_sl": true
       },
       {
         "date": "2026-07-27 00:00:00",
@@ -1980,9 +1959,9 @@
       },
       {
         "date": "2026-08-18 00:00:00",
-        "ticker": "ITUB",
+        "ticker": "JD",
         "side": "Long",
-        "profit": -97.34,
+        "profit": 131.38,
         "hit_sl": false
       },
       {
@@ -2057,17 +2036,17 @@
       },
       {
         "date": "2026-08-24 00:00:00",
-        "ticker": "MGCLY",
-        "side": "Short",
-        "profit": 9.96,
-        "hit_sl": false
-      },
-      {
-        "date": "2026-08-24 00:00:00",
         "ticker": "PGR",
         "side": "Long",
         "profit": 156.32,
         "hit_sl": false
+      },
+      {
+        "date": "2026-08-24 00:00:00",
+        "ticker": "PG",
+        "side": "Short",
+        "profit": -76.46,
+        "hit_sl": true
       },
       {
         "date": "2026-08-25 00:00:00",
@@ -2077,18 +2056,18 @@
         "hit_sl": false
       },
       {
+        "date": "2026-08-24 00:00:00",
+        "ticker": "MGCLY",
+        "side": "Short",
+        "profit": 9.96,
+        "hit_sl": false
+      },
+      {
         "date": "2026-08-25 00:00:00",
         "ticker": "AMX",
         "side": "Long",
         "profit": -97.34,
         "hit_sl": true
-      },
-      {
-        "date": "2026-08-25 00:00:00",
-        "ticker": "HOOD",
-        "side": "Long",
-        "profit": 851.44,
-        "hit_sl": false
       },
       {
         "date": "2026-08-26 00:00:00",
@@ -2204,16 +2183,16 @@
       },
       {
         "date": "2026-09-02 00:00:00",
-        "ticker": "MGCLY",
-        "side": "Short",
-        "profit": 38.77,
-        "hit_sl": false
-      },
-      {
-        "date": "2026-09-02 00:00:00",
         "ticker": "NEM",
         "side": "Short",
         "profit": -115.72,
+        "hit_sl": true
+      },
+      {
+        "date": "2026-09-02 00:00:00",
+        "ticker": "CME",
+        "side": "Long",
+        "profit": -159.54,
         "hit_sl": true
       },
       {
@@ -2224,17 +2203,17 @@
         "hit_sl": false
       },
       {
-        "date": "2026-09-03 00:00:00",
-        "ticker": "UL",
+        "date": "2026-09-02 00:00:00",
+        "ticker": "MGCLY",
         "side": "Short",
-        "profit": 32.1,
+        "profit": 38.77,
         "hit_sl": false
       },
       {
         "date": "2026-09-03 00:00:00",
-        "ticker": "TEL",
-        "side": "Long",
-        "profit": 305.23,
+        "ticker": "UL",
+        "side": "Short",
+        "profit": 32.1,
         "hit_sl": false
       },
       {
@@ -2344,16 +2323,16 @@
       },
       {
         "date": "2026-09-14 00:00:00",
-        "ticker": "CFRUY",
+        "ticker": "AAPL",
         "side": "Long",
-        "profit": 69.22,
+        "profit": -51.59,
         "hit_sl": false
       },
       {
         "date": "2026-09-14 00:00:00",
-        "ticker": "AAPL",
+        "ticker": "CFRUY",
         "side": "Long",
-        "profit": -51.59,
+        "profit": 69.22,
         "hit_sl": false
       },
       {
@@ -2372,17 +2351,17 @@
       },
       {
         "date": "2026-09-15 00:00:00",
-        "ticker": "JCI",
-        "side": "Long",
-        "profit": -65.18,
-        "hit_sl": false
-      },
-      {
-        "date": "2026-09-15 00:00:00",
         "ticker": "BTI",
         "side": "Short",
         "profit": -83.98,
         "hit_sl": true
+      },
+      {
+        "date": "2026-09-15 00:00:00",
+        "ticker": "JCI",
+        "side": "Long",
+        "profit": -65.18,
+        "hit_sl": false
       },
       {
         "date": "2026-09-16 00:00:00",
@@ -2449,13 +2428,6 @@
       },
       {
         "date": "2026-09-21 00:00:00",
-        "ticker": "MGCLY",
-        "side": "Long",
-        "profit": 6.22,
-        "hit_sl": false
-      },
-      {
-        "date": "2026-09-21 00:00:00",
         "ticker": "PGR",
         "side": "Short",
         "profit": -64.86,
@@ -2466,6 +2438,13 @@
         "ticker": "TMUS",
         "side": "Short",
         "profit": 73.0,
+        "hit_sl": false
+      },
+      {
+        "date": "2026-09-21 00:00:00",
+        "ticker": "TMO",
+        "side": "Long",
+        "profit": 71.05,
         "hit_sl": false
       },
       {
@@ -2490,10 +2469,10 @@
         "hit_sl": false
       },
       {
-        "date": "2026-09-23 00:00:00",
+        "date": "2026-09-22 00:00:00",
         "ticker": "MGCLY",
         "side": "Long",
-        "profit": -14.27,
+        "profit": -66.72,
         "hit_sl": false
       },
       {
@@ -2511,6 +2490,13 @@
         "hit_sl": false
       },
       {
+        "date": "2026-09-23 00:00:00",
+        "ticker": "MGCLY",
+        "side": "Long",
+        "profit": -14.27,
+        "hit_sl": false
+      },
+      {
         "date": "2026-09-24 00:00:00",
         "ticker": "PGR",
         "side": "Short",
@@ -2523,13 +2509,6 @@
         "side": "Short",
         "profit": -126.92,
         "hit_sl": false
-      },
-      {
-        "date": "2026-09-24 00:00:00",
-        "ticker": "ARM",
-        "side": "Long",
-        "profit": -163.51,
-        "hit_sl": true
       },
       {
         "date": "2026-09-25 00:00:00",
@@ -2575,13 +2554,6 @@
       },
       {
         "date": "2026-09-29 00:00:00",
-        "ticker": "MGCLY",
-        "side": "Short",
-        "profit": -2.0,
-        "hit_sl": false
-      },
-      {
-        "date": "2026-09-29 00:00:00",
         "ticker": "COST",
         "side": "Long",
         "profit": 75.9,
@@ -2592,6 +2564,20 @@
         "ticker": "MPLX",
         "side": "Short",
         "profit": 75.85,
+        "hit_sl": false
+      },
+      {
+        "date": "2026-09-29 00:00:00",
+        "ticker": "DTEGY",
+        "side": "Long",
+        "profit": -25.31,
+        "hit_sl": false
+      },
+      {
+        "date": "2026-09-29 00:00:00",
+        "ticker": "MGCLY",
+        "side": "Short",
+        "profit": -2.0,
         "hit_sl": false
       },
       {
@@ -2606,13 +2592,6 @@
         "ticker": "KKR",
         "side": "Short",
         "profit": 191.67,
-        "hit_sl": false
-      },
-      {
-        "date": "2026-09-30 00:00:00",
-        "ticker": "ARM",
-        "side": "Short",
-        "profit": 145.56,
         "hit_sl": false
       },
       {
@@ -2638,9 +2617,9 @@
       },
       {
         "date": "2026-10-02 00:00:00",
-        "ticker": "MGCLY",
+        "ticker": "TT",
         "side": "Short",
-        "profit": 41.1,
+        "profit": 20.89,
         "hit_sl": false
       },
       {
@@ -2652,102 +2631,102 @@
       },
       {
         "date": "2026-10-02 00:00:00",
-        "ticker": "TT",
+        "ticker": "BRK-B",
         "side": "Short",
-        "profit": 20.89,
+        "profit": -50.45,
         "hit_sl": false
+      },
+      {
+        "date": "2026-10-02 00:00:00",
+        "ticker": "MGCLY",
+        "side": "Short",
+        "profit": 41.1,
+        "hit_sl": false
+      },
+      {
+        "date": "2026-10-05 00:00:00",
+        "ticker": "MUFG",
+        "side": "Long",
+        "profit": 19.8,
+        "hit_sl": false
+      },
+      {
+        "date": "2026-10-05 00:00:00",
+        "ticker": "UL",
+        "side": "Short",
+        "profit": -48.16,
+        "hit_sl": true
       }
     ]
   },
   "V": {
     "equity_curve": [
       10000,
-      9834.83,
-      9845.21,
-      10924.8,
-      10851.51,
-      10985.48,
-      11561.41,
-      11376.66,
-      10922.98,
-      10374.17,
-      9789.25,
-      9706.51,
-      9943.86,
-      9947.92,
-      10105.25,
-      10962.09,
-      11129.89,
-      11181.19,
-      11564.59,
-      11967.39,
-      12880.17,
-      12285.82,
-      12906.96,
-      12885.05,
-      12886.68,
-      12708.44,
-      12598.93,
-      12481.96,
-      12104.78,
-      11831.05,
-      11677.02,
-      11872.21,
-      11873.06,
-      11967.34,
-      11971.96,
-      12210.17,
-      11968.39,
-      12175.37,
-      12214.35,
-      12494.03,
-      12437.52,
-      12458.4,
-      12134.55,
-      11934.0,
-      11783.68,
-      12022.94,
-      12132.06,
-      11956.98,
-      11630.82,
-      11388.66,
-      10984.89,
-      11339.59,
-      11288.03,
-      11310.56,
-      11614.68,
-      11249.08,
-      11724.6,
-      11579.91,
-      11277.59,
-      10491.66,
-      10412.28
+      10010.37,
+      11089.96,
+      11016.68,
+      11150.64,
+      11726.58,
+      11580.91,
+      11127.23,
+      10578.42,
+      10024.15,
+      9941.41,
+      10178.77,
+      10182.82,
+      10340.15,
+      11232.93,
+      11400.73,
+      11452.03,
+      11835.43,
+      12238.23,
+      13151.01,
+      12556.66,
+      13177.8,
+      13155.89,
+      13157.52,
+      12979.28,
+      12869.77,
+      12752.8,
+      12375.63,
+      12101.89,
+      11947.86,
+      12143.05,
+      12143.9,
+      12238.18,
+      12242.8,
+      12481.01,
+      12239.23,
+      12446.21,
+      12485.19,
+      12764.87,
+      12708.36,
+      12729.24,
+      12405.4,
+      12204.84,
+      12054.52,
+      12293.78,
+      12402.9,
+      12227.82,
+      11901.66,
+      11659.5,
+      11255.73,
+      11610.43,
+      11558.87,
+      11633.87,
+      11937.99,
+      11572.39,
+      12047.91,
+      11903.22,
+      11600.9,
+      11191.68,
+      11112.31,
+      11133.12
     ],
     "num_trades": 180,
-    "total_profit": 412.28,
-    "max_drawdown": 19.33,
+    "total_profit": 1133.12,
+    "max_drawdown": 15.67,
     "trades": [
-      {
-        "date": "2026-07-10 00:00:00",
-        "ticker": "ARNNY",
-        "side": "Long",
-        "profit": -2.64,
-        "hit_sl": false
-      },
-      {
-        "date": "2026-07-10 00:00:00",
-        "ticker": "GMAB",
-        "side": "Long",
-        "profit": -181.11,
-        "hit_sl": true
-      },
-      {
-        "date": "2026-07-10 00:00:00",
-        "ticker": "EMA",
-        "side": "Long",
-        "profit": 18.59,
-        "hit_sl": false
-      },
       {
         "date": "2026-07-13 00:00:00",
         "ticker": "ARNNY",
@@ -2771,16 +2750,16 @@
       },
       {
         "date": "2026-07-14 00:00:00",
-        "ticker": "UUGRY",
+        "ticker": "CHYM",
         "side": "Long",
-        "profit": -53.68,
+        "profit": 501.67,
         "hit_sl": false
       },
       {
         "date": "2026-07-14 00:00:00",
-        "ticker": "CHYM",
+        "ticker": "UUGRY",
         "side": "Long",
-        "profit": 501.67,
+        "profit": -53.68,
         "hit_sl": false
       },
       {
@@ -2862,10 +2841,10 @@
       },
       {
         "date": "2026-07-20 00:00:00",
-        "ticker": "REXR",
+        "ticker": "BZLFY",
         "side": "Long",
-        "profit": -95.08,
-        "hit_sl": true
+        "profit": -56.0,
+        "hit_sl": false
       },
       {
         "date": "2026-07-20 00:00:00",
@@ -2932,10 +2911,10 @@
       },
       {
         "date": "2026-07-23 00:00:00",
-        "ticker": "YPF",
+        "ticker": "BPYPP",
         "side": "Long",
-        "profit": -219.62,
-        "hit_sl": true
+        "profit": -188.97,
+        "hit_sl": false
       },
       {
         "date": "2026-07-24 00:00:00",
@@ -3030,16 +3009,16 @@
       },
       {
         "date": "2026-07-30 00:00:00",
-        "ticker": "PEN",
+        "ticker": "RDEIY",
         "side": "Long",
-        "profit": 14.43,
+        "profit": 20.74,
         "hit_sl": false
       },
       {
         "date": "2026-07-30 00:00:00",
-        "ticker": "ICLR",
+        "ticker": "PEN",
         "side": "Long",
-        "profit": -15.2,
+        "profit": 14.43,
         "hit_sl": false
       },
       {
@@ -3107,16 +3086,16 @@
       },
       {
         "date": "2026-08-05 00:00:00",
-        "ticker": "UUGRY",
+        "ticker": "CHYM",
         "side": "Long",
-        "profit": 3.22,
+        "profit": 366.0,
         "hit_sl": false
       },
       {
         "date": "2026-08-05 00:00:00",
-        "ticker": "CHYM",
+        "ticker": "UUGRY",
         "side": "Long",
-        "profit": 366.0,
+        "profit": 3.22,
         "hit_sl": false
       },
       {
@@ -3128,16 +3107,16 @@
       },
       {
         "date": "2026-08-06 00:00:00",
-        "ticker": "UUGRY",
+        "ticker": "CHYM",
         "side": "Long",
-        "profit": 5.8,
+        "profit": 1039.35,
         "hit_sl": false
       },
       {
         "date": "2026-08-06 00:00:00",
-        "ticker": "CHYM",
+        "ticker": "UUGRY",
         "side": "Long",
-        "profit": 1039.35,
+        "profit": 5.8,
         "hit_sl": false
       },
       {
@@ -3149,16 +3128,16 @@
       },
       {
         "date": "2026-08-07 00:00:00",
-        "ticker": "UUGRY",
+        "ticker": "CHYM",
         "side": "Long",
-        "profit": 49.8,
+        "profit": -508.93,
         "hit_sl": false
       },
       {
         "date": "2026-08-07 00:00:00",
-        "ticker": "CHYM",
+        "ticker": "UUGRY",
         "side": "Long",
-        "profit": -508.93,
+        "profit": 49.8,
         "hit_sl": false
       },
       {
@@ -3170,16 +3149,16 @@
       },
       {
         "date": "2026-08-10 00:00:00",
-        "ticker": "UUGRY",
+        "ticker": "CHYM",
         "side": "Long",
-        "profit": -77.11,
+        "profit": 584.53,
         "hit_sl": false
       },
       {
         "date": "2026-08-10 00:00:00",
-        "ticker": "CHYM",
+        "ticker": "UUGRY",
         "side": "Long",
-        "profit": 584.53,
+        "profit": -77.11,
         "hit_sl": false
       },
       {
@@ -3835,9 +3814,9 @@
       },
       {
         "date": "2026-09-23 00:00:00",
-        "ticker": "LUV",
+        "ticker": "MRNA",
         "side": "Long",
-        "profit": -124.4,
+        "profit": -71.93,
         "hit_sl": false
       },
       {
@@ -3961,10 +3940,10 @@
       },
       {
         "date": "2026-10-01 00:00:00",
-        "ticker": "BE",
+        "ticker": "MRNA",
         "side": "Long",
-        "profit": -255.23,
-        "hit_sl": true
+        "profit": 121.49,
+        "hit_sl": false
       },
       {
         "date": "2026-10-02 00:00:00",
@@ -3986,98 +3965,98 @@
         "side": "Long",
         "profit": -38.11,
         "hit_sl": false
+      },
+      {
+        "date": "2026-10-05 00:00:00",
+        "ticker": "RBRK",
+        "side": "Long",
+        "profit": 307.12,
+        "hit_sl": false
+      },
+      {
+        "date": "2026-10-05 00:00:00",
+        "ticker": "FN",
+        "side": "Long",
+        "profit": -277.61,
+        "hit_sl": true
+      },
+      {
+        "date": "2026-10-05 00:00:00",
+        "ticker": "AES",
+        "side": "Long",
+        "profit": -8.7,
+        "hit_sl": false
       }
     ]
   },
   "M": {
     "equity_curve": [
       10000,
-      9210.27,
-      9087.87,
-      8657.26,
-      7747.29,
-      8241.21,
-      7878.35,
-      6607.89,
-      6805.37,
-      6241.37,
-      7136.25,
-      6001.55,
-      5576.1,
-      5852.13,
-      5648.85,
-      5038.73,
-      3416.7,
-      3895.46,
-      4516.89,
-      4325.08,
-      4519.4,
-      4939.68,
-      5354.26,
-      6685.9,
-      6448.08,
-      6717.43,
-      5863.24,
-      4887.25,
-      4194.99,
-      4870.81,
-      4697.48,
-      6228.42,
-      5570.27,
-      5576.02,
-      5339.96,
-      5791.91,
-      6602.67,
-      6885.32,
-      6813.8,
-      6054.99,
-      6612.79,
-      6967.51,
-      7256.28,
-      6816.11,
-      6449.75,
-      7085.53,
-      6567.82,
-      7213.1,
-      7205.47,
-      6963.21,
-      6362.33,
-      6147.85,
-      6515.85,
-      6218.42,
-      6695.14,
-      7082.58,
-      6535.63,
-      6620.35,
-      6103.1,
-      6018.16,
-      6882.72
+      9877.6,
+      9446.99,
+      8537.02,
+      9030.93,
+      8667.76,
+      7397.3,
+      7594.78,
+      7030.77,
+      7925.65,
+      6790.95,
+      6365.5,
+      6641.53,
+      6438.25,
+      5828.13,
+      4206.1,
+      4684.86,
+      5306.29,
+      5114.48,
+      5308.8,
+      5729.08,
+      6143.66,
+      7475.3,
+      7237.49,
+      7506.84,
+      6652.64,
+      5676.65,
+      4984.39,
+      5660.21,
+      5486.88,
+      6232.54,
+      5574.39,
+      5580.14,
+      5344.08,
+      5796.03,
+      6606.79,
+      6889.44,
+      6817.92,
+      6059.11,
+      6616.91,
+      6971.63,
+      7260.4,
+      6820.23,
+      6453.87,
+      7089.65,
+      6571.94,
+      7217.22,
+      7209.6,
+      6967.33,
+      6366.45,
+      6151.97,
+      6519.97,
+      6298.75,
+      6658.83,
+      7046.26,
+      6499.31,
+      6584.04,
+      6066.79,
+      5981.85,
+      6846.41,
+      7390.04
     ],
     "num_trades": 180,
-    "total_profit": -3117.28,
-    "max_drawdown": 65.83,
+    "total_profit": -2609.96,
+    "max_drawdown": 57.94,
     "trades": [
-      {
-        "date": "2026-07-10 00:00:00",
-        "ticker": "QGEN",
-        "side": "Long",
-        "profit": -98.3,
-        "hit_sl": true
-      },
-      {
-        "date": "2026-07-10 00:00:00",
-        "ticker": "RIVN",
-        "side": "Long",
-        "profit": -498.1,
-        "hit_sl": true
-      },
-      {
-        "date": "2026-07-10 00:00:00",
-        "ticker": "HUBS",
-        "side": "Long",
-        "profit": -193.32,
-        "hit_sl": true
-      },
       {
         "date": "2026-07-13 00:00:00",
         "ticker": "CAVA",
@@ -4180,7 +4159,7 @@
         "date": "2026-07-17 00:00:00",
         "ticker": "ERIE",
         "side": "Long",
-        "profit": -21.78,
+        "profit": -22.11,
         "hit_sl": false
       },
       {
@@ -4691,8 +4670,8 @@
         "date": "2026-08-21 00:00:00",
         "ticker": "CAI",
         "side": "Long",
-        "profit": 620.16,
-        "hit_sl": false
+        "profit": -165.12,
+        "hit_sl": true
       },
       {
         "date": "2026-08-21 00:00:00",
@@ -5151,13 +5130,6 @@
       },
       {
         "date": "2026-09-23 00:00:00",
-        "ticker": "PMDIY",
-        "side": "Long",
-        "profit": -2.0,
-        "hit_sl": false
-      },
-      {
-        "date": "2026-09-23 00:00:00",
         "ticker": "MRNA",
         "side": "Long",
         "profit": -71.93,
@@ -5167,7 +5139,21 @@
         "date": "2026-09-23 00:00:00",
         "ticker": "TER",
         "side": "Long",
-        "profit": -223.5,
+        "profit": -223.85,
+        "hit_sl": true
+      },
+      {
+        "date": "2026-09-23 00:00:00",
+        "ticker": "ENTG",
+        "side": "Long",
+        "profit": 74.56,
+        "hit_sl": false
+      },
+      {
+        "date": "2026-09-23 00:00:00",
+        "ticker": "PMDIY",
+        "side": "Long",
+        "profit": -2.0,
         "hit_sl": false
       },
       {
@@ -5182,13 +5168,6 @@
         "ticker": "KVYO",
         "side": "Long",
         "profit": -451.92,
-        "hit_sl": false
-      },
-      {
-        "date": "2026-09-24 00:00:00",
-        "ticker": "OKTA",
-        "side": "Long",
-        "profit": 114.64,
         "hit_sl": false
       },
       {
@@ -5315,6 +5294,27 @@
         "ticker": "CIEN",
         "side": "Long",
         "profit": 156.5,
+        "hit_sl": false
+      },
+      {
+        "date": "2026-10-05 00:00:00",
+        "ticker": "NJDCY",
+        "side": "Long",
+        "profit": 87.01,
+        "hit_sl": false
+      },
+      {
+        "date": "2026-10-05 00:00:00",
+        "ticker": "PPC",
+        "side": "Long",
+        "profit": 194.56,
+        "hit_sl": false
+      },
+      {
+        "date": "2026-10-05 00:00:00",
+        "ticker": "VIRT",
+        "side": "Long",
+        "profit": 262.06,
         "hit_sl": false
       }
     ]
