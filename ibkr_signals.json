@@ -7,59 +7,59 @@
             "sl_factor": 3.2,
             "z_score": 0.14,
             "prev_return_pct": null,
-            "vol_ratio": 0.76,
+            "vol_ratio": 0.79,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "PANW",
+            "ticker": "CAT",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 1.6,
             "z_score": 0.08,
             "prev_return_pct": null,
-            "vol_ratio": 0.72,
+            "vol_ratio": 0.85,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "SPY",
+            "ticker": "ADSK",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 3.2,
+            "sl_factor": 0.4,
             "z_score": 0.07,
             "prev_return_pct": null,
-            "vol_ratio": 0.96,
+            "vol_ratio": 0.99,
             "ticker_group": "BIG + ETF"
         }
     ],
     "B": [
         {
-            "ticker": "ABBV",
-            "action": "Long",
-            "allocation_usd": 10000,
-            "sl_factor": 0.8,
-            "z_score": 0.21,
-            "prev_return_pct": null,
-            "vol_ratio": 1.71,
-            "ticker_group": "BIG + ETF"
-        },
-        {
-            "ticker": "AMX",
+            "ticker": "PG",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.4,
-            "z_score": 0.14,
+            "z_score": 0.15,
             "prev_return_pct": null,
-            "vol_ratio": 1.76,
+            "vol_ratio": 1.6,
             "ticker_group": "BIG + ETF"
         },
         {
-            "ticker": "CTVA",
-            "action": "Long",
+            "ticker": "BAESY",
+            "action": "Short",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
-            "z_score": 0.13,
+            "z_score": 0.11,
             "prev_return_pct": null,
-            "vol_ratio": 8.58,
+            "vol_ratio": 2.55,
+            "ticker_group": "BIG + ETF"
+        },
+        {
+            "ticker": "DHI",
+            "action": "Long",
+            "allocation_usd": 10000,
+            "sl_factor": 0.8,
+            "z_score": 0.06,
+            "prev_return_pct": null,
+            "vol_ratio": 1.51,
             "ticker_group": "BIG + ETF"
         }
     ],
@@ -69,19 +69,19 @@
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 0.6,
-            "z_score": 0.17,
+            "z_score": 0.16,
             "prev_return_pct": null,
-            "vol_ratio": 1.29,
+            "vol_ratio": 0.81,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "GMAB",
+            "ticker": "ICLR",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 0.8,
+            "sl_factor": 3.2,
             "z_score": 0.16,
             "prev_return_pct": null,
-            "vol_ratio": 3.68,
+            "vol_ratio": 0.91,
             "ticker_group": "SMALL"
         },
         {
@@ -91,39 +91,39 @@
             "sl_factor": 1.6,
             "z_score": 0.13,
             "prev_return_pct": null,
-            "vol_ratio": 1.49,
+            "vol_ratio": 1.17,
             "ticker_group": "SMALL"
         }
     ],
     "M": [
         {
-            "ticker": "CIEN",
+            "ticker": "MRNA",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
             "z_score": null,
-            "prev_return_pct": 12.72,
-            "vol_ratio": 0.96,
+            "prev_return_pct": 6.99,
+            "vol_ratio": 1.24,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "STRL",
+            "ticker": "FN",
             "action": "Long",
             "allocation_usd": 10000,
-            "sl_factor": 3.2,
+            "sl_factor": 1.6,
             "z_score": null,
-            "prev_return_pct": 7.32,
-            "vol_ratio": 0.96,
+            "prev_return_pct": 5.66,
+            "vol_ratio": 1.84,
             "ticker_group": "SMALL"
         },
         {
-            "ticker": "FTAI",
+            "ticker": "SMMT",
             "action": "Long",
             "allocation_usd": 10000,
             "sl_factor": 3.2,
             "z_score": null,
-            "prev_return_pct": 7.0,
-            "vol_ratio": 0.55,
+            "prev_return_pct": 4.97,
+            "vol_ratio": 0.81,
             "ticker_group": "SMALL"
         }
     ]
